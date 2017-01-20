@@ -19,7 +19,7 @@ The SDK requires [**ARC (Automatic Reference Counting)**](http://stackoverflow.c
 Add the following to the Podfile:
 
 ```ruby
-pod 'SwaggerClient', :git => 'https://github.com//.git'
+pod 'SwaggerClient', :git => 'https://github.com/sanket0007/Backhand-IOS-Client-Library.git'
 ```
 
 To specify a particular branch, append `, :branch => 'branch-name-here'`
