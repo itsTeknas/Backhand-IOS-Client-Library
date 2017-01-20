@@ -21,10 +21,10 @@ Pod::Spec.new do |s|
 
     s.framework    = 'SystemConfiguration'
 
-    s.homepage     = "https://github.com/swagger-api/swagger-codegen"
+    s.homepage     = "https://github.com/sanket0007/Backhand-IOS-Client-Library"
     s.license      = "Proprietary"
-    s.source       = { :git => "https://github.com/swagger-api/swagger-codegen.git", :tag => "#{s.version}" }
-    s.author       = { "Swagger" => "apiteam@swagger.io" }
+    s.source       = { :git => "https://github.com/sanket0007/Backhand-IOS-Client-Library.git"}
+    s.author       = { "Sanket" => "sanket@blackcurrantapps.com" }
 
     s.source_files = 'SwaggerClient/**/*.{m,h}'
     s.public_header_files = 'SwaggerClient/**/*.h'
