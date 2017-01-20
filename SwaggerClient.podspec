@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
     s.public_header_files = 'SwaggerClient/**/*.h'
 
 
-    s.dependency 'AFNetworking', '~> 3.0'
+    s.dependency 'AFNetworking',  :git => 'https://github.com/AFNetworking/AFNetworking.git', :tag => '3.1', :submodules => true
     s.dependency 'JSONModel', '~> 1.4'
     s.dependency 'ISO8601', '~> 0.6'
 end
