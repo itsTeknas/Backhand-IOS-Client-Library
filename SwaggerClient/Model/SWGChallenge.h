@@ -14,7 +14,7 @@
 */
 
 
-#import "SWGUser.h"
+#import "SWGUserShortProfile.h"
 
 
 @protocol SWGChallenge
@@ -44,12 +44,12 @@
 
 @property(nonatomic) NSNumber* challengeClubId;
 
-@property(nonatomic) SWGUser* challengeChallengerPlayer1Profile;
+@property(nonatomic) SWGUserShortProfile* challengeChallengerPlayer1Profile;
 
-@property(nonatomic) SWGUser* challengeChallengerPlayer2Profile;
+@property(nonatomic) SWGUserShortProfile* challengeChallengerPlayer2Profile;
 
-@property(nonatomic) SWGUser* challengeOppositionPlayer1Profile;
+@property(nonatomic) SWGUserShortProfile* challengeOppositionPlayer1Profile;
 
-@property(nonatomic) SWGUser* challengeOppositionPlayer2Profile;
+@property(nonatomic) SWGUserShortProfile* challengeOppositionPlayer2Profile;
 
 @end

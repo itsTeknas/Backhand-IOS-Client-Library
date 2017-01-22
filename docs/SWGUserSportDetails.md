@@ -1,10 +1,13 @@
-# SWGEventParticipants
+# SWGUserSportDetails
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**event** | [**SWGEvent***](SWGEvent.md) |  | [optional] 
-**players** | [**NSArray&lt;SWGUser&gt;***](SWGUser.md) |  | [optional] 
+**skillLevel** | **NSNumber*** |  | [optional] 
+**totalMatches** | **NSNumber*** |  | [optional] 
+**winRate** | **NSNumber*** |  | [optional] 
+**favouritePlayer** | **NSString*** |  | [optional] 
+**playingSince** | **NSNumber*** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

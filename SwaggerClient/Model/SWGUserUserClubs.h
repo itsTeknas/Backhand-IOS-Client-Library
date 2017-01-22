@@ -14,18 +14,16 @@
 */
 
 
-#import "SWGEvent.h"
-#import "SWGUser.h"
 
 
-@protocol SWGEventParticipants
+@protocol SWGUserUserClubs
 @end
 
-@interface SWGEventParticipants : SWGObject
+@interface SWGUserUserClubs : SWGObject
 
 
-@property(nonatomic) SWGEvent* event;
+@property(nonatomic) NSString* name;
 
-@property(nonatomic) NSArray<SWGUser>* players;
+@property(nonatomic) NSNumber* clubId;
 
 @end

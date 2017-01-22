@@ -5,6 +5,7 @@
 #import "SWGEvent.h"
 #import "SWGEventParticipants.h"
 #import "SWGGame.h"
+#import "SWGInlineResponse200.h"
 #import "SWGUser.h"
 #import "SWGApi.h"
 
@@ -42,6 +43,17 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     gameOppositionScore: (NSNumber*) gameOppositionScore
     completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
 
+/// Get challenge recommendations
+/// search users based on name / phone number / email / name / club
+///
+/// @param sport 
+/// @param limit Limit the number of results (optional) (default to 50)
+///  code:200 message:"List of Users"
+/// @return NSArray<SWGUser>*
+-(NSNumber*) getChallengeRecommendationsGetWithSport: (NSString*) sport
+    limit: (NSNumber*) limit
+    completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
+
 /// Get List of Clubs
 /// Get list of clubs for a city
 ///
@@ -55,9 +67,11 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// Get the players for various sports within a club
 ///
 /// @param clubId City
+/// @param limit Limit the number of results (optional) (default to 50)
 ///  code:200 message:"Club Details"
 /// @return SWGClubParticipants*
 -(NSNumber*) getClubsParticipantsGetWithClubId: (NSNumber*) clubId
+    limit: (NSNumber*) limit
     completionHandler: (void (^)(SWGClubParticipants* output, NSError* error)) handler;
 
 /// Get Event Participants
@@ -78,27 +92,25 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 -(NSNumber*) getEventsGetWithCity: (NSString*) city
     completionHandler: (void (^)(NSArray<SWGEvent>* output, NSError* error)) handler;
 
-/// Get past games
-/// A list of games that are not yet validated
+/// Get challenges
+/// A list of challenges
 ///
-/// @param clubId City (optional)
-/// @param limit Limit the number of results (optional)
-///  code:200 message:"List of Clubs"
+/// @param limit Limit the number of results (optional) (default to 50)
+///  code:200 message:"List of Challenges"
 /// @return NSArray<SWGChallenge>*
--(NSNumber*) getMyChallengesGetWithClubId: (NSNumber*) clubId
-    limit: (NSNumber*) limit
+-(NSNumber*) getMyChallengesGetWithLimit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGChallenge>* output, NSError* error)) handler;
 
-/// Get past verified games
+/// Get Scoreboard for a sport
 /// A list of games that are validated by the opoonent.
 ///
-/// @param clubId City (optional)
-/// @param limit Limit the number of results (optional)
-///  code:200 message:"List of Clubs"
-/// @return NSArray<SWGGame>*
--(NSNumber*) getMyGamesGetWithClubId: (NSNumber*) clubId
+/// @param sport 
+/// @param limit Limit the number of results (optional) (default to 50)
+///  code:200 message:"Scoreboard per sport"
+/// @return SWGInlineResponse200*
+-(NSNumber*) getScoreboardGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
-    completionHandler: (void (^)(NSArray<SWGGame>* output, NSError* error)) handler;
+    completionHandler: (void (^)(SWGInlineResponse200* output, NSError* error)) handler;
 
 /// Get Authenticated user's profile
 ///
@@ -159,6 +171,37 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     gameOppositionPlayer2: (NSNumber*) gameOppositionPlayer2
     completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
 
+/// Query Users
+/// search users based on name / phone number / email / name / club
+///
+/// @param query 
+/// @param cityFilter filter by club_id (optional)
+/// @param clubFilter filter by club_id (optional)
+/// @param limit Limit the number of results (optional) (default to 50)
+///  code:200 message:"List of Users"
+/// @return NSArray<SWGUser>*
+-(NSNumber*) searchUsersPostWithQuery: (NSString*) query
+    cityFilter: (NSString*) cityFilter
+    clubFilter: (NSNumber*) clubFilter
+    limit: (NSNumber*) limit
+    completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
+
+/// UNDO Join an event
+/// Remove yourself from an event
+///
+/// @param eventId Event ID
+///  code:200 message:"UN-Joined Event"
+-(NSNumber*) unJoinEventGetWithEventId: (NSNumber*) eventId
+    completionHandler: (void (^)(NSError* error)) handler;
+
+/// Update profile picture
+/// Upload a picture and get a url to the picture
+///
+/// @param file File to upload Accepted formats jpg,jpeg,png
+///  code:200 message:"URL of the picture"
+-(NSNumber*) updateProfilePicturePostWithFile: (NSURL*) file
+    completionHandler: (void (^)(NSError* error)) handler;
+
 /// Update Profile
 /// If the profilePic file is provided, we save it and update the profile pic link in the user profile. Also, all other provided fileds are updated.
 ///
@@ -170,8 +213,8 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// @param handedness 
 /// @param city 
 /// @param clubIds 
-/// @param profilePic The jpeg file to be uploaded (optional)
-///  code:200 message:"Profile updated"
+///  code:200 message:"Updated Profile"
+/// @return SWGUser*
 -(NSNumber*) updateProfilePostWithMobileNumber: (NSString*) mobileNumber
     birthDate: (NSString*) birthDate
     playsBadminton: (NSNumber*) playsBadminton
@@ -180,7 +223,14 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     handedness: (NSString*) handedness
     city: (NSString*) city
     clubIds: (NSArray<NSNumber*>*) clubIds
-    profilePic: (NSURL*) profilePic
+    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+
+/// Update profile picture
+/// Upload a picture and get a url to the picture
+///
+/// @param message New Status Message
+///  code:200 message:"Status Updated"
+-(NSNumber*) updateStatusMessagePostWithMessage: (NSString*) message
     completionHandler: (void (^)(NSError* error)) handler;
 
 /// Verify the score

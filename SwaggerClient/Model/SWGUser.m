@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"userId": @"user_id", @"userFirstName": @"user_first_name", @"userLastName": @"user_last_name", @"email": @"email", @"userMobileNo": @"user_mobile_no", @"userProfilePicUrl": @"user_profile_pic_url", @"userSocialId": @"user_social_id", @"userHandedness": @"user_handedness", @"userGender": @"user_gender", @"userCity": @"user_city", @"userPlaysBadminton": @"user_plays_badminton", @"userPlaysSquash": @"user_plays_squash", @"userPlaysTennis": @"user_plays_tennis", @"userIsReal": @"user_is_real", @"userLevel": @"user_level", @"userPlayingSince": @"user_playing_since", @"userBirthdate": @"user_birthdate", @"userMatches": @"user_matches", @"userWinRate": @"user_win_rate", @"userProfileRating": @"user_profile_rating" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"userId": @"user_id", @"userFirstName": @"user_first_name", @"userLastName": @"user_last_name", @"email": @"email", @"userMobileNo": @"user_mobile_no", @"userProfilePicUrl": @"user_profile_pic_url", @"userSocialId": @"user_social_id", @"userHandedness": @"user_handedness", @"userGender": @"user_gender", @"userCity": @"user_city", @"userPlayesBadminton": @"user_playes_badminton", @"userPlayesTennis": @"user_playes_tennis", @"userPlayesSquash": @"user_playes_squash", @"userBadmintonStats": @"user_badminton_stats", @"userTennisStats": @"user_tennis_stats", @"userSquashStats": @"user_squash_stats", @"userIsReal": @"user_is_real", @"userLevel": @"user_level", @"userBirthdate": @"user_birthdate", @"userLocationString": @"user_location_string", @"userClubs": @"user_clubs", @"userStatusMessage": @"user_status_message", @"userCumilativeMatches": @"user_cumilative_matches", @"userCumilativeWinRate": @"user_cumilative_win_rate" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"userId", @"userFirstName", @"userLastName", @"email", @"userMobileNo", @"userProfilePicUrl", @"userSocialId", @"userHandedness", @"userGender", @"userCity", @"userPlaysBadminton", @"userPlaysSquash", @"userPlaysTennis", @"userIsReal", @"userLevel", @"userPlayingSince", @"userBirthdate", @"userMatches", @"userWinRate", @"userProfileRating"];
+  NSArray *optionalProperties = @[@"userId", @"userFirstName", @"userLastName", @"email", @"userMobileNo", @"userProfilePicUrl", @"userSocialId", @"userHandedness", @"userGender", @"userCity", @"userPlayesBadminton", @"userPlayesTennis", @"userPlayesSquash", @"userBadmintonStats", @"userTennisStats", @"userSquashStats", @"userIsReal", @"userLevel", @"userBirthdate", @"userLocationString", @"userClubs", @"userStatusMessage", @"userCumilativeMatches", @"userCumilativeWinRate"];
   return [optionalProperties containsObject:propertyName];
 }
 

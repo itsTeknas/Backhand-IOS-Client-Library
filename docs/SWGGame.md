@@ -16,10 +16,10 @@ Name | Type | Description | Notes
 **gameIsVerified** | **NSNumber*** |  | [optional] 
 **gameCreatedTs** | **NSString*** |  | [optional] 
 **gameVerifiedTs** | **NSString*** |  | [optional] 
-**gameChallengerPlayer1Profile** | [**SWGUser***](SWGUser.md) |  | [optional] 
-**gameChallengerPlayer2Profile** | [**SWGUser***](SWGUser.md) |  | [optional] 
-**gameOppositionPlayer1Profile** | [**SWGUser***](SWGUser.md) |  | [optional] 
-**gameOppositionPlayer2Profile** | [**SWGUser***](SWGUser.md) |  | [optional] 
+**gameChallengerPlayer1Profile** | [**SWGUserShortProfile***](SWGUserShortProfile.md) |  | [optional] 
+**gameChallengerPlayer2Profile** | [**SWGUserShortProfile***](SWGUserShortProfile.md) |  | [optional] 
+**gameOppositionPlayer1Profile** | [**SWGUserShortProfile***](SWGUserShortProfile.md) |  | [optional] 
+**gameOppositionPlayer2Profile** | [**SWGUserShortProfile***](SWGUserShortProfile.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

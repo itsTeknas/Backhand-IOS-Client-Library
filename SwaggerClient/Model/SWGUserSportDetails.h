@@ -14,18 +14,22 @@
 */
 
 
-#import "SWGEvent.h"
-#import "SWGUser.h"
 
 
-@protocol SWGEventParticipants
+@protocol SWGUserSportDetails
 @end
 
-@interface SWGEventParticipants : SWGObject
+@interface SWGUserSportDetails : SWGObject
 
 
-@property(nonatomic) SWGEvent* event;
+@property(nonatomic) NSNumber* skillLevel;
 
-@property(nonatomic) NSArray<SWGUser>* players;
+@property(nonatomic) NSNumber* totalMatches;
+
+@property(nonatomic) NSNumber* winRate;
+
+@property(nonatomic) NSString* favouritePlayer;
+
+@property(nonatomic) NSNumber* playingSince;
 
 @end

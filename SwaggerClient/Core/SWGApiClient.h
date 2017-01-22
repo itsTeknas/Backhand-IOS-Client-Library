@@ -29,7 +29,11 @@
 #import "SWGEvent.h"
 #import "SWGEventParticipants.h"
 #import "SWGGame.h"
+#import "SWGInlineResponse200.h"
 #import "SWGUser.h"
+#import "SWGUserShortProfile.h"
+#import "SWGUserSportDetails.h"
+#import "SWGUserUserClubs.h"
 
 
 

@@ -1,6 +1,6 @@
-#import "SWGEventParticipants.h"
+#import "SWGInlineResponse200.h"
 
-@implementation SWGEventParticipants
+@implementation SWGInlineResponse200
 
 - (instancetype)init {
   self = [super init];
@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"event": @"event", @"players": @"players" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"pendingScores": @"pending_scores", @"totalMatches": @"total_matches", @"winRate": @"win_rate", @"matches": @"matches" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"event", @"players"];
+  NSArray *optionalProperties = @[@"pendingScores", @"totalMatches", @"winRate", @"matches"];
   return [optionalProperties containsObject:propertyName];
 }
 

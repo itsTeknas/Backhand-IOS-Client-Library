@@ -1,10 +1,10 @@
-# SWGEventParticipants
+# SWGUserUserClubs
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**event** | [**SWGEvent***](SWGEvent.md) |  | [optional] 
-**players** | [**NSArray&lt;SWGUser&gt;***](SWGUser.md) |  | [optional] 
+**name** | **NSString*** |  | [optional] 
+**clubId** | **NSNumber*** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

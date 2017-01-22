@@ -14,18 +14,21 @@
 */
 
 
-#import "SWGEvent.h"
-#import "SWGUser.h"
+#import "SWGGame.h"
 
 
-@protocol SWGEventParticipants
+@protocol SWGInlineResponse200
 @end
 
-@interface SWGEventParticipants : SWGObject
+@interface SWGInlineResponse200 : SWGObject
 
 
-@property(nonatomic) SWGEvent* event;
+@property(nonatomic) NSNumber* pendingScores;
 
-@property(nonatomic) NSArray<SWGUser>* players;
+@property(nonatomic) NSNumber* totalMatches;
+
+@property(nonatomic) NSNumber* winRate;
+
+@property(nonatomic) NSArray<SWGGame>* matches;
 
 @end

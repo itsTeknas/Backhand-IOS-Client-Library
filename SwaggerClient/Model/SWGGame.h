@@ -14,7 +14,7 @@
 */
 
 
-#import "SWGUser.h"
+#import "SWGUserShortProfile.h"
 
 
 @protocol SWGGame
@@ -49,12 +49,12 @@
 
 @property(nonatomic) NSString* gameVerifiedTs;
 
-@property(nonatomic) SWGUser* gameChallengerPlayer1Profile;
+@property(nonatomic) SWGUserShortProfile* gameChallengerPlayer1Profile;
 
-@property(nonatomic) SWGUser* gameChallengerPlayer2Profile;
+@property(nonatomic) SWGUserShortProfile* gameChallengerPlayer2Profile;
 
-@property(nonatomic) SWGUser* gameOppositionPlayer1Profile;
+@property(nonatomic) SWGUserShortProfile* gameOppositionPlayer1Profile;
 
-@property(nonatomic) SWGUser* gameOppositionPlayer2Profile;
+@property(nonatomic) SWGUserShortProfile* gameOppositionPlayer2Profile;
 
 @end

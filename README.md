@@ -49,7 +49,11 @@ Import the following:
 #import <SwaggerClient/SWGEvent.h>
 #import <SwaggerClient/SWGEventParticipants.h>
 #import <SwaggerClient/SWGGame.h>
+#import <SwaggerClient/SWGInlineResponse200.h>
 #import <SwaggerClient/SWGUser.h>
+#import <SwaggerClient/SWGUserShortProfile.h>
+#import <SwaggerClient/SWGUserSportDetails.h>
+#import <SwaggerClient/SWGUserUserClubs.h>
 // load API classes for accessing endpoints
 #import <SwaggerClient/SWGAdminApi.h>
 #import <SwaggerClient/SWGAuthenticationApi.h>
@@ -120,17 +124,22 @@ Class | Method | HTTP request | Description
 *SWGAuthenticationApi* | [**authenticateSignupPost**](docs/SWGAuthenticationApi.md#authenticatesignuppost) | **POST** /authenticate/signup | Sign up new user
 *SWGAuthenticationApi* | [**oauthTokenPost**](docs/SWGAuthenticationApi.md#oauthtokenpost) | **POST** /oauth/token | Password Login
 *SWGUserApi* | [**editGamePost**](docs/SWGUserApi.md#editgamepost) | **POST** /edit_game | Edit Scores
+*SWGUserApi* | [**getChallengeRecommendationsGet**](docs/SWGUserApi.md#getchallengerecommendationsget) | **GET** /get_challenge_recommendations | Get challenge recommendations
 *SWGUserApi* | [**getClubsGet**](docs/SWGUserApi.md#getclubsget) | **GET** /get_clubs | Get List of Clubs
 *SWGUserApi* | [**getClubsParticipantsGet**](docs/SWGUserApi.md#getclubsparticipantsget) | **GET** /get_clubs_participants | Get Club Participants
 *SWGUserApi* | [**getEventParticipantsGet**](docs/SWGUserApi.md#geteventparticipantsget) | **GET** /get_event_participants | Get Event Participants
 *SWGUserApi* | [**getEventsGet**](docs/SWGUserApi.md#geteventsget) | **GET** /get_events | Get List of Events
-*SWGUserApi* | [**getMyChallengesGet**](docs/SWGUserApi.md#getmychallengesget) | **GET** /get_my_challenges | Get past games
-*SWGUserApi* | [**getMyGamesGet**](docs/SWGUserApi.md#getmygamesget) | **GET** /get_my_games | Get past verified games
+*SWGUserApi* | [**getMyChallengesGet**](docs/SWGUserApi.md#getmychallengesget) | **GET** /get_my_challenges | Get challenges
+*SWGUserApi* | [**getScoreboardGet**](docs/SWGUserApi.md#getscoreboardget) | **GET** /get_scoreboard | Get Scoreboard for a sport
 *SWGUserApi* | [**getSelfProfileGet**](docs/SWGUserApi.md#getselfprofileget) | **GET** /get_self_profile | Get Authenticated user&#39;s profile
 *SWGUserApi* | [**joinEventGet**](docs/SWGUserApi.md#joineventget) | **GET** /join_event | Join an event
 *SWGUserApi* | [**newChallengePost**](docs/SWGUserApi.md#newchallengepost) | **POST** /new_challenge | Challenge someone for a game
 *SWGUserApi* | [**newGamePost**](docs/SWGUserApi.md#newgamepost) | **POST** /new_game | Make a new game
+*SWGUserApi* | [**searchUsersPost**](docs/SWGUserApi.md#searchuserspost) | **POST** /search_users | Query Users
+*SWGUserApi* | [**unJoinEventGet**](docs/SWGUserApi.md#unjoineventget) | **GET** /un_join_event | UNDO Join an event
+*SWGUserApi* | [**updateProfilePicturePost**](docs/SWGUserApi.md#updateprofilepicturepost) | **POST** /update_profile_picture | Update profile picture
 *SWGUserApi* | [**updateProfilePost**](docs/SWGUserApi.md#updateprofilepost) | **POST** /update_profile | Update Profile
+*SWGUserApi* | [**updateStatusMessagePost**](docs/SWGUserApi.md#updatestatusmessagepost) | **POST** /update_status_message | Update profile picture
 *SWGUserApi* | [**verifyGamePost**](docs/SWGUserApi.md#verifygamepost) | **POST** /verify_game | Verify the score
 
 
@@ -143,7 +152,11 @@ Class | Method | HTTP request | Description
  - [SWGEvent](docs/SWGEvent.md)
  - [SWGEventParticipants](docs/SWGEventParticipants.md)
  - [SWGGame](docs/SWGGame.md)
+ - [SWGInlineResponse200](docs/SWGInlineResponse200.md)
  - [SWGUser](docs/SWGUser.md)
+ - [SWGUserShortProfile](docs/SWGUserShortProfile.md)
+ - [SWGUserSportDetails](docs/SWGUserSportDetails.md)
+ - [SWGUserUserClubs](docs/SWGUserUserClubs.md)
 
 
 ## Documentation For Authorization

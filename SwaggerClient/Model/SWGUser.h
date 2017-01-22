@@ -14,6 +14,8 @@
 */
 
 
+#import "SWGUserSportDetails.h"
+#import "SWGUserUserClubs.h"
 
 
 @protocol SWGUser
@@ -42,28 +44,35 @@
 
 @property(nonatomic) NSString* userCity;
 
-@property(nonatomic) NSNumber* userPlaysBadminton;
+@property(nonatomic) NSNumber* userPlayesBadminton;
 
-@property(nonatomic) NSNumber* userPlaysSquash;
+@property(nonatomic) NSNumber* userPlayesTennis;
 
-@property(nonatomic) NSNumber* userPlaysTennis;
+@property(nonatomic) NSNumber* userPlayesSquash;
+
+@property(nonatomic) SWGUserSportDetails* userBadmintonStats;
+
+@property(nonatomic) SWGUserSportDetails* userTennisStats;
+
+@property(nonatomic) SWGUserSportDetails* userSquashStats;
 
 @property(nonatomic) NSNumber* userIsReal;
 
 @property(nonatomic) NSNumber* userLevel;
-
-@property(nonatomic) NSNumber* userPlayingSince;
 /* DD/MM//YYYY [optional]
  */
 @property(nonatomic) NSString* userBirthdate;
-/* Total matches played [optional]
+
+@property(nonatomic) NSString* userLocationString;
+
+@property(nonatomic) NSArray<SWGUserUserClubs>* userClubs;
+
+@property(nonatomic) NSString* userStatusMessage;
+/* Total matches played across all sports [optional]
  */
-@property(nonatomic) NSNumber* userMatches;
-/* Win rate of the user in percentage [optional]
+@property(nonatomic) NSNumber* userCumilativeMatches;
+/* Win rate of the user in percentage across all sports [optional]
  */
-@property(nonatomic) NSNumber* userWinRate;
-/* No of Stars [optional]
- */
-@property(nonatomic) NSNumber* userProfileRating;
+@property(nonatomic) NSNumber* userCumilativeWinRate;
 
 @end
