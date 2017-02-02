@@ -3,9 +3,8 @@
 #import "SWGClub.h"
 #import "SWGClubParticipants.h"
 #import "SWGEvent.h"
-#import "SWGEventParticipants.h"
 #import "SWGGame.h"
-#import "SWGInlineResponse200.h"
+#import "SWGScoreboard.h"
 #import "SWGUser.h"
 #import "SWGApi.h"
 
@@ -30,23 +29,31 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 
 +(instancetype) sharedAPI;
 
-/// Edit Scores
-/// Edit the scores and resubmit for validation form the other party
+/// Add sport to user profile
 ///
-/// @param gameId 
-/// @param gameChallengerScore 
-/// @param gameOppositionScore 
-///  code:200 message:"Game Verified"
-/// @return SWGGame*
--(NSNumber*) editGamePostWithGameId: (NSNumber*) gameId
-    gameChallengerScore: (NSNumber*) gameChallengerScore
-    gameOppositionScore: (NSNumber*) gameOppositionScore
-    completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
+/// @param sport Sport Enum
+/// @param skillLevel 
+/// @param favouritePlayer 
+/// @param playingSince 
+///  code:200 message:"Updated Profile"
+/// @return SWGUser*
+-(NSNumber*) addSportPostWithSport: (NSString*) sport
+    skillLevel: (NSNumber*) skillLevel
+    favouritePlayer: (NSString*) favouritePlayer
+    playingSince: (NSNumber*) playingSince
+    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+
+/// Delete sport to user profile
+///
+/// @param sport Sport Enum
+///  code:200 message:"Updated Profile"
+/// @return SWGUser*
+-(NSNumber*) deleteSportPostWithSport: (NSString*) sport
+    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
 
 /// Get challenge recommendations
-/// search users based on name / phone number / email / name / club
 ///
-/// @param sport 
+/// @param sport Sport Enum (optional)
 /// @param limit Limit the number of results (optional) (default to 50)
 ///  code:200 message:"List of Users"
 /// @return NSArray<SWGUser>*
@@ -55,12 +62,18 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
 
 /// Get List of Clubs
-/// Get list of clubs for a city
+/// Get list of clubs for user's city
 ///
-/// @param city City
+/// @param city City (optional)
+/// @param locality City (optional)
+/// @param sport Sport Enum (optional)
+/// @param limit Limit the number of results (optional) (default to 50)
 ///  code:200 message:"List of Clubs"
 /// @return NSArray<SWGClub>*
 -(NSNumber*) getClubsGetWithCity: (NSString*) city
+    locality: (NSString*) locality
+    sport: (NSString*) sport
+    limit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGClub>* output, NSError* error)) handler;
 
 /// Get Club Participants
@@ -74,15 +87,6 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     limit: (NSNumber*) limit
     completionHandler: (void (^)(SWGClubParticipants* output, NSError* error)) handler;
 
-/// Get Event Participants
-/// Get the players for various sports within a event
-///
-/// @param eventId Event ID
-///  code:200 message:"Event Details"
-/// @return SWGEventParticipants*
--(NSNumber*) getEventParticipantsGetWithEventId: (NSNumber*) eventId
-    completionHandler: (void (^)(SWGEventParticipants* output, NSError* error)) handler;
-
 /// Get List of Events
 /// Get list of events for a city
 ///
@@ -91,6 +95,14 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// @return NSArray<SWGEvent>*
 -(NSNumber*) getEventsGetWithCity: (NSString*) city
     completionHandler: (void (^)(NSArray<SWGEvent>* output, NSError* error)) handler;
+
+/// Get Players List to load in add sport screen
+///
+/// @param sport Sport Enum
+///  code:200 message:"Player List"
+/// @return NSArray<NSString*>*
+-(NSNumber*) getFeaturedPlayersPostWithSport: (NSString*) sport
+    completionHandler: (void (^)(NSArray<NSString*>* output, NSError* error)) handler;
 
 /// Get challenges
 /// A list of challenges
@@ -104,28 +116,28 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// Get Scoreboard for a sport
 /// A list of games that are validated by the opoonent.
 ///
-/// @param sport 
+/// @param sport Sport Enum
 /// @param limit Limit the number of results (optional) (default to 50)
 ///  code:200 message:"Scoreboard per sport"
-/// @return SWGInlineResponse200*
+/// @return SWGScoreboard*
 -(NSNumber*) getScoreboardGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
-    completionHandler: (void (^)(SWGInlineResponse200* output, NSError* error)) handler;
+    completionHandler: (void (^)(SWGScoreboard* output, NSError* error)) handler;
 
 /// Get Authenticated user's profile
 ///
-///  code:200 message:"List of Clubs"
+///  code:200 message:"User's own profile"
 /// @return SWGUser*
 -(NSNumber*) getSelfProfileGetWithCompletionHandler: 
     (void (^)(SWGUser* output, NSError* error)) handler;
 
-/// Join an event
-/// You become descoverable to other players who are also goint to that event.
+/// Get user profile
 ///
-/// @param eventId Event ID
-///  code:200 message:"Joined Event"
--(NSNumber*) joinEventGetWithEventId: (NSNumber*) eventId
-    completionHandler: (void (^)(NSError* error)) handler;
+/// @param userId 
+///  code:200 message:"User profile"
+/// @return SWGUser*
+-(NSNumber*) getUserPostWithUserId: (NSNumber*) userId
+    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
 
 /// Challenge someone for a game
 /// Create a new challenge and send a push notification to opponents.
@@ -171,6 +183,15 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     gameOppositionPlayer2: (NSNumber*) gameOppositionPlayer2
     completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
 
+/// Push Notify User
+///
+/// @param userId 
+/// @param message 
+///  code:200 message:"Notification Sent"
+-(NSNumber*) notifyNewMessagePostWithUserId: (NSNumber*) userId
+    message: (NSString*) message
+    completionHandler: (void (^)(NSError* error)) handler;
+
 /// Query Users
 /// search users based on name / phone number / email / name / club
 ///
@@ -186,12 +207,13 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     limit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
 
-/// UNDO Join an event
-/// Remove yourself from an event
+/// Update favourite player
 ///
-/// @param eventId Event ID
-///  code:200 message:"UN-Joined Event"
--(NSNumber*) unJoinEventGetWithEventId: (NSNumber*) eventId
+/// @param sport Sport Enum
+/// @param player New Status Message
+///  code:200 message:"Favourite Player Updated"
+-(NSNumber*) updateFavouritePlayerPostWithSport: (NSString*) sport
+    player: (NSString*) player
     completionHandler: (void (^)(NSError* error)) handler;
 
 /// Update profile picture
@@ -207,9 +229,6 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 ///
 /// @param mobileNumber 
 /// @param birthDate format - DD/MM/YYYY
-/// @param playsBadminton 
-/// @param playsTennis 
-/// @param playsSquash 
 /// @param handedness 
 /// @param city 
 /// @param clubIds 
@@ -217,9 +236,6 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// @return SWGUser*
 -(NSNumber*) updateProfilePostWithMobileNumber: (NSString*) mobileNumber
     birthDate: (NSString*) birthDate
-    playsBadminton: (NSNumber*) playsBadminton
-    playsTennis: (NSNumber*) playsTennis
-    playsSquash: (NSNumber*) playsSquash
     handedness: (NSString*) handedness
     city: (NSString*) city
     clubIds: (NSArray<NSNumber*>*) clubIds

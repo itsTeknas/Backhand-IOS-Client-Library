@@ -41,8 +41,12 @@
 @property(nonatomic) NSString* userHandedness;
 
 @property(nonatomic) NSString* userGender;
-
+/* example - Mumbai [optional]
+ */
 @property(nonatomic) NSString* userCity;
+/* example - Borivali [optional]
+ */
+@property(nonatomic) NSString* userLocality;
 
 @property(nonatomic) NSNumber* userPlayesBadminton;
 
@@ -63,16 +67,8 @@
  */
 @property(nonatomic) NSString* userBirthdate;
 
-@property(nonatomic) NSString* userLocationString;
-
 @property(nonatomic) NSArray<SWGUserUserClubs>* userClubs;
 
 @property(nonatomic) NSString* userStatusMessage;
-/* Total matches played across all sports [optional]
- */
-@property(nonatomic) NSNumber* userCumilativeMatches;
-/* Win rate of the user in percentage across all sports [optional]
- */
-@property(nonatomic) NSNumber* userCumilativeWinRate;
 
 @end

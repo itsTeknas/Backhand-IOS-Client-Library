@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "SWGEventParticipants.h"
+#import "SWGEvent.h"
 #import "SWGApi.h"
 
 /**
@@ -35,8 +35,8 @@ extern NSInteger kSWGAdminApiMissingParamErrorCode;
 /// @param eventBackgroundPicture Picture URL
 /// @param eventLat Event ID
 /// @param eventLon Event ID
-///  code:200 message:"Joined Event"
-/// @return SWGEventParticipants*
+///  code:200 message:"Event"
+/// @return SWGEvent*
 -(NSNumber*) createEventPostWithEventName: (NSString*) eventName
     eventDescription: (NSString*) eventDescription
     eventCity: (NSString*) eventCity
@@ -46,7 +46,7 @@ extern NSInteger kSWGAdminApiMissingParamErrorCode;
     eventBackgroundPicture: (NSString*) eventBackgroundPicture
     eventLat: (NSString*) eventLat
     eventLon: (NSString*) eventLon
-    completionHandler: (void (^)(SWGEventParticipants* output, NSError* error)) handler;
+    completionHandler: (void (^)(SWGEvent* output, NSError* error)) handler;
 
 /// Upload a picture
 /// Upload a picture and get a url to the picture

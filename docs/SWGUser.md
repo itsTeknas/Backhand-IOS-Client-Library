@@ -12,7 +12,8 @@ Name | Type | Description | Notes
 **userSocialId** | **NSString*** |  | [optional] 
 **userHandedness** | **NSString*** |  | [optional] 
 **userGender** | **NSString*** |  | [optional] 
-**userCity** | **NSString*** |  | [optional] 
+**userCity** | **NSString*** | example - Mumbai | [optional] 
+**userLocality** | **NSString*** | example - Borivali | [optional] 
 **userPlayesBadminton** | **NSNumber*** |  | [optional] 
 **userPlayesTennis** | **NSNumber*** |  | [optional] 
 **userPlayesSquash** | **NSNumber*** |  | [optional] 
@@ -22,11 +23,8 @@ Name | Type | Description | Notes
 **userIsReal** | **NSNumber*** |  | [optional] 
 **userLevel** | **NSNumber*** |  | [optional] 
 **userBirthdate** | **NSString*** | DD/MM//YYYY | [optional] 
-**userLocationString** | **NSString*** |  | [optional] 
 **userClubs** | [**NSArray&lt;SWGUserUserClubs&gt;***](SWGUserUserClubs.md) |  | [optional] 
 **userStatusMessage** | **NSString*** |  | [optional] 
-**userCumilativeMatches** | **NSNumber*** | Total matches played across all sports | [optional] 
-**userCumilativeWinRate** | **NSNumber*** | Win rate of the user in percentage across all sports | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

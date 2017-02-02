@@ -17,10 +17,10 @@
 #import "SWGGame.h"
 
 
-@protocol SWGInlineResponse200
+@protocol SWGScoreboard
 @end
 
-@interface SWGInlineResponse200 : SWGObject
+@interface SWGScoreboard : SWGObject
 
 
 @property(nonatomic) NSNumber* pendingScores;
@@ -29,6 +29,6 @@
 
 @property(nonatomic) NSNumber* winRate;
 
-@property(nonatomic) NSArray<SWGGame>* matches;
+@property(nonatomic) NSArray<SWGGame>* games;
 
 @end

@@ -1,6 +1,6 @@
 #import "SWGAdminApi.h"
 #import "SWGQueryParamCollection.h"
-#import "SWGEventParticipants.h"
+#import "SWGEvent.h"
 
 
 @interface SWGAdminApi ()
@@ -90,8 +90,8 @@ NSInteger kSWGAdminApiMissingParamErrorCode = 234513;
 ///
 /// @param eventLon Event ID 
 ///
-///  code:200 message:"Joined Event"
-/// @return SWGEventParticipants*
+///  code:200 message:"Event"
+/// @return SWGEvent*
 -(NSNumber*) createEventPostWithEventName: (NSString*) eventName
     eventDescription: (NSString*) eventDescription
     eventCity: (NSString*) eventCity
@@ -101,7 +101,7 @@ NSInteger kSWGAdminApiMissingParamErrorCode = 234513;
     eventBackgroundPicture: (NSString*) eventBackgroundPicture
     eventLat: (NSString*) eventLat
     eventLon: (NSString*) eventLon
-    completionHandler: (void (^)(SWGEventParticipants* output, NSError* error)) handler {
+    completionHandler: (void (^)(SWGEvent* output, NSError* error)) handler {
     // verify the required parameter 'eventName' is set
     if (eventName == nil) {
         NSParameterAssert(eventName);
@@ -268,10 +268,10 @@ NSInteger kSWGAdminApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"SWGEventParticipants*"
+                              responseType: @"SWGEvent*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((SWGEventParticipants*)data, error);
+                                    handler((SWGEvent*)data, error);
                                 }
                            }
           ];

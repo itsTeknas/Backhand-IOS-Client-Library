@@ -19,7 +19,7 @@ Method | HTTP request | Description
     eventBackgroundPicture: (NSString*) eventBackgroundPicture
     eventLat: (NSString*) eventLat
     eventLon: (NSString*) eventLon
-        completionHandler: (void (^)(SWGEventParticipants* output, NSError* error)) handler;
+        completionHandler: (void (^)(SWGEvent* output, NSError* error)) handler;
 ```
 
 Create a new event
@@ -58,7 +58,7 @@ SWGAdminApi*apiInstance = [[SWGAdminApi alloc] init];
               eventBackgroundPicture:eventBackgroundPicture
               eventLat:eventLat
               eventLon:eventLon
-          completionHandler: ^(SWGEventParticipants* output, NSError* error) {
+          completionHandler: ^(SWGEvent* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SWGEventParticipants***](SWGEventParticipants.md)
+[**SWGEvent***](SWGEvent.md)
 
 ### Authorization
 

@@ -1,10 +1,12 @@
-# SWGEventParticipants
+# SWGScoreboard
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**event** | [**SWGEvent***](SWGEvent.md) |  | [optional] 
-**players** | [**NSArray&lt;SWGUser&gt;***](SWGUser.md) |  | [optional] 
+**pendingScores** | **NSNumber*** |  | [optional] 
+**totalMatches** | **NSNumber*** |  | [optional] 
+**winRate** | **NSNumber*** |  | [optional] 
+**games** | [**NSArray&lt;SWGGame&gt;***](SWGGame.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

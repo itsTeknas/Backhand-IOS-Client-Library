@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 **gameId** | **NSNumber*** |  | [optional] 
 **gameSport** | **NSString*** |  | [optional] 
 **gameType** | **NSString*** |  | [optional] 
-**gameScoreFormat** | **NSString*** |  | [optional] 
 **gameChallengerScore** | **NSNumber*** |  | [optional] 
 **gameOppositionScore** | **NSNumber*** |  | [optional] 
 **gameChallengerPlayer1** | **NSNumber*** |  | [optional] 

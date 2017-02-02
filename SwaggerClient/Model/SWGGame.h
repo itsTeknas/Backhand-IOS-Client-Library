@@ -29,8 +29,6 @@
 
 @property(nonatomic) NSString* gameType;
 
-@property(nonatomic) NSString* gameScoreFormat;
-
 @property(nonatomic) NSNumber* gameChallengerScore;
 
 @property(nonatomic) NSNumber* gameOppositionScore;
