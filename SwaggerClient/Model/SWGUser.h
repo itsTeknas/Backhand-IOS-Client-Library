@@ -48,11 +48,11 @@
  */
 @property(nonatomic) NSString* userLocality;
 
-@property(nonatomic) NSNumber* userPlayesBadminton;
+@property(nonatomic) NSNumber* userPlaysBadminton;
 
-@property(nonatomic) NSNumber* userPlayesTennis;
+@property(nonatomic) NSNumber* userPlaysTennis;
 
-@property(nonatomic) NSNumber* userPlayesSquash;
+@property(nonatomic) NSNumber* userPlaysSquash;
 
 @property(nonatomic) SWGUserSportDetails* userBadmintonStats;
 
