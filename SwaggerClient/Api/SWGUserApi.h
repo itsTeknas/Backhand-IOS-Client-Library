@@ -61,16 +61,26 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     limit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
 
+/// Get List of Cities
+/// Get list of clubs for user's city
+///
+///  code:200 message:"List of Cities"
+/// @return NSArray<NSString*>*
+-(NSNumber*) getCitiesGetWithCompletionHandler: 
+    (void (^)(NSArray<NSString*>* output, NSError* error)) handler;
+
 /// Get List of Clubs
 /// Get list of clubs for user's city
 ///
+/// @param searchString Search String (optional)
 /// @param city City (optional)
-/// @param locality City (optional)
+/// @param locality Locality Search (optional)
 /// @param sport Sport Enum (optional)
 /// @param limit Limit the number of results (optional) (default to 50)
 ///  code:200 message:"List of Clubs"
 /// @return NSArray<SWGClub>*
--(NSNumber*) getClubsGetWithCity: (NSString*) city
+-(NSNumber*) getClubsGetWithSearchString: (NSString*) searchString
+    city: (NSString*) city
     locality: (NSString*) locality
     sport: (NSString*) sport
     limit: (NSNumber*) limit
@@ -231,6 +241,7 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// @param birthDate format - DD/MM/YYYY
 /// @param handedness 
 /// @param city 
+/// @param locality 
 /// @param clubIds 
 ///  code:200 message:"Updated Profile"
 /// @return SWGUser*
@@ -238,6 +249,7 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     birthDate: (NSString*) birthDate
     handedness: (NSString*) handedness
     city: (NSString*) city
+    locality: (NSString*) locality
     clubIds: (NSArray<NSNumber*>*) clubIds
     completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
 

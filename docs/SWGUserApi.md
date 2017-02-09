@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**addSportPost**](SWGUserApi.md#addsportpost) | **POST** /add_sport | Add sport to user profile
 [**deleteSportPost**](SWGUserApi.md#deletesportpost) | **POST** /delete_sport | Delete sport to user profile
 [**getChallengeRecommendationsGet**](SWGUserApi.md#getchallengerecommendationsget) | **GET** /get_challenge_recommendations | Get challenge recommendations
+[**getCitiesGet**](SWGUserApi.md#getcitiesget) | **GET** /get_cities | Get List of Cities
 [**getClubsGet**](SWGUserApi.md#getclubsget) | **GET** /get_clubs | Get List of Clubs
 [**getClubsParticipantsGet**](SWGUserApi.md#getclubsparticipantsget) | **GET** /get_clubs_participants | Get Club Participants
 [**getEventsGet**](SWGUserApi.md#geteventsget) | **GET** /get_events | Get List of Events
@@ -207,9 +208,63 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getCitiesGet**
+```objc
+-(NSNumber*) getCitiesGetWithCompletionHandler: 
+        (void (^)(NSArray<NSString*>* output, NSError* error)) handler;
+```
+
+Get List of Cities
+
+Get list of clubs for user's city
+
+### Example 
+```objc
+SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Get List of Cities
+[apiInstance getCitiesGetWithCompletionHandler: 
+          ^(NSArray<NSString*>* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->getCitiesGet: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**NSArray<NSString*>***
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getClubsGet**
 ```objc
--(NSNumber*) getClubsGetWithCity: (NSString*) city
+-(NSNumber*) getClubsGetWithSearchString: (NSString*) searchString
+    city: (NSString*) city
     locality: (NSString*) locality
     sport: (NSString*) sport
     limit: (NSNumber*) limit
@@ -230,15 +285,17 @@ SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
 
 
+NSString* searchString = @"searchString_example"; // Search String (optional)
 NSString* city = @"city_example"; // City (optional)
-NSString* locality = @"locality_example"; // City (optional)
+NSString* locality = @"locality_example"; // Locality Search (optional)
 NSString* sport = @"sport_example"; // Sport Enum (optional)
 NSNumber* limit = @50; // Limit the number of results (optional) (default to 50)
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 // Get List of Clubs
-[apiInstance getClubsGetWithCity:city
+[apiInstance getClubsGetWithSearchString:searchString
+              city:city
               locality:locality
               sport:sport
               limit:limit
@@ -256,8 +313,9 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **searchString** | **NSString***| Search String | [optional] 
  **city** | **NSString***| City | [optional] 
- **locality** | **NSString***| City | [optional] 
+ **locality** | **NSString***| Locality Search | [optional] 
  **sport** | **NSString***| Sport Enum | [optional] 
  **limit** | **NSNumber***| Limit the number of results | [optional] [default to 50]
 
@@ -1080,6 +1138,7 @@ void (empty response body)
     birthDate: (NSString*) birthDate
     handedness: (NSString*) handedness
     city: (NSString*) city
+    locality: (NSString*) locality
     clubIds: (NSArray<NSNumber*>*) clubIds
         completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
 ```
@@ -1102,6 +1161,7 @@ NSString* mobileNumber = @"mobileNumber_example"; //
 NSString* birthDate = @"birthDate_example"; // format - DD/MM/YYYY
 NSString* handedness = @"handedness_example"; // 
 NSString* city = @"city_example"; // 
+NSString* locality = @"locality_example"; // 
 NSArray<NSNumber*>* clubIds = @[@56]; // 
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
@@ -1111,6 +1171,7 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
               birthDate:birthDate
               handedness:handedness
               city:city
+              locality:locality
               clubIds:clubIds
           completionHandler: ^(SWGUser* output, NSError* error) {
                         if (output) {
@@ -1130,6 +1191,7 @@ Name | Type | Description  | Notes
  **birthDate** | **NSString***| format - DD/MM/YYYY | 
  **handedness** | **NSString***|  | 
  **city** | **NSString***|  | 
+ **locality** | **NSString***|  | 
  **clubIds** | [**NSArray&lt;NSNumber*&gt;***](NSNumber*.md)|  | 
 
 ### Return type

@@ -338,11 +338,69 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 }
 
 ///
+/// Get List of Cities
+/// Get list of clubs for user's city
+///  code:200 message:"List of Cities"
+/// @return NSArray<NSString*>*
+-(NSNumber*) getCitiesGetWithCompletionHandler: 
+    (void (^)(NSArray<NSString*>* output, NSError* error)) handler {
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/get_cities"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"TokenAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"NSArray<NSString*>*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((NSArray<NSString*>*)data, error);
+                                }
+                           }
+          ];
+}
+
+///
 /// Get List of Clubs
 /// Get list of clubs for user's city
+/// @param searchString Search String (optional)
+///
 /// @param city City (optional)
 ///
-/// @param locality City (optional)
+/// @param locality Locality Search (optional)
 ///
 /// @param sport Sport Enum (optional)
 ///
@@ -350,7 +408,8 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 ///
 ///  code:200 message:"List of Clubs"
 /// @return NSArray<SWGClub>*
--(NSNumber*) getClubsGetWithCity: (NSString*) city
+-(NSNumber*) getClubsGetWithSearchString: (NSString*) searchString
+    city: (NSString*) city
     locality: (NSString*) locality
     sport: (NSString*) sport
     limit: (NSNumber*) limit
@@ -363,6 +422,9 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
     NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (searchString != nil) {
+        queryParams[@"search_string"] = searchString;
+    }
     if (city != nil) {
         queryParams[@"city"] = city;
     }
@@ -1561,6 +1623,8 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 ///
 /// @param city  
 ///
+/// @param locality  
+///
 /// @param clubIds  
 ///
 ///  code:200 message:"Updated Profile"
@@ -1569,6 +1633,7 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
     birthDate: (NSString*) birthDate
     handedness: (NSString*) handedness
     city: (NSString*) city
+    locality: (NSString*) locality
     clubIds: (NSArray<NSNumber*>*) clubIds
     completionHandler: (void (^)(SWGUser* output, NSError* error)) handler {
     // verify the required parameter 'mobileNumber' is set
@@ -1615,6 +1680,17 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
         return nil;
     }
 
+    // verify the required parameter 'locality' is set
+    if (locality == nil) {
+        NSParameterAssert(locality);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"locality"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
     // verify the required parameter 'clubIds' is set
     if (clubIds == nil) {
         NSParameterAssert(clubIds);
@@ -1645,6 +1721,9 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
     }
     if (city != nil) {
         queryParams[@"city"] = city;
+    }
+    if (locality != nil) {
+        queryParams[@"locality"] = locality;
     }
     if (clubIds != nil) {
         queryParams[@"club_ids"] = [[SWGQueryParamCollection alloc] initWithValuesAndFormat: clubIds format: @"csv"];
