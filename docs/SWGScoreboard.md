@@ -5,6 +5,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pendingScores** | **NSNumber*** |  | [optional] 
 **totalMatches** | **NSNumber*** |  | [optional] 
+**totalVerifiedMatches** | **NSNumber*** |  | [optional] 
+**totalMatchesWon** | **NSNumber*** |  | [optional] 
+**verifiedMatchesWon** | **NSNumber*** |  | [optional] 
 **winRate** | **NSNumber*** |  | [optional] 
 **games** | [**NSArray&lt;SWGGame&gt;***](SWGGame.md) |  | [optional] 
 

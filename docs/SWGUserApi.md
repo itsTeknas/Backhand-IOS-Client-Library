@@ -812,11 +812,12 @@ Name | Type | Description  | Notes
 ```objc
 -(NSNumber*) newGamePostWithGameSport: (NSString*) gameSport
     gameType: (NSString*) gameType
+    gameClub: (NSString*) gameClub
+    gameClubId: (NSNumber*) gameClubId
     gameChallengerScore: (NSNumber*) gameChallengerScore
     gameOppositionScore: (NSNumber*) gameOppositionScore
     gameChallengerPlayer1: (NSNumber*) gameChallengerPlayer1
     gameOppositionPlayer1: (NSNumber*) gameOppositionPlayer1
-    gameScoreFormat: (NSString*) gameScoreFormat
     gameChallengerPlayer2: (NSNumber*) gameChallengerPlayer2
     gameOppositionPlayer2: (NSNumber*) gameOppositionPlayer2
         completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
@@ -838,11 +839,12 @@ SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
 
 NSString* gameSport = @"gameSport_example"; // 
 NSString* gameType = @"gameType_example"; // 
+NSString* gameClub = @"gameClub_example"; // 
+NSNumber* gameClubId = @789; // 
 NSNumber* gameChallengerScore = @56; // 
 NSNumber* gameOppositionScore = @56; // 
 NSNumber* gameChallengerPlayer1 = @789; // 
 NSNumber* gameOppositionPlayer1 = @789; // 
-NSString* gameScoreFormat = @"gameScoreFormat_example"; //  (optional)
 NSNumber* gameChallengerPlayer2 = @789; //  (optional)
 NSNumber* gameOppositionPlayer2 = @789; //  (optional)
 
@@ -851,11 +853,12 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 // Make a new game
 [apiInstance newGamePostWithGameSport:gameSport
               gameType:gameType
+              gameClub:gameClub
+              gameClubId:gameClubId
               gameChallengerScore:gameChallengerScore
               gameOppositionScore:gameOppositionScore
               gameChallengerPlayer1:gameChallengerPlayer1
               gameOppositionPlayer1:gameOppositionPlayer1
-              gameScoreFormat:gameScoreFormat
               gameChallengerPlayer2:gameChallengerPlayer2
               gameOppositionPlayer2:gameOppositionPlayer2
           completionHandler: ^(SWGGame* output, NSError* error) {
@@ -874,11 +877,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **gameSport** | **NSString***|  | 
  **gameType** | **NSString***|  | 
+ **gameClub** | **NSString***|  | 
+ **gameClubId** | **NSNumber***|  | 
  **gameChallengerScore** | **NSNumber***|  | 
  **gameOppositionScore** | **NSNumber***|  | 
  **gameChallengerPlayer1** | **NSNumber***|  | 
  **gameOppositionPlayer1** | **NSNumber***|  | 
- **gameScoreFormat** | **NSString***|  | [optional] 
  **gameChallengerPlayer2** | **NSNumber***|  | [optional] 
  **gameOppositionPlayer2** | **NSNumber***|  | [optional] 
 

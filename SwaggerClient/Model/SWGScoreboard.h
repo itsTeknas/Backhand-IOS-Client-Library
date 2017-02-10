@@ -27,6 +27,12 @@
 
 @property(nonatomic) NSNumber* totalMatches;
 
+@property(nonatomic) NSNumber* totalVerifiedMatches;
+
+@property(nonatomic) NSNumber* totalMatchesWon;
+
+@property(nonatomic) NSNumber* verifiedMatchesWon;
+
 @property(nonatomic) NSNumber* winRate;
 
 @property(nonatomic) NSArray<SWGGame>* games;

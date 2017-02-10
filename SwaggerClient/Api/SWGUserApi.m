@@ -1109,6 +1109,10 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 ///
 /// @param gameType  
 ///
+/// @param gameClub  
+///
+/// @param gameClubId  
+///
 /// @param gameChallengerScore  
 ///
 /// @param gameOppositionScore  
@@ -1116,8 +1120,6 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 /// @param gameChallengerPlayer1  
 ///
 /// @param gameOppositionPlayer1  
-///
-/// @param gameScoreFormat  (optional)
 ///
 /// @param gameChallengerPlayer2  (optional)
 ///
@@ -1127,11 +1129,12 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 /// @return SWGGame*
 -(NSNumber*) newGamePostWithGameSport: (NSString*) gameSport
     gameType: (NSString*) gameType
+    gameClub: (NSString*) gameClub
+    gameClubId: (NSNumber*) gameClubId
     gameChallengerScore: (NSNumber*) gameChallengerScore
     gameOppositionScore: (NSNumber*) gameOppositionScore
     gameChallengerPlayer1: (NSNumber*) gameChallengerPlayer1
     gameOppositionPlayer1: (NSNumber*) gameOppositionPlayer1
-    gameScoreFormat: (NSString*) gameScoreFormat
     gameChallengerPlayer2: (NSNumber*) gameChallengerPlayer2
     gameOppositionPlayer2: (NSNumber*) gameOppositionPlayer2
     completionHandler: (void (^)(SWGGame* output, NSError* error)) handler {
@@ -1151,6 +1154,28 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
         NSParameterAssert(gameType);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"gameType"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'gameClub' is set
+    if (gameClub == nil) {
+        NSParameterAssert(gameClub);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"gameClub"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'gameClubId' is set
+    if (gameClubId == nil) {
+        NSParameterAssert(gameClubId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"gameClubId"] };
             NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
@@ -1215,8 +1240,11 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
     if (gameType != nil) {
         queryParams[@"game_type"] = gameType;
     }
-    if (gameScoreFormat != nil) {
-        queryParams[@"game_score_format"] = gameScoreFormat;
+    if (gameClub != nil) {
+        queryParams[@"game_club"] = gameClub;
+    }
+    if (gameClubId != nil) {
+        queryParams[@"game_club_id"] = gameClubId;
     }
     if (gameChallengerScore != nil) {
         queryParams[@"game_challenger_score"] = gameChallengerScore;

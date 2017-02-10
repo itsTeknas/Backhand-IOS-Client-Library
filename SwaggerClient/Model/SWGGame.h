@@ -27,6 +27,10 @@
 
 @property(nonatomic) NSString* gameSport;
 
+@property(nonatomic) NSString* gameClub;
+
+@property(nonatomic) NSNumber* gameClubId;
+
 @property(nonatomic) NSString* gameType;
 
 @property(nonatomic) NSNumber* gameChallengerScore;

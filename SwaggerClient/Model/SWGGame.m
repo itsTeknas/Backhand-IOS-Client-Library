@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"gameId": @"game_id", @"gameSport": @"game_sport", @"gameType": @"game_type", @"gameChallengerScore": @"game_challenger_score", @"gameOppositionScore": @"game_opposition_score", @"gameChallengerPlayer1": @"game_challenger_player1", @"gameChallengerPlayer2": @"game_challenger_player2", @"gameOppositionPlayer1": @"game_opposition_player1", @"gameOppositionPlayer2": @"game_opposition_player2", @"gameIsVerified": @"game_is_verified", @"gameCreatedTs": @"game_created_ts", @"gameVerifiedTs": @"game_verified_ts", @"gameChallengerPlayer1Profile": @"game_challenger_player1_profile", @"gameChallengerPlayer2Profile": @"game_challenger_player2_profile", @"gameOppositionPlayer1Profile": @"game_opposition_player1_profile", @"gameOppositionPlayer2Profile": @"game_opposition_player2_profile" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"gameId": @"game_id", @"gameSport": @"game_sport", @"gameClub": @"game_club", @"gameClubId": @"game_club_id", @"gameType": @"game_type", @"gameChallengerScore": @"game_challenger_score", @"gameOppositionScore": @"game_opposition_score", @"gameChallengerPlayer1": @"game_challenger_player1", @"gameChallengerPlayer2": @"game_challenger_player2", @"gameOppositionPlayer1": @"game_opposition_player1", @"gameOppositionPlayer2": @"game_opposition_player2", @"gameIsVerified": @"game_is_verified", @"gameCreatedTs": @"game_created_ts", @"gameVerifiedTs": @"game_verified_ts", @"gameChallengerPlayer1Profile": @"game_challenger_player1_profile", @"gameChallengerPlayer2Profile": @"game_challenger_player2_profile", @"gameOppositionPlayer1Profile": @"game_opposition_player1_profile", @"gameOppositionPlayer2Profile": @"game_opposition_player2_profile" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"gameId", @"gameSport", @"gameType", @"gameChallengerScore", @"gameOppositionScore", @"gameChallengerPlayer1", @"gameChallengerPlayer2", @"gameOppositionPlayer1", @"gameOppositionPlayer2", @"gameIsVerified", @"gameCreatedTs", @"gameVerifiedTs", @"gameChallengerPlayer1Profile", @"gameChallengerPlayer2Profile", @"gameOppositionPlayer1Profile", @"gameOppositionPlayer2Profile"];
+  NSArray *optionalProperties = @[@"gameId", @"gameSport", @"gameClub", @"gameClubId", @"gameType", @"gameChallengerScore", @"gameOppositionScore", @"gameChallengerPlayer1", @"gameChallengerPlayer2", @"gameOppositionPlayer1", @"gameOppositionPlayer2", @"gameIsVerified", @"gameCreatedTs", @"gameVerifiedTs", @"gameChallengerPlayer1Profile", @"gameChallengerPlayer2Profile", @"gameOppositionPlayer1Profile", @"gameOppositionPlayer2Profile"];
   return [optionalProperties containsObject:propertyName];
 }
 

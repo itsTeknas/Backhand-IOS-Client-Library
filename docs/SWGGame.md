@@ -5,6 +5,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **gameId** | **NSNumber*** |  | [optional] 
 **gameSport** | **NSString*** |  | [optional] 
+**gameClub** | **NSString*** |  | [optional] 
+**gameClubId** | **NSNumber*** |  | [optional] 
 **gameType** | **NSString*** |  | [optional] 
 **gameChallengerScore** | **NSNumber*** |  | [optional] 
 **gameOppositionScore** | **NSNumber*** |  | [optional] 

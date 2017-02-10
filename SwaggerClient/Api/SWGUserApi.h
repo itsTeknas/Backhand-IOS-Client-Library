@@ -173,22 +173,24 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 ///
 /// @param gameSport 
 /// @param gameType 
+/// @param gameClub 
+/// @param gameClubId 
 /// @param gameChallengerScore 
 /// @param gameOppositionScore 
 /// @param gameChallengerPlayer1 
 /// @param gameOppositionPlayer1 
-/// @param gameScoreFormat  (optional)
 /// @param gameChallengerPlayer2  (optional)
 /// @param gameOppositionPlayer2  (optional)
 ///  code:200 message:"Game Created"
 /// @return SWGGame*
 -(NSNumber*) newGamePostWithGameSport: (NSString*) gameSport
     gameType: (NSString*) gameType
+    gameClub: (NSString*) gameClub
+    gameClubId: (NSNumber*) gameClubId
     gameChallengerScore: (NSNumber*) gameChallengerScore
     gameOppositionScore: (NSNumber*) gameOppositionScore
     gameChallengerPlayer1: (NSNumber*) gameChallengerPlayer1
     gameOppositionPlayer1: (NSNumber*) gameOppositionPlayer1
-    gameScoreFormat: (NSString*) gameScoreFormat
     gameChallengerPlayer2: (NSNumber*) gameChallengerPlayer2
     gameOppositionPlayer2: (NSNumber*) gameOppositionPlayer2
     completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
