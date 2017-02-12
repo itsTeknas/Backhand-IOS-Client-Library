@@ -123,6 +123,17 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 -(NSNumber*) getMyChallengesGetWithLimit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGChallenge>* output, NSError* error)) handler;
 
+/// Get all pending games
+/// A list of games that are validated by the opoonent.
+///
+/// @param sport Sport Enum (optional)
+/// @param limit Limit the number of results (optional) (default to 50)
+///  code:200 message:"Scoreboard per sport"
+/// @return NSArray<SWGGame>*
+-(NSNumber*) getPendingGamesGetWithSport: (NSString*) sport
+    limit: (NSNumber*) limit
+    completionHandler: (void (^)(NSArray<SWGGame>* output, NSError* error)) handler;
+
 /// Get Scoreboard for a sport
 /// A list of games that are validated by the opoonent.
 ///
@@ -204,6 +215,15 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     message: (NSString*) message
     completionHandler: (void (^)(NSError* error)) handler;
 
+/// Reject pending score
+/// Validate the score entered by an opponent.
+///
+/// @param gameId 
+///  code:200 message:"Game Rejected"
+/// @return SWGGame*
+-(NSNumber*) rejectGamePostWithGameId: (NSNumber*) gameId
+    completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
+
 /// Query Users
 /// search users based on name / phone number / email / name / club
 ///
@@ -263,7 +283,7 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 -(NSNumber*) updateStatusMessagePostWithMessage: (NSString*) message
     completionHandler: (void (^)(NSError* error)) handler;
 
-/// Verify the score
+/// Verify pending score
 /// Validate the score entered by an opponent.
 ///
 /// @param gameId 

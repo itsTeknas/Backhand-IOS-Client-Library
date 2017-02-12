@@ -13,18 +13,20 @@ Method | HTTP request | Description
 [**getEventsGet**](SWGUserApi.md#geteventsget) | **GET** /get_events | Get List of Events
 [**getFeaturedPlayersPost**](SWGUserApi.md#getfeaturedplayerspost) | **POST** /get_featured_players | Get Players List to load in add sport screen
 [**getMyChallengesGet**](SWGUserApi.md#getmychallengesget) | **GET** /get_my_challenges | Get challenges
+[**getPendingGamesGet**](SWGUserApi.md#getpendinggamesget) | **GET** /get_pending_games | Get all pending games
 [**getScoreboardGet**](SWGUserApi.md#getscoreboardget) | **GET** /get_scoreboard | Get Scoreboard for a sport
 [**getSelfProfileGet**](SWGUserApi.md#getselfprofileget) | **GET** /get_self_profile | Get Authenticated user&#39;s profile
 [**getUserPost**](SWGUserApi.md#getuserpost) | **POST** /get_user | Get user profile
 [**newChallengePost**](SWGUserApi.md#newchallengepost) | **POST** /new_challenge | Challenge someone for a game
 [**newGamePost**](SWGUserApi.md#newgamepost) | **POST** /new_game | Make a new game
 [**notifyNewMessagePost**](SWGUserApi.md#notifynewmessagepost) | **POST** /notify_new_message | Push Notify User
+[**rejectGamePost**](SWGUserApi.md#rejectgamepost) | **POST** /reject_game | Reject pending score
 [**searchUsersPost**](SWGUserApi.md#searchuserspost) | **POST** /search_users | Query Users
 [**updateFavouritePlayerPost**](SWGUserApi.md#updatefavouriteplayerpost) | **POST** /update_favourite_player | Update favourite player
 [**updateProfilePicturePost**](SWGUserApi.md#updateprofilepicturepost) | **POST** /update_profile_picture | Update profile picture
 [**updateProfilePost**](SWGUserApi.md#updateprofilepost) | **POST** /update_profile | Update Profile
 [**updateStatusMessagePost**](SWGUserApi.md#updatestatusmessagepost) | **POST** /update_status_message | Update profile picture
-[**verifyGamePost**](SWGUserApi.md#verifygamepost) | **POST** /verify_game | Verify the score
+[**verifyGamePost**](SWGUserApi.md#verifygamepost) | **POST** /verify_game | Verify pending score
 
 
 # **addSportPost**
@@ -564,6 +566,67 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getPendingGamesGet**
+```objc
+-(NSNumber*) getPendingGamesGetWithSport: (NSString*) sport
+    limit: (NSNumber*) limit
+        completionHandler: (void (^)(NSArray<SWGGame>* output, NSError* error)) handler;
+```
+
+Get all pending games
+
+A list of games that are validated by the opoonent.
+
+### Example 
+```objc
+SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* sport = @"sport_example"; // Sport Enum (optional)
+NSNumber* limit = @50; // Limit the number of results (optional) (default to 50)
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Get all pending games
+[apiInstance getPendingGamesGetWithSport:sport
+              limit:limit
+          completionHandler: ^(NSArray<SWGGame>* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->getPendingGamesGet: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sport** | **NSString***| Sport Enum | [optional] 
+ **limit** | **NSNumber***| Limit the number of results | [optional] [default to 50]
+
+### Return type
+
+[**NSArray<SWGGame>***](SWGGame.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getScoreboardGet**
 ```objc
 -(NSNumber*) getScoreboardGetWithSport: (NSString*) sport
@@ -957,6 +1020,63 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **rejectGamePost**
+```objc
+-(NSNumber*) rejectGamePostWithGameId: (NSNumber*) gameId
+        completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
+```
+
+Reject pending score
+
+Validate the score entered by an opponent.
+
+### Example 
+```objc
+SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSNumber* gameId = @789; // 
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Reject pending score
+[apiInstance rejectGamePostWithGameId:gameId
+          completionHandler: ^(SWGGame* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->rejectGamePost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **gameId** | **NSNumber***|  | 
+
+### Return type
+
+[**SWGGame***](SWGGame.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **searchUsersPost**
 ```objc
 -(NSNumber*) searchUsersPostWithQuery: (NSString*) query
@@ -1273,7 +1393,7 @@ void (empty response body)
         completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
 ```
 
-Verify the score
+Verify pending score
 
 Validate the score entered by an opponent.
 
@@ -1291,7 +1411,7 @@ NSNumber* gameId = @789; //
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
-// Verify the score
+// Verify pending score
 [apiInstance verifyGamePostWithGameId:gameId
           completionHandler: ^(SWGGame* output, NSError* error) {
                         if (output) {

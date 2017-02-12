@@ -762,6 +762,73 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 }
 
 ///
+/// Get all pending games
+/// A list of games that are validated by the opoonent.
+/// @param sport Sport Enum (optional)
+///
+/// @param limit Limit the number of results (optional, default to 50)
+///
+///  code:200 message:"Scoreboard per sport"
+/// @return NSArray<SWGGame>*
+-(NSNumber*) getPendingGamesGetWithSport: (NSString*) sport
+    limit: (NSNumber*) limit
+    completionHandler: (void (^)(NSArray<SWGGame>* output, NSError* error)) handler {
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/get_pending_games"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (sport != nil) {
+        queryParams[@"sport"] = sport;
+    }
+    if (limit != nil) {
+        queryParams[@"limit"] = limit;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"TokenAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"NSArray<SWGGame>*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((NSArray<SWGGame>*)data, error);
+                                }
+                           }
+          ];
+}
+
+///
 /// Get Scoreboard for a sport
 /// A list of games that are validated by the opoonent.
 /// @param sport Sport Enum 
@@ -1394,6 +1461,78 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 }
 
 ///
+/// Reject pending score
+/// Validate the score entered by an opponent.
+/// @param gameId  
+///
+///  code:200 message:"Game Rejected"
+/// @return SWGGame*
+-(NSNumber*) rejectGamePostWithGameId: (NSNumber*) gameId
+    completionHandler: (void (^)(SWGGame* output, NSError* error)) handler {
+    // verify the required parameter 'gameId' is set
+    if (gameId == nil) {
+        NSParameterAssert(gameId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"gameId"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/reject_game"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (gameId != nil) {
+        queryParams[@"game_id"] = gameId;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"TokenAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"SWGGame*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((SWGGame*)data, error);
+                                }
+                           }
+          ];
+}
+
+///
 /// Query Users
 /// search users based on name / phone number / email / name / club
 /// @param query  
@@ -1870,7 +2009,7 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 }
 
 ///
-/// Verify the score
+/// Verify pending score
 /// Validate the score entered by an opponent.
 /// @param gameId  
 ///
