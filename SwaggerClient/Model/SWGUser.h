@@ -29,8 +29,6 @@
 
 @property(nonatomic) NSString* userLastName;
 
-@property(nonatomic) NSNumber* userAge;
-
 @property(nonatomic) NSString* email;
 
 @property(nonatomic) NSString* userMobileNo;
@@ -49,39 +47,51 @@
  */
 @property(nonatomic) NSString* userLocality;
 
-@property(nonatomic) NSNumber* userPlaysBadminton;
-
-@property(nonatomic) NSNumber* userPlaysTennis;
-
-@property(nonatomic) NSNumber* userPlaysSquash;
-
-@property(nonatomic) NSNumber* userSkillLevelBadminton;
-
-@property(nonatomic) NSNumber* userSkillLevelTennis;
-
-@property(nonatomic) NSNumber* userSkillLevelSquash;
-
-@property(nonatomic) NSNumber* userPlayingBadmintonSince;
-
-@property(nonatomic) NSNumber* userPlayingTennisSince;
-
-@property(nonatomic) NSNumber* userPlayingSquashSince;
-
-@property(nonatomic) NSString* userBadmintonFavouritePlayer;
-
-@property(nonatomic) NSString* userTennisFavouritePlayer;
-
-@property(nonatomic) NSString* userSquashFavouritePlayer;
-
 @property(nonatomic) NSNumber* userIsReal;
-
-@property(nonatomic) NSNumber* userLevel;
 /* DD/MM//YYYY [optional]
  */
 @property(nonatomic) NSString* userBirthdate;
 
-@property(nonatomic) NSArray<SWGUserUserClubs>* userClubs;
+@property(nonatomic) NSNumber* userAge;
 
 @property(nonatomic) NSString* userStatusMessage;
+
+@property(nonatomic) NSNumber* userPlaysBadminton;
+
+@property(nonatomic) NSNumber* userSkillLevelBadminton;
+
+@property(nonatomic) NSNumber* userWinRateBadminton;
+
+@property(nonatomic) NSNumber* userPlayingBadmintonSince;
+
+@property(nonatomic) NSString* userBadmintonFavouritePlayer;
+
+@property(nonatomic) NSNumber* userTotalMatchesBadminton;
+
+@property(nonatomic) NSNumber* userPlaysTennis;
+
+@property(nonatomic) NSNumber* userSkillLevelTennis;
+
+@property(nonatomic) NSNumber* userPlayingTennisSince;
+
+@property(nonatomic) NSString* userTennisFavouritePlayer;
+
+@property(nonatomic) NSNumber* userTotalMatchesTennis;
+
+@property(nonatomic) NSNumber* userWinRateTennis;
+
+@property(nonatomic) NSNumber* userPlaysSquash;
+
+@property(nonatomic) NSNumber* userSkillLevelSquash;
+
+@property(nonatomic) NSNumber* userPlayingSquashSince;
+
+@property(nonatomic) NSString* userSquashFavouritePlayer;
+
+@property(nonatomic) NSNumber* userTotalMatchesSquash;
+
+@property(nonatomic) NSNumber* userWinRateSquash;
+
+@property(nonatomic) NSArray<SWGUserUserClubs>* userClubs;
 
 @end
