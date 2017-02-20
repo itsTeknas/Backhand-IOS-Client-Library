@@ -14,7 +14,6 @@
 */
 
 
-#import "SWGUserSportDetails.h"
 #import "SWGUserUserClubs.h"
 
 
@@ -29,6 +28,8 @@
 @property(nonatomic) NSString* userFirstName;
 
 @property(nonatomic) NSString* userLastName;
+
+@property(nonatomic) NSNumber* userAge;
 
 @property(nonatomic) NSString* email;
 
@@ -54,11 +55,23 @@
 
 @property(nonatomic) NSNumber* userPlaysSquash;
 
-@property(nonatomic) SWGUserSportDetails* userBadmintonStats;
+@property(nonatomic) NSNumber* userSkillLevelBadminton;
 
-@property(nonatomic) SWGUserSportDetails* userTennisStats;
+@property(nonatomic) NSNumber* userSkillLevelTennis;
 
-@property(nonatomic) SWGUserSportDetails* userSquashStats;
+@property(nonatomic) NSNumber* userSkillLevelSquash;
+
+@property(nonatomic) NSNumber* userPlayingBadmintonSince;
+
+@property(nonatomic) NSNumber* userPlayingTennisSince;
+
+@property(nonatomic) NSNumber* userPlayingSquashSince;
+
+@property(nonatomic) NSString* userBadmintonFavouritePlayer;
+
+@property(nonatomic) NSString* userTennisFavouritePlayer;
+
+@property(nonatomic) NSString* userSquashFavouritePlayer;
 
 @property(nonatomic) NSNumber* userIsReal;
 

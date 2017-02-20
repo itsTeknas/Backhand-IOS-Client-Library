@@ -51,7 +51,6 @@ Import the following:
 #import <SwaggerClient/SWGScoreboard.h>
 #import <SwaggerClient/SWGUser.h>
 #import <SwaggerClient/SWGUserShortProfile.h>
-#import <SwaggerClient/SWGUserSportDetails.h>
 #import <SwaggerClient/SWGUserUserClubs.h>
 // load API classes for accessing endpoints
 #import <SwaggerClient/SWGAdminApi.h>
@@ -158,7 +157,6 @@ Class | Method | HTTP request | Description
  - [SWGScoreboard](docs/SWGScoreboard.md)
  - [SWGUser](docs/SWGUser.md)
  - [SWGUserShortProfile](docs/SWGUserShortProfile.md)
- - [SWGUserSportDetails](docs/SWGUserSportDetails.md)
  - [SWGUserUserClubs](docs/SWGUserUserClubs.md)
 
 
@@ -175,5 +173,6 @@ Class | Method | HTTP request | Description
 ## Author
 
 sanket@blackcurrantapps.com
+
 
 

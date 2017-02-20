@@ -227,15 +227,11 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// Query Users
 /// search users based on name / phone number / email / name / club
 ///
-/// @param query 
-/// @param cityFilter filter by club_id (optional)
-/// @param clubFilter filter by club_id (optional)
+/// @param query Search based on name, email, phone number
 /// @param limit Limit the number of results (optional) (default to 50)
 ///  code:200 message:"List of Users"
 /// @return NSArray<SWGUser>*
 -(NSNumber*) searchUsersPostWithQuery: (NSString*) query
-    cityFilter: (NSString*) cityFilter
-    clubFilter: (NSNumber*) clubFilter
     limit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
 

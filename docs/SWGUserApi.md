@@ -1080,8 +1080,6 @@ Name | Type | Description  | Notes
 # **searchUsersPost**
 ```objc
 -(NSNumber*) searchUsersPostWithQuery: (NSString*) query
-    cityFilter: (NSString*) cityFilter
-    clubFilter: (NSNumber*) clubFilter
     limit: (NSNumber*) limit
         completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
 ```
@@ -1100,17 +1098,13 @@ SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
 
 
-NSString* query = @"query_example"; // 
-NSString* cityFilter = @"cityFilter_example"; // filter by club_id (optional)
-NSNumber* clubFilter = @789; // filter by club_id (optional)
+NSString* query = @"query_example"; // Search based on name, email, phone number
 NSNumber* limit = @50; // Limit the number of results (optional) (default to 50)
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 // Query Users
 [apiInstance searchUsersPostWithQuery:query
-              cityFilter:cityFilter
-              clubFilter:clubFilter
               limit:limit
           completionHandler: ^(NSArray<SWGUser>* output, NSError* error) {
                         if (output) {
@@ -1126,9 +1120,7 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | **NSString***|  | 
- **cityFilter** | **NSString***| filter by club_id | [optional] 
- **clubFilter** | **NSNumber***| filter by club_id | [optional] 
+ **query** | **NSString***| Search based on name, email, phone number | 
  **limit** | **NSNumber***| Limit the number of results | [optional] [default to 50]
 
 ### Return type

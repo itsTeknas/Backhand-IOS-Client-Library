@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
     s.name             = "SwaggerClient"
-    s.version          = "1.0.7"
+    s.version          = "1.0.8"
 
     s.summary          = "Backhand Api"
     s.description      = <<-DESC

@@ -31,7 +31,6 @@
 #import "SWGScoreboard.h"
 #import "SWGUser.h"
 #import "SWGUserShortProfile.h"
-#import "SWGUserSportDetails.h"
 #import "SWGUserUserClubs.h"
 
 
