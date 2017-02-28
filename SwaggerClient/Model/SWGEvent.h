@@ -34,7 +34,7 @@
 
 @property(nonatomic) NSString* eventCity;
 
-@property(nonatomic) NSString* gameSport;
+@property(nonatomic) NSString* eventSport;
 
 @property(nonatomic) NSString* eventStartDate;
 

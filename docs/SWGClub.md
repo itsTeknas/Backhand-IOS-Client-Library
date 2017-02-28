@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**clubId** | **NSNumber*** |  | [optional] 
-**clubName** | **NSString*** |  | [optional] 
+**clubId** | **NSNumber*** |  | 
+**clubName** | **NSString*** |  | 
 **clubCity** | **NSString*** |  | [optional] 
 **clubAddress** | **NSString*** |  | [optional] 
 **clubHasBadminton** | **NSNumber*** |  | [optional] 

@@ -44,6 +44,8 @@
 
 @property(nonatomic) NSNumber* challengeClubId;
 
+@property(nonatomic) NSString* challengeStatus;
+
 @property(nonatomic) SWGUserShortProfile* challengeChallengerPlayer1Profile;
 
 @property(nonatomic) SWGUserShortProfile* challengeChallengerPlayer2Profile;

@@ -6,6 +6,9 @@
   self = [super init];
   if (self) {
     // initialize property's default value, if any
+    self.userPlaysBadminton = @0;
+    self.userPlaysTennis = @0;
+    self.userPlaysSquash = @0;
     
   }
   return self;
@@ -27,7 +30,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"userId", @"userFirstName", @"userLastName", @"email", @"userMobileNo", @"userProfilePicUrl", @"userSocialId", @"userHandedness", @"userGender", @"userCity", @"userLocality", @"userIsReal", @"userBirthdate", @"userAge", @"userStatusMessage", @"userPlaysBadminton", @"userSkillLevelBadminton", @"userWinRateBadminton", @"userPlayingBadmintonSince", @"userBadmintonFavouritePlayer", @"userTotalMatchesBadminton", @"userPlaysTennis", @"userSkillLevelTennis", @"userPlayingTennisSince", @"userTennisFavouritePlayer", @"userTotalMatchesTennis", @"userWinRateTennis", @"userPlaysSquash", @"userSkillLevelSquash", @"userPlayingSquashSince", @"userSquashFavouritePlayer", @"userTotalMatchesSquash", @"userWinRateSquash", @"userClubs"];
+  NSArray *optionalProperties = @[@"userLastName", @"userMobileNo", @"userSocialId", @"userHandedness", @"userCity", @"userLocality", @"userIsReal", @"userBirthdate", @"userAge", @"userStatusMessage", ];
   return [optionalProperties containsObject:propertyName];
 }
 

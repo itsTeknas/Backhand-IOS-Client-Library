@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **eventName** | **NSString*** |  | [optional] 
 **eventDescription** | **NSString*** |  | [optional] 
 **eventCity** | **NSString*** |  | [optional] 
-**gameSport** | **NSString*** |  | [optional] 
+**eventSport** | **NSString*** |  | [optional] 
 **eventStartDate** | **NSString*** |  | [optional] 
 **eventEndDate** | **NSString*** |  | [optional] 
 **eventBackgroundPicture** | **NSString*** |  | [optional] 

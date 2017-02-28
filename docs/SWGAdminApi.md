@@ -100,12 +100,10 @@ Name | Type | Description  | Notes
 # **uploadPicturePost**
 ```objc
 -(NSNumber*) uploadPicturePostWithFile: (NSURL*) file
-        completionHandler: (void (^)(NSError* error)) handler;
+        completionHandler: (void (^)(SWGUrl* output, NSError* error)) handler;
 ```
 
 Upload a picture
-
-Upload a picture and get a url to the picture
 
 ### Example 
 ```objc
@@ -123,7 +121,10 @@ SWGAdminApi*apiInstance = [[SWGAdminApi alloc] init];
 
 // Upload a picture
 [apiInstance uploadPicturePostWithFile:file
-          completionHandler: ^(NSError* error) {
+          completionHandler: ^(SWGUrl* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
                         if (error) {
                             NSLog(@"Error calling SWGAdminApi->uploadPicturePost: %@", error);
                         }
@@ -138,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SWGUrl***](SWGUrl.md)
 
 ### Authorization
 
@@ -146,7 +147,7 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: multipart/form-data, application/x-www-form-urlencoded
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

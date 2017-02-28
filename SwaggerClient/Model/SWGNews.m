@@ -1,6 +1,6 @@
-#import "SWGUserShortProfile.h"
+#import "SWGNews.h"
 
-@implementation SWGUserShortProfile
+@implementation SWGNews
 
 - (instancetype)init {
   self = [super init];
@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"userId": @"user_id", @"userFirstName": @"user_first_name", @"userLastName": @"user_last_name", @"email": @"email", @"userMobileNo": @"user_mobile_no", @"userProfilePicUrl": @"user_profile_pic_url", @"userGender": @"user_gender", @"userIsReal": @"user_is_real" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"varNewsId": @"news_id", @"varNewsTitle": @"news_title", @"varNewsContent": @"news_content", @"varNewsAuthor": @"news_author", @"varNewsSport": @"news_sport", @"varNewsPublishTs": @"news_publish_ts", @"varNewsImageUrl": @"news_image_url" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"userLastName", @"userMobileNo", @"userIsReal"];
+  NSArray *optionalProperties = @[@"varNewsId", @"varNewsTitle", @"varNewsContent", @"varNewsAuthor", @"varNewsSport", @"varNewsPublishTs", @"varNewsImageUrl"];
   return [optionalProperties containsObject:propertyName];
 }
 

@@ -45,10 +45,12 @@ Import the following:
 #import <SwaggerClient/SWGAuthSuccess.h>
 #import <SwaggerClient/SWGChallenge.h>
 #import <SwaggerClient/SWGClub.h>
-#import <SwaggerClient/SWGClubParticipants.h>
 #import <SwaggerClient/SWGEvent.h>
+#import <SwaggerClient/SWGFeaturedPlayer.h>
 #import <SwaggerClient/SWGGame.h>
+#import <SwaggerClient/SWGNews.h>
 #import <SwaggerClient/SWGScoreboard.h>
+#import <SwaggerClient/SWGUrl.h>
 #import <SwaggerClient/SWGUser.h>
 #import <SwaggerClient/SWGUserShortProfile.h>
 #import <SwaggerClient/SWGUserUserClubs.h>
@@ -121,28 +123,33 @@ Class | Method | HTTP request | Description
 *SWGAuthenticationApi* | [**authenticateFacebookPost**](docs/SWGAuthenticationApi.md#authenticatefacebookpost) | **POST** /authenticate/facebook | FB Login
 *SWGAuthenticationApi* | [**authenticateSignupPost**](docs/SWGAuthenticationApi.md#authenticatesignuppost) | **POST** /authenticate/signup | Sign up new user
 *SWGAuthenticationApi* | [**oauthTokenPost**](docs/SWGAuthenticationApi.md#oauthtokenpost) | **POST** /oauth/token | Password Login
+*SWGUserApi* | [**acceptChallengePost**](docs/SWGUserApi.md#acceptchallengepost) | **POST** /accept_challenge | Accept Challenge
 *SWGUserApi* | [**addSportPost**](docs/SWGUserApi.md#addsportpost) | **POST** /add_sport | Add sport to user profile
 *SWGUserApi* | [**deleteSportPost**](docs/SWGUserApi.md#deletesportpost) | **POST** /delete_sport | Delete sport to user profile
 *SWGUserApi* | [**getChallengeRecommendationsGet**](docs/SWGUserApi.md#getchallengerecommendationsget) | **GET** /get_challenge_recommendations | Get challenge recommendations
+*SWGUserApi* | [**getChallengesGet**](docs/SWGUserApi.md#getchallengesget) | **GET** /get_challenges | Get List of Challenges
 *SWGUserApi* | [**getCitiesGet**](docs/SWGUserApi.md#getcitiesget) | **GET** /get_cities | Get List of Cities
 *SWGUserApi* | [**getClubsGet**](docs/SWGUserApi.md#getclubsget) | **GET** /get_clubs | Get List of Clubs
-*SWGUserApi* | [**getClubsParticipantsGet**](docs/SWGUserApi.md#getclubsparticipantsget) | **GET** /get_clubs_participants | Get Club Participants
 *SWGUserApi* | [**getEventsGet**](docs/SWGUserApi.md#geteventsget) | **GET** /get_events | Get List of Events
-*SWGUserApi* | [**getFeaturedPlayersPost**](docs/SWGUserApi.md#getfeaturedplayerspost) | **POST** /get_featured_players | Get Players List to load in add sport screen
+*SWGUserApi* | [**getFeaturedPlayersGet**](docs/SWGUserApi.md#getfeaturedplayersget) | **GET** /get_featured_players | Get featured players
 *SWGUserApi* | [**getMyChallengesGet**](docs/SWGUserApi.md#getmychallengesget) | **GET** /get_my_challenges | Get challenges
+*SWGUserApi* | [**getNewsPost**](docs/SWGUserApi.md#getnewspost) | **POST** /get_news | Get news
 *SWGUserApi* | [**getPendingGamesGet**](docs/SWGUserApi.md#getpendinggamesget) | **GET** /get_pending_games | Get all pending games
 *SWGUserApi* | [**getScoreboardGet**](docs/SWGUserApi.md#getscoreboardget) | **GET** /get_scoreboard | Get Scoreboard for a sport
 *SWGUserApi* | [**getSelfProfileGet**](docs/SWGUserApi.md#getselfprofileget) | **GET** /get_self_profile | Get Authenticated user&#39;s profile
 *SWGUserApi* | [**getUserPost**](docs/SWGUserApi.md#getuserpost) | **POST** /get_user | Get user profile
+*SWGUserApi* | [**invitePlayerPost**](docs/SWGUserApi.md#inviteplayerpost) | **POST** /invite_player | pseudo signup user
 *SWGUserApi* | [**newChallengePost**](docs/SWGUserApi.md#newchallengepost) | **POST** /new_challenge | Challenge someone for a game
 *SWGUserApi* | [**newGamePost**](docs/SWGUserApi.md#newgamepost) | **POST** /new_game | Make a new game
 *SWGUserApi* | [**notifyNewMessagePost**](docs/SWGUserApi.md#notifynewmessagepost) | **POST** /notify_new_message | Push Notify User
+*SWGUserApi* | [**rejectChallengePost**](docs/SWGUserApi.md#rejectchallengepost) | **POST** /reject_challenge | Reject Challenge
 *SWGUserApi* | [**rejectGamePost**](docs/SWGUserApi.md#rejectgamepost) | **POST** /reject_game | Reject pending score
 *SWGUserApi* | [**searchUsersPost**](docs/SWGUserApi.md#searchuserspost) | **POST** /search_users | Query Users
 *SWGUserApi* | [**updateFavouritePlayerPost**](docs/SWGUserApi.md#updatefavouriteplayerpost) | **POST** /update_favourite_player | Update favourite player
+*SWGUserApi* | [**updateFcmInstanceIdPost**](docs/SWGUserApi.md#updatefcminstanceidpost) | **POST** /update_fcm_instance_id | Update FCM InstanceID
 *SWGUserApi* | [**updateProfilePicturePost**](docs/SWGUserApi.md#updateprofilepicturepost) | **POST** /update_profile_picture | Update profile picture
 *SWGUserApi* | [**updateProfilePost**](docs/SWGUserApi.md#updateprofilepost) | **POST** /update_profile | Update Profile
-*SWGUserApi* | [**updateStatusMessagePost**](docs/SWGUserApi.md#updatestatusmessagepost) | **POST** /update_status_message | Update profile picture
+*SWGUserApi* | [**updateStatusMessagePost**](docs/SWGUserApi.md#updatestatusmessagepost) | **POST** /update_status_message | Update status message
 *SWGUserApi* | [**verifyGamePost**](docs/SWGUserApi.md#verifygamepost) | **POST** /verify_game | Verify pending score
 
 
@@ -151,10 +158,12 @@ Class | Method | HTTP request | Description
  - [SWGAuthSuccess](docs/SWGAuthSuccess.md)
  - [SWGChallenge](docs/SWGChallenge.md)
  - [SWGClub](docs/SWGClub.md)
- - [SWGClubParticipants](docs/SWGClubParticipants.md)
  - [SWGEvent](docs/SWGEvent.md)
+ - [SWGFeaturedPlayer](docs/SWGFeaturedPlayer.md)
  - [SWGGame](docs/SWGGame.md)
+ - [SWGNews](docs/SWGNews.md)
  - [SWGScoreboard](docs/SWGScoreboard.md)
+ - [SWGUrl](docs/SWGUrl.md)
  - [SWGUser](docs/SWGUser.md)
  - [SWGUserShortProfile](docs/SWGUserShortProfile.md)
  - [SWGUserUserClubs](docs/SWGUserUserClubs.md)
@@ -173,4 +182,6 @@ Class | Method | HTTP request | Description
 ## Author
 
 sanket@blackcurrantapps.com
+
+
 

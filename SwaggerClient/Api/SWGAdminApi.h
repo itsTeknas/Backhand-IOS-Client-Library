@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "SWGEvent.h"
+#import "SWGUrl.h"
 #import "SWGApi.h"
 
 /**
@@ -49,12 +50,12 @@ extern NSInteger kSWGAdminApiMissingParamErrorCode;
     completionHandler: (void (^)(SWGEvent* output, NSError* error)) handler;
 
 /// Upload a picture
-/// Upload a picture and get a url to the picture
 ///
 /// @param file File to upload Accepted formats jpg,jpeg,png
 ///  code:200 message:"URL of the picture"
+/// @return SWGUrl*
 -(NSNumber*) uploadPicturePostWithFile: (NSURL*) file
-    completionHandler: (void (^)(NSError* error)) handler;
+    completionHandler: (void (^)(SWGUrl* output, NSError* error)) handler;
 
 
 @end

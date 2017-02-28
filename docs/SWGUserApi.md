@@ -4,30 +4,90 @@ All URIs are relative to *http://www.back-hand.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**acceptChallengePost**](SWGUserApi.md#acceptchallengepost) | **POST** /accept_challenge | Accept Challenge
 [**addSportPost**](SWGUserApi.md#addsportpost) | **POST** /add_sport | Add sport to user profile
 [**deleteSportPost**](SWGUserApi.md#deletesportpost) | **POST** /delete_sport | Delete sport to user profile
 [**getChallengeRecommendationsGet**](SWGUserApi.md#getchallengerecommendationsget) | **GET** /get_challenge_recommendations | Get challenge recommendations
+[**getChallengesGet**](SWGUserApi.md#getchallengesget) | **GET** /get_challenges | Get List of Challenges
 [**getCitiesGet**](SWGUserApi.md#getcitiesget) | **GET** /get_cities | Get List of Cities
 [**getClubsGet**](SWGUserApi.md#getclubsget) | **GET** /get_clubs | Get List of Clubs
-[**getClubsParticipantsGet**](SWGUserApi.md#getclubsparticipantsget) | **GET** /get_clubs_participants | Get Club Participants
 [**getEventsGet**](SWGUserApi.md#geteventsget) | **GET** /get_events | Get List of Events
-[**getFeaturedPlayersPost**](SWGUserApi.md#getfeaturedplayerspost) | **POST** /get_featured_players | Get Players List to load in add sport screen
+[**getFeaturedPlayersGet**](SWGUserApi.md#getfeaturedplayersget) | **GET** /get_featured_players | Get featured players
 [**getMyChallengesGet**](SWGUserApi.md#getmychallengesget) | **GET** /get_my_challenges | Get challenges
+[**getNewsPost**](SWGUserApi.md#getnewspost) | **POST** /get_news | Get news
 [**getPendingGamesGet**](SWGUserApi.md#getpendinggamesget) | **GET** /get_pending_games | Get all pending games
 [**getScoreboardGet**](SWGUserApi.md#getscoreboardget) | **GET** /get_scoreboard | Get Scoreboard for a sport
 [**getSelfProfileGet**](SWGUserApi.md#getselfprofileget) | **GET** /get_self_profile | Get Authenticated user&#39;s profile
 [**getUserPost**](SWGUserApi.md#getuserpost) | **POST** /get_user | Get user profile
+[**invitePlayerPost**](SWGUserApi.md#inviteplayerpost) | **POST** /invite_player | pseudo signup user
 [**newChallengePost**](SWGUserApi.md#newchallengepost) | **POST** /new_challenge | Challenge someone for a game
 [**newGamePost**](SWGUserApi.md#newgamepost) | **POST** /new_game | Make a new game
 [**notifyNewMessagePost**](SWGUserApi.md#notifynewmessagepost) | **POST** /notify_new_message | Push Notify User
+[**rejectChallengePost**](SWGUserApi.md#rejectchallengepost) | **POST** /reject_challenge | Reject Challenge
 [**rejectGamePost**](SWGUserApi.md#rejectgamepost) | **POST** /reject_game | Reject pending score
 [**searchUsersPost**](SWGUserApi.md#searchuserspost) | **POST** /search_users | Query Users
 [**updateFavouritePlayerPost**](SWGUserApi.md#updatefavouriteplayerpost) | **POST** /update_favourite_player | Update favourite player
+[**updateFcmInstanceIdPost**](SWGUserApi.md#updatefcminstanceidpost) | **POST** /update_fcm_instance_id | Update FCM InstanceID
 [**updateProfilePicturePost**](SWGUserApi.md#updateprofilepicturepost) | **POST** /update_profile_picture | Update profile picture
 [**updateProfilePost**](SWGUserApi.md#updateprofilepost) | **POST** /update_profile | Update Profile
-[**updateStatusMessagePost**](SWGUserApi.md#updatestatusmessagepost) | **POST** /update_status_message | Update profile picture
+[**updateStatusMessagePost**](SWGUserApi.md#updatestatusmessagepost) | **POST** /update_status_message | Update status message
 [**verifyGamePost**](SWGUserApi.md#verifygamepost) | **POST** /verify_game | Verify pending score
 
+
+# **acceptChallengePost**
+```objc
+-(NSNumber*) acceptChallengePostWithChallengeId: (NSNumber*) challengeId
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+```
+
+Accept Challenge
+
+### Example 
+```objc
+SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSNumber* challengeId = @789; // 
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Accept Challenge
+[apiInstance acceptChallengePostWithChallengeId:challengeId
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->acceptChallengePost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **challengeId** | **NSNumber***|  | 
+
+### Return type
+
+**NSObject***
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **addSportPost**
 ```objc
@@ -35,7 +95,7 @@ Method | HTTP request | Description
     skillLevel: (NSNumber*) skillLevel
     favouritePlayer: (NSString*) favouritePlayer
     playingSince: (NSNumber*) playingSince
-        completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
 Add sport to user profile
@@ -62,7 +122,7 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
               skillLevel:skillLevel
               favouritePlayer:favouritePlayer
               playingSince:playingSince
-          completionHandler: ^(SWGUser* output, NSError* error) {
+          completionHandler: ^(NSObject* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -83,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SWGUser***](SWGUser.md)
+**NSObject***
 
 ### Authorization
 
@@ -99,7 +159,7 @@ Name | Type | Description  | Notes
 # **deleteSportPost**
 ```objc
 -(NSNumber*) deleteSportPostWithSport: (NSString*) sport
-        completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
 Delete sport to user profile
@@ -120,7 +180,7 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 // Delete sport to user profile
 [apiInstance deleteSportPostWithSport:sport
-          completionHandler: ^(SWGUser* output, NSError* error) {
+          completionHandler: ^(NSObject* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -138,7 +198,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SWGUser***](SWGUser.md)
+**NSObject***
 
 ### Authorization
 
@@ -198,6 +258,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**NSArray<SWGUser>***](SWGUser.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getChallengesGet**
+```objc
+-(NSNumber*) getChallengesGetWithCompletionHandler: 
+        (void (^)(NSArray<SWGChallenge>* output, NSError* error)) handler;
+```
+
+Get List of Challenges
+
+### Example 
+```objc
+SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Get List of Challenges
+[apiInstance getChallengesGetWithCompletionHandler: 
+          ^(NSArray<SWGChallenge>* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->getChallengesGet: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**NSArray<SWGChallenge>***](SWGChallenge.md)
 
 ### Authorization
 
@@ -336,70 +447,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getClubsParticipantsGet**
-```objc
--(NSNumber*) getClubsParticipantsGetWithClubId: (NSNumber*) clubId
-    limit: (NSNumber*) limit
-        completionHandler: (void (^)(SWGClubParticipants* output, NSError* error)) handler;
-```
-
-Get Club Participants
-
-Get the players for various sports within a club
-
-### Example 
-```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
-
-// Configure API key authorization: (authentication scheme: TokenAuth)
-[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
-
-
-NSNumber* clubId = @789; // City
-NSNumber* limit = @50; // Limit the number of results (optional) (default to 50)
-
-SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
-
-// Get Club Participants
-[apiInstance getClubsParticipantsGetWithClubId:clubId
-              limit:limit
-          completionHandler: ^(SWGClubParticipants* output, NSError* error) {
-                        if (output) {
-                            NSLog(@"%@", output);
-                        }
-                        if (error) {
-                            NSLog(@"Error calling SWGUserApi->getClubsParticipantsGet: %@", error);
-                        }
-                    }];
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **clubId** | **NSNumber***| City | 
- **limit** | **NSNumber***| Limit the number of results | [optional] [default to 50]
-
-### Return type
-
-[**SWGClubParticipants***](SWGClubParticipants.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **getEventsGet**
 ```objc
--(NSNumber*) getEventsGetWithCity: (NSString*) city
+-(NSNumber*) getEventsGetWithSport: (NSString*) sport
+    city: (NSString*) city
         completionHandler: (void (^)(NSArray<SWGEvent>* output, NSError* error)) handler;
 ```
 
@@ -417,12 +468,14 @@ SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
 
 
+NSString* sport = @"sport_example"; // Sport Enum
 NSString* city = @"city_example"; // City
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 // Get List of Events
-[apiInstance getEventsGetWithCity:city
+[apiInstance getEventsGetWithSport:sport
+              city:city
           completionHandler: ^(NSArray<SWGEvent>* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
@@ -437,6 +490,7 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **sport** | **NSString***| Sport Enum | 
  **city** | **NSString***| City | 
 
 ### Return type
@@ -454,13 +508,13 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getFeaturedPlayersPost**
+# **getFeaturedPlayersGet**
 ```objc
--(NSNumber*) getFeaturedPlayersPostWithSport: (NSString*) sport
-        completionHandler: (void (^)(NSArray<NSString*>* output, NSError* error)) handler;
+-(NSNumber*) getFeaturedPlayersGetWithSport: (NSString*) sport
+        completionHandler: (void (^)(NSArray<SWGFeaturedPlayer>* output, NSError* error)) handler;
 ```
 
-Get Players List to load in add sport screen
+Get featured players
 
 ### Example 
 ```objc
@@ -476,14 +530,14 @@ NSString* sport = @"sport_example"; // Sport Enum
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
-// Get Players List to load in add sport screen
-[apiInstance getFeaturedPlayersPostWithSport:sport
-          completionHandler: ^(NSArray<NSString*>* output, NSError* error) {
+// Get featured players
+[apiInstance getFeaturedPlayersGetWithSport:sport
+          completionHandler: ^(NSArray<SWGFeaturedPlayer>* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling SWGUserApi->getFeaturedPlayersPost: %@", error);
+                            NSLog(@"Error calling SWGUserApi->getFeaturedPlayersGet: %@", error);
                         }
                     }];
 ```
@@ -496,7 +550,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**NSArray<NSString*>***
+[**NSArray<SWGFeaturedPlayer>***](SWGFeaturedPlayer.md)
 
 ### Authorization
 
@@ -554,6 +608,61 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**NSArray<SWGChallenge>***](SWGChallenge.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getNewsPost**
+```objc
+-(NSNumber*) getNewsPostWithSport: (NSString*) sport
+        completionHandler: (void (^)(NSArray<SWGNews>* output, NSError* error)) handler;
+```
+
+Get news
+
+### Example 
+```objc
+SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* sport = @"sport_example"; // Sport Enum
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Get news
+[apiInstance getNewsPostWithSport:sport
+          completionHandler: ^(NSArray<SWGNews>* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->getNewsPost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sport** | **NSString***| Sport Enum | 
+
+### Return type
+
+[**NSArray<SWGNews>***](SWGNews.md)
 
 ### Authorization
 
@@ -794,6 +903,75 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **invitePlayerPost**
+```objc
+-(NSNumber*) invitePlayerPostWithFirstName: (NSString*) firstName
+    lastName: (NSString*) lastName
+    email: (NSString*) email
+    gender: (NSString*) gender
+        completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+```
+
+pseudo signup user
+
+Add user if it dosent exist. set user_is_real = false
+
+### Example 
+```objc
+SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* firstName = @"firstName_example"; // 
+NSString* lastName = @"lastName_example"; // 
+NSString* email = @"email_example"; // 
+NSString* gender = @"gender_example"; // 
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// pseudo signup user
+[apiInstance invitePlayerPostWithFirstName:firstName
+              lastName:lastName
+              email:email
+              gender:gender
+          completionHandler: ^(SWGUser* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->invitePlayerPost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **firstName** | **NSString***|  | 
+ **lastName** | **NSString***|  | 
+ **email** | **NSString***|  | 
+ **gender** | **NSString***|  | 
+
+### Return type
+
+[**SWGUser***](SWGUser.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **newChallengePost**
 ```objc
 -(NSNumber*) newChallengePostWithGameSport: (NSString*) gameSport
@@ -968,7 +1146,7 @@ Name | Type | Description  | Notes
 ```objc
 -(NSNumber*) notifyNewMessagePostWithUserId: (NSNumber*) userId
     message: (NSString*) message
-        completionHandler: (void (^)(NSError* error)) handler;
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
 Push Notify User
@@ -991,7 +1169,10 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 // Push Notify User
 [apiInstance notifyNewMessagePostWithUserId:userId
               message:message
-          completionHandler: ^(NSError* error) {
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
                         if (error) {
                             NSLog(@"Error calling SWGUserApi->notifyNewMessagePost: %@", error);
                         }
@@ -1007,7 +1188,62 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**NSObject***
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rejectChallengePost**
+```objc
+-(NSNumber*) rejectChallengePostWithChallengeId: (NSNumber*) challengeId
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+```
+
+Reject Challenge
+
+### Example 
+```objc
+SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSNumber* challengeId = @789; // 
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Reject Challenge
+[apiInstance rejectChallengePostWithChallengeId:challengeId
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->rejectChallengePost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **challengeId** | **NSNumber***|  | 
+
+### Return type
+
+**NSObject***
 
 ### Authorization
 
@@ -1142,7 +1378,7 @@ Name | Type | Description  | Notes
 ```objc
 -(NSNumber*) updateFavouritePlayerPostWithSport: (NSString*) sport
     player: (NSString*) player
-        completionHandler: (void (^)(NSError* error)) handler;
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
 Update favourite player
@@ -1158,14 +1394,17 @@ SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
 
 
 NSString* sport = @"sport_example"; // Sport Enum
-NSString* player = @"player_example"; // New Status Message
+NSString* player = @"player_example"; // 
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 // Update favourite player
 [apiInstance updateFavouritePlayerPostWithSport:sport
               player:player
-          completionHandler: ^(NSError* error) {
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
                         if (error) {
                             NSLog(@"Error calling SWGUserApi->updateFavouritePlayerPost: %@", error);
                         }
@@ -1177,11 +1416,66 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sport** | **NSString***| Sport Enum | 
- **player** | **NSString***| New Status Message | 
+ **player** | **NSString***|  | 
 
 ### Return type
 
-void (empty response body)
+**NSObject***
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateFcmInstanceIdPost**
+```objc
+-(NSNumber*) updateFcmInstanceIdPostWithInstanceId: (NSString*) instanceId
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+```
+
+Update FCM InstanceID
+
+### Example 
+```objc
+SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* instanceId = @"instanceId_example"; // 
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Update FCM InstanceID
+[apiInstance updateFcmInstanceIdPostWithInstanceId:instanceId
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->updateFcmInstanceIdPost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceId** | **NSString***|  | 
+
+### Return type
+
+**NSObject***
 
 ### Authorization
 
@@ -1197,12 +1491,10 @@ void (empty response body)
 # **updateProfilePicturePost**
 ```objc
 -(NSNumber*) updateProfilePicturePostWithFile: (NSURL*) file
-        completionHandler: (void (^)(NSError* error)) handler;
+        completionHandler: (void (^)(SWGUrl* output, NSError* error)) handler;
 ```
 
 Update profile picture
-
-Upload a picture and get a url to the picture
 
 ### Example 
 ```objc
@@ -1220,7 +1512,10 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 // Update profile picture
 [apiInstance updateProfilePicturePostWithFile:file
-          completionHandler: ^(NSError* error) {
+          completionHandler: ^(SWGUrl* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
                         if (error) {
                             NSLog(@"Error calling SWGUserApi->updateProfilePicturePost: %@", error);
                         }
@@ -1235,7 +1530,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SWGUrl***](SWGUrl.md)
 
 ### Authorization
 
@@ -1243,7 +1538,7 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: multipart/form-data, application/x-www-form-urlencoded
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1255,8 +1550,8 @@ void (empty response body)
     handedness: (NSString*) handedness
     city: (NSString*) city
     locality: (NSString*) locality
-    clubIds: (NSArray<NSNumber*>*) clubIds
-        completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+    clubIds: (NSString*) clubIds
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
 Update Profile
@@ -1278,7 +1573,7 @@ NSString* birthDate = @"birthDate_example"; // format - DD/MM/YYYY
 NSString* handedness = @"handedness_example"; // 
 NSString* city = @"city_example"; // 
 NSString* locality = @"locality_example"; // 
-NSArray<NSNumber*>* clubIds = @[@56]; // 
+NSString* clubIds = @"clubIds_example"; //  (optional)
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
@@ -1289,7 +1584,7 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
               city:city
               locality:locality
               clubIds:clubIds
-          completionHandler: ^(SWGUser* output, NSError* error) {
+          completionHandler: ^(NSObject* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -1308,11 +1603,11 @@ Name | Type | Description  | Notes
  **handedness** | **NSString***|  | 
  **city** | **NSString***|  | 
  **locality** | **NSString***|  | 
- **clubIds** | [**NSArray&lt;NSNumber*&gt;***](NSNumber*.md)|  | 
+ **clubIds** | **NSString***|  | [optional] 
 
 ### Return type
 
-[**SWGUser***](SWGUser.md)
+**NSObject***
 
 ### Authorization
 
@@ -1328,12 +1623,10 @@ Name | Type | Description  | Notes
 # **updateStatusMessagePost**
 ```objc
 -(NSNumber*) updateStatusMessagePostWithMessage: (NSString*) message
-        completionHandler: (void (^)(NSError* error)) handler;
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
-Update profile picture
-
-Upload a picture and get a url to the picture
+Update status message
 
 ### Example 
 ```objc
@@ -1349,9 +1642,12 @@ NSString* message = @"message_example"; // New Status Message
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
-// Update profile picture
+// Update status message
 [apiInstance updateStatusMessagePostWithMessage:message
-          completionHandler: ^(NSError* error) {
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
                         if (error) {
                             NSLog(@"Error calling SWGUserApi->updateStatusMessagePost: %@", error);
                         }
@@ -1366,7 +1662,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**NSObject***
 
 ### Authorization
 

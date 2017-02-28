@@ -14,22 +14,26 @@
 */
 
 
-#import "SWGClub.h"
-#import "SWGUser.h"
 
 
-@protocol SWGClubParticipants
+@protocol SWGNews
 @end
 
-@interface SWGClubParticipants : SWGObject
+@interface SWGNews : SWGObject
 
 
-@property(nonatomic) SWGClub* club;
+@property(nonatomic) NSNumber* varNewsId;
 
-@property(nonatomic) NSArray<SWGUser>* badmintonPlayers;
+@property(nonatomic) NSString* varNewsTitle;
 
-@property(nonatomic) NSArray<SWGUser>* tennisPlayers;
+@property(nonatomic) NSString* varNewsContent;
 
-@property(nonatomic) NSArray<SWGUser>* squashPlayers;
+@property(nonatomic) NSString* varNewsAuthor;
+
+@property(nonatomic) NSString* varNewsSport;
+
+@property(nonatomic) NSString* varNewsPublishTs;
+
+@property(nonatomic) NSString* varNewsImageUrl;
 
 @end

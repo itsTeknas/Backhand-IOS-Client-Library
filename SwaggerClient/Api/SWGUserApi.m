@@ -2,10 +2,12 @@
 #import "SWGQueryParamCollection.h"
 #import "SWGChallenge.h"
 #import "SWGClub.h"
-#import "SWGClubParticipants.h"
 #import "SWGEvent.h"
+#import "SWGFeaturedPlayer.h"
 #import "SWGGame.h"
+#import "SWGNews.h"
 #import "SWGScoreboard.h"
+#import "SWGUrl.h"
 #import "SWGUser.h"
 
 
@@ -76,6 +78,78 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 #pragma mark - Api Methods
 
 ///
+/// Accept Challenge
+/// 
+/// @param challengeId  
+///
+///  code:200 message:"Challenge Accepted"
+/// @return NSObject*
+-(NSNumber*) acceptChallengePostWithChallengeId: (NSNumber*) challengeId
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
+    // verify the required parameter 'challengeId' is set
+    if (challengeId == nil) {
+        NSParameterAssert(challengeId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"challengeId"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/accept_challenge"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (challengeId != nil) {
+        queryParams[@"challenge_id"] = challengeId;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"TokenAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"NSObject*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((NSObject*)data, error);
+                                }
+                           }
+          ];
+}
+
+///
 /// Add sport to user profile
 /// 
 /// @param sport Sport Enum 
@@ -86,13 +160,13 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 ///
 /// @param playingSince  
 ///
-///  code:200 message:"Updated Profile"
-/// @return SWGUser*
+///  code:200 message:"Status Updated"
+/// @return NSObject*
 -(NSNumber*) addSportPostWithSport: (NSString*) sport
     skillLevel: (NSNumber*) skillLevel
     favouritePlayer: (NSString*) favouritePlayer
     playingSince: (NSNumber*) playingSince
-    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler {
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
     // verify the required parameter 'sport' is set
     if (sport == nil) {
         NSParameterAssert(sport);
@@ -189,10 +263,10 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"SWGUser*"
+                              responseType: @"NSObject*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((SWGUser*)data, error);
+                                    handler((NSObject*)data, error);
                                 }
                            }
           ];
@@ -203,10 +277,10 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 /// 
 /// @param sport Sport Enum 
 ///
-///  code:200 message:"Updated Profile"
-/// @return SWGUser*
+///  code:200 message:"Status Updated"
+/// @return NSObject*
 -(NSNumber*) deleteSportPostWithSport: (NSString*) sport
-    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler {
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
     // verify the required parameter 'sport' is set
     if (sport == nil) {
         NSParameterAssert(sport);
@@ -261,10 +335,10 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"SWGUser*"
+                              responseType: @"NSObject*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((SWGUser*)data, error);
+                                    handler((NSObject*)data, error);
                                 }
                            }
           ];
@@ -332,6 +406,62 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
                                     handler((NSArray<SWGUser>*)data, error);
+                                }
+                           }
+          ];
+}
+
+///
+/// Get List of Challenges
+/// 
+///  code:200 message:"List of Challenges"
+/// @return NSArray<SWGChallenge>*
+-(NSNumber*) getChallengesGetWithCompletionHandler: 
+    (void (^)(NSArray<SWGChallenge>* output, NSError* error)) handler {
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/get_challenges"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"TokenAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"NSArray<SWGChallenge>*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((NSArray<SWGChallenge>*)data, error);
                                 }
                            }
           ];
@@ -479,92 +609,28 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 }
 
 ///
-/// Get Club Participants
-/// Get the players for various sports within a club
-/// @param clubId City 
+/// Get List of Events
+/// Get list of events for a city
+/// @param sport Sport Enum 
 ///
-/// @param limit Limit the number of results (optional, default to 50)
+/// @param city City 
 ///
-///  code:200 message:"Club Details"
-/// @return SWGClubParticipants*
--(NSNumber*) getClubsParticipantsGetWithClubId: (NSNumber*) clubId
-    limit: (NSNumber*) limit
-    completionHandler: (void (^)(SWGClubParticipants* output, NSError* error)) handler {
-    // verify the required parameter 'clubId' is set
-    if (clubId == nil) {
-        NSParameterAssert(clubId);
+///  code:200 message:"List of Events"
+/// @return NSArray<SWGEvent>*
+-(NSNumber*) getEventsGetWithSport: (NSString*) sport
+    city: (NSString*) city
+    completionHandler: (void (^)(NSArray<SWGEvent>* output, NSError* error)) handler {
+    // verify the required parameter 'sport' is set
+    if (sport == nil) {
+        NSParameterAssert(sport);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"clubId"] };
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"sport"] };
             NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/get_clubs_participants"];
-
-    // remove format in URL if needed
-    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    if (clubId != nil) {
-        queryParams[@"club_id"] = clubId;
-    }
-    if (limit != nil) {
-        queryParams[@"limit"] = limit;
-    }
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"TokenAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"GET"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"SWGClubParticipants*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((SWGClubParticipants*)data, error);
-                                }
-                           }
-          ];
-}
-
-///
-/// Get List of Events
-/// Get list of events for a city
-/// @param city City 
-///
-///  code:200 message:"List of Events"
-/// @return NSArray<SWGEvent>*
--(NSNumber*) getEventsGetWithCity: (NSString*) city
-    completionHandler: (void (^)(NSArray<SWGEvent>* output, NSError* error)) handler {
     // verify the required parameter 'city' is set
     if (city == nil) {
         NSParameterAssert(city);
@@ -584,6 +650,9 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
     NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (sport != nil) {
+        queryParams[@"sport"] = sport;
+    }
     if (city != nil) {
         queryParams[@"city"] = city;
     }
@@ -629,14 +698,14 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 }
 
 ///
-/// Get Players List to load in add sport screen
+/// Get featured players
 /// 
 /// @param sport Sport Enum 
 ///
 ///  code:200 message:"Player List"
-/// @return NSArray<NSString*>*
--(NSNumber*) getFeaturedPlayersPostWithSport: (NSString*) sport
-    completionHandler: (void (^)(NSArray<NSString*>* output, NSError* error)) handler {
+/// @return NSArray<SWGFeaturedPlayer>*
+-(NSNumber*) getFeaturedPlayersGetWithSport: (NSString*) sport
+    completionHandler: (void (^)(NSArray<SWGFeaturedPlayer>* output, NSError* error)) handler {
     // verify the required parameter 'sport' is set
     if (sport == nil) {
         NSParameterAssert(sport);
@@ -681,7 +750,7 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
 
     return [self.apiClient requestWithPath: resourcePath
-                                    method: @"POST"
+                                    method: @"GET"
                                 pathParams: pathParams
                                queryParams: queryParams
                                 formParams: formParams
@@ -691,10 +760,10 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"NSArray<NSString*>*"
+                              responseType: @"NSArray<SWGFeaturedPlayer>*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((NSArray<NSString*>*)data, error);
+                                    handler((NSArray<SWGFeaturedPlayer>*)data, error);
                                 }
                            }
           ];
@@ -756,6 +825,78 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
                                     handler((NSArray<SWGChallenge>*)data, error);
+                                }
+                           }
+          ];
+}
+
+///
+/// Get news
+/// 
+/// @param sport Sport Enum 
+///
+///  code:200 message:"Player List"
+/// @return NSArray<SWGNews>*
+-(NSNumber*) getNewsPostWithSport: (NSString*) sport
+    completionHandler: (void (^)(NSArray<SWGNews>* output, NSError* error)) handler {
+    // verify the required parameter 'sport' is set
+    if (sport == nil) {
+        NSParameterAssert(sport);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"sport"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/get_news"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (sport != nil) {
+        queryParams[@"sport"] = sport;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"TokenAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"NSArray<SWGNews>*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((NSArray<SWGNews>*)data, error);
                                 }
                            }
           ];
@@ -992,6 +1133,130 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
     NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
     if (userId != nil) {
         queryParams[@"user_id"] = userId;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"TokenAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"SWGUser*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((SWGUser*)data, error);
+                                }
+                           }
+          ];
+}
+
+///
+/// pseudo signup user
+/// Add user if it dosent exist. set user_is_real = false
+/// @param firstName  
+///
+/// @param lastName  
+///
+/// @param email  
+///
+/// @param gender  
+///
+///  code:200 message:"Pseudo User",
+///  code:302 message:"Real Player Already exists"
+/// @return SWGUser*
+-(NSNumber*) invitePlayerPostWithFirstName: (NSString*) firstName
+    lastName: (NSString*) lastName
+    email: (NSString*) email
+    gender: (NSString*) gender
+    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler {
+    // verify the required parameter 'firstName' is set
+    if (firstName == nil) {
+        NSParameterAssert(firstName);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"firstName"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'lastName' is set
+    if (lastName == nil) {
+        NSParameterAssert(lastName);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"lastName"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'email' is set
+    if (email == nil) {
+        NSParameterAssert(email);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"email"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'gender' is set
+    if (gender == nil) {
+        NSParameterAssert(gender);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"gender"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/invite_player"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (firstName != nil) {
+        queryParams[@"first_name"] = firstName;
+    }
+    if (lastName != nil) {
+        queryParams[@"last_name"] = lastName;
+    }
+    if (email != nil) {
+        queryParams[@"email"] = email;
+    }
+    if (gender != nil) {
+        queryParams[@"gender"] = gender;
     }
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
@@ -1380,16 +1645,17 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 /// @param message  
 ///
 ///  code:200 message:"Notification Sent"
+/// @return NSObject*
 -(NSNumber*) notifyNewMessagePostWithUserId: (NSNumber*) userId
     message: (NSString*) message
-    completionHandler: (void (^)(NSError* error)) handler {
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
     // verify the required parameter 'userId' is set
     if (userId == nil) {
         NSParameterAssert(userId);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"userId"] };
             NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
-            handler(error);
+            handler(nil, error);
         }
         return nil;
     }
@@ -1400,7 +1666,7 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"message"] };
             NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
-            handler(error);
+            handler(nil, error);
         }
         return nil;
     }
@@ -1451,10 +1717,82 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: nil
+                              responseType: @"NSObject*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler(error);
+                                    handler((NSObject*)data, error);
+                                }
+                           }
+          ];
+}
+
+///
+/// Reject Challenge
+/// 
+/// @param challengeId  
+///
+///  code:200 message:"Challenge Rejected"
+/// @return NSObject*
+-(NSNumber*) rejectChallengePostWithChallengeId: (NSNumber*) challengeId
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
+    // verify the required parameter 'challengeId' is set
+    if (challengeId == nil) {
+        NSParameterAssert(challengeId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"challengeId"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/reject_challenge"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (challengeId != nil) {
+        queryParams[@"challenge_id"] = challengeId;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"TokenAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"NSObject*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((NSObject*)data, error);
                                 }
                            }
           ];
@@ -1615,19 +1953,20 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 /// 
 /// @param sport Sport Enum 
 ///
-/// @param player New Status Message 
+/// @param player  
 ///
 ///  code:200 message:"Favourite Player Updated"
+/// @return NSObject*
 -(NSNumber*) updateFavouritePlayerPostWithSport: (NSString*) sport
     player: (NSString*) player
-    completionHandler: (void (^)(NSError* error)) handler {
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
     // verify the required parameter 'sport' is set
     if (sport == nil) {
         NSParameterAssert(sport);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"sport"] };
             NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
-            handler(error);
+            handler(nil, error);
         }
         return nil;
     }
@@ -1638,7 +1977,7 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"player"] };
             NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
-            handler(error);
+            handler(nil, error);
         }
         return nil;
     }
@@ -1689,10 +2028,82 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: nil
+                              responseType: @"NSObject*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler(error);
+                                    handler((NSObject*)data, error);
+                                }
+                           }
+          ];
+}
+
+///
+/// Update FCM InstanceID
+/// 
+/// @param instanceId  
+///
+///  code:200 message:"Status Updated"
+/// @return NSObject*
+-(NSNumber*) updateFcmInstanceIdPostWithInstanceId: (NSString*) instanceId
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
+    // verify the required parameter 'instanceId' is set
+    if (instanceId == nil) {
+        NSParameterAssert(instanceId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceId"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/update_fcm_instance_id"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (instanceId != nil) {
+        queryParams[@"instance_id"] = instanceId;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"TokenAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"NSObject*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((NSObject*)data, error);
                                 }
                            }
           ];
@@ -1700,19 +2111,20 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 
 ///
 /// Update profile picture
-/// Upload a picture and get a url to the picture
+/// 
 /// @param file File to upload Accepted formats jpg,jpeg,png 
 ///
 ///  code:200 message:"URL of the picture"
+/// @return SWGUrl*
 -(NSNumber*) updateProfilePicturePostWithFile: (NSURL*) file
-    completionHandler: (void (^)(NSError* error)) handler {
+    completionHandler: (void (^)(SWGUrl* output, NSError* error)) handler {
     // verify the required parameter 'file' is set
     if (file == nil) {
         NSParameterAssert(file);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"file"] };
             NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
-            handler(error);
+            handler(nil, error);
         }
         return nil;
     }
@@ -1737,7 +2149,7 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
     NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
 
     // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"multipart/form-data", @"application/x-www-form-urlencoded"]];
 
     // Authentication setting
     NSArray *authSettings = @[@"TokenAuth"];
@@ -1758,10 +2170,10 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: nil
+                              responseType: @"SWGUrl*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler(error);
+                                    handler((SWGUrl*)data, error);
                                 }
                            }
           ];
@@ -1780,17 +2192,17 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 ///
 /// @param locality  
 ///
-/// @param clubIds  
+/// @param clubIds  (optional)
 ///
-///  code:200 message:"Updated Profile"
-/// @return SWGUser*
+///  code:200 message:"Status Updated"
+/// @return NSObject*
 -(NSNumber*) updateProfilePostWithMobileNumber: (NSString*) mobileNumber
     birthDate: (NSString*) birthDate
     handedness: (NSString*) handedness
     city: (NSString*) city
     locality: (NSString*) locality
-    clubIds: (NSArray<NSNumber*>*) clubIds
-    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler {
+    clubIds: (NSString*) clubIds
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
     // verify the required parameter 'mobileNumber' is set
     if (mobileNumber == nil) {
         NSParameterAssert(mobileNumber);
@@ -1846,17 +2258,6 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
         return nil;
     }
 
-    // verify the required parameter 'clubIds' is set
-    if (clubIds == nil) {
-        NSParameterAssert(clubIds);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"clubIds"] };
-            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
     NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/update_profile"];
 
     // remove format in URL if needed
@@ -1881,8 +2282,7 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
         queryParams[@"locality"] = locality;
     }
     if (clubIds != nil) {
-        queryParams[@"club_ids"] = [[SWGQueryParamCollection alloc] initWithValuesAndFormat: clubIds format: @"csv"];
-        
+        queryParams[@"club_ids"] = clubIds;
     }
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
@@ -1916,30 +2316,31 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"SWGUser*"
+                              responseType: @"NSObject*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((SWGUser*)data, error);
+                                    handler((NSObject*)data, error);
                                 }
                            }
           ];
 }
 
 ///
-/// Update profile picture
-/// Upload a picture and get a url to the picture
+/// Update status message
+/// 
 /// @param message New Status Message 
 ///
 ///  code:200 message:"Status Updated"
+/// @return NSObject*
 -(NSNumber*) updateStatusMessagePostWithMessage: (NSString*) message
-    completionHandler: (void (^)(NSError* error)) handler {
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
     // verify the required parameter 'message' is set
     if (message == nil) {
         NSParameterAssert(message);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"message"] };
             NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
-            handler(error);
+            handler(nil, error);
         }
         return nil;
     }
@@ -1987,10 +2388,10 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: nil
+                              responseType: @"NSObject*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler(error);
+                                    handler((NSObject*)data, error);
                                 }
                            }
           ];

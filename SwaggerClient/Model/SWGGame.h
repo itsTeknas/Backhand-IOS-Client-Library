@@ -45,7 +45,7 @@
 
 @property(nonatomic) NSNumber* gameOppositionPlayer2;
 
-@property(nonatomic) NSNumber* gameIsVerified;
+@property(nonatomic) NSString* gameStatus;
 
 @property(nonatomic) NSString* gameCreatedTs;
 

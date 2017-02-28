@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"tokenType", @"expiresIn", @"accessToken", @"refreshToken"];
+  NSArray *optionalProperties = @[@"tokenType", @"expiresIn", @"refreshToken"];
   return [optionalProperties containsObject:propertyName];
 }
 

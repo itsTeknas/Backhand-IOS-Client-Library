@@ -1,6 +1,7 @@
 #import "SWGAdminApi.h"
 #import "SWGQueryParamCollection.h"
 #import "SWGEvent.h"
+#import "SWGUrl.h"
 
 
 @interface SWGAdminApi ()
@@ -279,19 +280,20 @@ NSInteger kSWGAdminApiMissingParamErrorCode = 234513;
 
 ///
 /// Upload a picture
-/// Upload a picture and get a url to the picture
+/// 
 /// @param file File to upload Accepted formats jpg,jpeg,png 
 ///
 ///  code:200 message:"URL of the picture"
+/// @return SWGUrl*
 -(NSNumber*) uploadPicturePostWithFile: (NSURL*) file
-    completionHandler: (void (^)(NSError* error)) handler {
+    completionHandler: (void (^)(SWGUrl* output, NSError* error)) handler {
     // verify the required parameter 'file' is set
     if (file == nil) {
         NSParameterAssert(file);
         if(handler) {
             NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"file"] };
             NSError* error = [NSError errorWithDomain:kSWGAdminApiErrorDomain code:kSWGAdminApiMissingParamErrorCode userInfo:userInfo];
-            handler(error);
+            handler(nil, error);
         }
         return nil;
     }
@@ -316,7 +318,7 @@ NSInteger kSWGAdminApiMissingParamErrorCode = 234513;
     NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
 
     // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"multipart/form-data", @"application/x-www-form-urlencoded"]];
 
     // Authentication setting
     NSArray *authSettings = @[@"TokenAuth"];
@@ -337,10 +339,10 @@ NSInteger kSWGAdminApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: nil
+                              responseType: @"SWGUrl*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler(error);
+                                    handler((SWGUrl*)data, error);
                                 }
                            }
           ];

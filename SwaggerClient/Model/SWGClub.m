@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"clubId", @"clubName", @"clubCity", @"clubAddress", @"clubHasBadminton", @"clubHasTennis", @"clubHasSquash", @"clubNoBadmintonCourts", @"clubNoTennisCourts", @"clubNoSquashCourts", @"clubLat", @"clubLon"];
+  NSArray *optionalProperties = @[@"clubCity", @"clubAddress", @"clubHasBadminton", @"clubHasTennis", @"clubHasSquash", @"clubNoBadmintonCourts", @"clubNoTennisCourts", @"clubNoSquashCourts", @"clubLat", @"clubLon"];
   return [optionalProperties containsObject:propertyName];
 }
 

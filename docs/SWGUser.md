@@ -3,40 +3,40 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | **NSNumber*** |  | [optional] 
-**userFirstName** | **NSString*** |  | [optional] 
+**userId** | **NSNumber*** |  | 
+**userFirstName** | **NSString*** |  | 
 **userLastName** | **NSString*** |  | [optional] 
-**email** | **NSString*** |  | [optional] 
+**email** | **NSString*** |  | 
 **userMobileNo** | **NSString*** |  | [optional] 
-**userProfilePicUrl** | **NSString*** |  | [optional] 
+**userProfilePicUrl** | **NSString*** |  | 
 **userSocialId** | **NSString*** |  | [optional] 
 **userHandedness** | **NSString*** |  | [optional] 
-**userGender** | **NSString*** |  | [optional] 
+**userGender** | **NSString*** |  | 
 **userCity** | **NSString*** | example - Mumbai | [optional] 
 **userLocality** | **NSString*** | example - Borivali | [optional] 
 **userIsReal** | **NSNumber*** |  | [optional] 
 **userBirthdate** | **NSString*** | DD/MM//YYYY | [optional] 
 **userAge** | **NSNumber*** |  | [optional] 
 **userStatusMessage** | **NSString*** |  | [optional] 
-**userPlaysBadminton** | **NSNumber*** |  | [optional] 
-**userSkillLevelBadminton** | **NSNumber*** |  | [optional] 
-**userWinRateBadminton** | **NSNumber*** |  | [optional] 
-**userPlayingBadmintonSince** | **NSNumber*** |  | [optional] 
-**userBadmintonFavouritePlayer** | **NSString*** |  | [optional] 
-**userTotalMatchesBadminton** | **NSNumber*** |  | [optional] 
-**userPlaysTennis** | **NSNumber*** |  | [optional] 
-**userSkillLevelTennis** | **NSNumber*** |  | [optional] 
-**userPlayingTennisSince** | **NSNumber*** |  | [optional] 
-**userTennisFavouritePlayer** | **NSString*** |  | [optional] 
-**userTotalMatchesTennis** | **NSNumber*** |  | [optional] 
-**userWinRateTennis** | **NSNumber*** |  | [optional] 
-**userPlaysSquash** | **NSNumber*** |  | [optional] 
-**userSkillLevelSquash** | **NSNumber*** |  | [optional] 
-**userPlayingSquashSince** | **NSNumber*** |  | [optional] 
-**userSquashFavouritePlayer** | **NSString*** |  | [optional] 
-**userTotalMatchesSquash** | **NSNumber*** |  | [optional] 
-**userWinRateSquash** | **NSNumber*** |  | [optional] 
-**userClubs** | [**NSArray&lt;SWGUserUserClubs&gt;***](SWGUserUserClubs.md) |  | [optional] 
+**userPlaysBadminton** | **NSNumber*** |  | [default to @0]
+**userSkillLevelBadminton** | **NSNumber*** |  | 
+**userWinRateBadminton** | **NSNumber*** |  | 
+**userPlayingBadmintonSince** | **NSNumber*** |  | 
+**userBadmintonFavouritePlayer** | **NSString*** |  | 
+**userTotalMatchesBadminton** | **NSNumber*** |  | 
+**userPlaysTennis** | **NSNumber*** |  | [default to @0]
+**userSkillLevelTennis** | **NSNumber*** |  | 
+**userPlayingTennisSince** | **NSNumber*** |  | 
+**userTennisFavouritePlayer** | **NSString*** |  | 
+**userTotalMatchesTennis** | **NSNumber*** |  | 
+**userWinRateTennis** | **NSNumber*** |  | 
+**userPlaysSquash** | **NSNumber*** |  | [default to @0]
+**userSkillLevelSquash** | **NSNumber*** |  | 
+**userPlayingSquashSince** | **NSNumber*** |  | 
+**userSquashFavouritePlayer** | **NSString*** |  | 
+**userTotalMatchesSquash** | **NSNumber*** |  | 
+**userWinRateSquash** | **NSNumber*** |  | 
+**userClubs** | [**NSArray&lt;SWGUserUserClubs&gt;***](SWGUserUserClubs.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

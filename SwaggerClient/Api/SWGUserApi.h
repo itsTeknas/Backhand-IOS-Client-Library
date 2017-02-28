@@ -1,10 +1,12 @@
 #import <Foundation/Foundation.h>
 #import "SWGChallenge.h"
 #import "SWGClub.h"
-#import "SWGClubParticipants.h"
 #import "SWGEvent.h"
+#import "SWGFeaturedPlayer.h"
 #import "SWGGame.h"
+#import "SWGNews.h"
 #import "SWGScoreboard.h"
+#import "SWGUrl.h"
 #import "SWGUser.h"
 #import "SWGApi.h"
 
@@ -29,27 +31,35 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 
 +(instancetype) sharedAPI;
 
+/// Accept Challenge
+///
+/// @param challengeId 
+///  code:200 message:"Challenge Accepted"
+/// @return NSObject*
+-(NSNumber*) acceptChallengePostWithChallengeId: (NSNumber*) challengeId
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
 /// Add sport to user profile
 ///
 /// @param sport Sport Enum
 /// @param skillLevel 
 /// @param favouritePlayer 
 /// @param playingSince 
-///  code:200 message:"Updated Profile"
-/// @return SWGUser*
+///  code:200 message:"Status Updated"
+/// @return NSObject*
 -(NSNumber*) addSportPostWithSport: (NSString*) sport
     skillLevel: (NSNumber*) skillLevel
     favouritePlayer: (NSString*) favouritePlayer
     playingSince: (NSNumber*) playingSince
-    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
 /// Delete sport to user profile
 ///
 /// @param sport Sport Enum
-///  code:200 message:"Updated Profile"
-/// @return SWGUser*
+///  code:200 message:"Status Updated"
+/// @return NSObject*
 -(NSNumber*) deleteSportPostWithSport: (NSString*) sport
-    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
 /// Get challenge recommendations
 ///
@@ -60,6 +70,13 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 -(NSNumber*) getChallengeRecommendationsGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
+
+/// Get List of Challenges
+///
+///  code:200 message:"List of Challenges"
+/// @return NSArray<SWGChallenge>*
+-(NSNumber*) getChallengesGetWithCompletionHandler: 
+    (void (^)(NSArray<SWGChallenge>* output, NSError* error)) handler;
 
 /// Get List of Cities
 /// Get list of clubs for user's city
@@ -86,33 +103,24 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     limit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGClub>* output, NSError* error)) handler;
 
-/// Get Club Participants
-/// Get the players for various sports within a club
-///
-/// @param clubId City
-/// @param limit Limit the number of results (optional) (default to 50)
-///  code:200 message:"Club Details"
-/// @return SWGClubParticipants*
--(NSNumber*) getClubsParticipantsGetWithClubId: (NSNumber*) clubId
-    limit: (NSNumber*) limit
-    completionHandler: (void (^)(SWGClubParticipants* output, NSError* error)) handler;
-
 /// Get List of Events
 /// Get list of events for a city
 ///
+/// @param sport Sport Enum
 /// @param city City
 ///  code:200 message:"List of Events"
 /// @return NSArray<SWGEvent>*
--(NSNumber*) getEventsGetWithCity: (NSString*) city
+-(NSNumber*) getEventsGetWithSport: (NSString*) sport
+    city: (NSString*) city
     completionHandler: (void (^)(NSArray<SWGEvent>* output, NSError* error)) handler;
 
-/// Get Players List to load in add sport screen
+/// Get featured players
 ///
 /// @param sport Sport Enum
 ///  code:200 message:"Player List"
-/// @return NSArray<NSString*>*
--(NSNumber*) getFeaturedPlayersPostWithSport: (NSString*) sport
-    completionHandler: (void (^)(NSArray<NSString*>* output, NSError* error)) handler;
+/// @return NSArray<SWGFeaturedPlayer>*
+-(NSNumber*) getFeaturedPlayersGetWithSport: (NSString*) sport
+    completionHandler: (void (^)(NSArray<SWGFeaturedPlayer>* output, NSError* error)) handler;
 
 /// Get challenges
 /// A list of challenges
@@ -122,6 +130,14 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// @return NSArray<SWGChallenge>*
 -(NSNumber*) getMyChallengesGetWithLimit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGChallenge>* output, NSError* error)) handler;
+
+/// Get news
+///
+/// @param sport Sport Enum
+///  code:200 message:"Player List"
+/// @return NSArray<SWGNews>*
+-(NSNumber*) getNewsPostWithSport: (NSString*) sport
+    completionHandler: (void (^)(NSArray<SWGNews>* output, NSError* error)) handler;
 
 /// Get all pending games
 /// A list of games that are validated by the opoonent.
@@ -158,6 +174,22 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 ///  code:200 message:"User profile"
 /// @return SWGUser*
 -(NSNumber*) getUserPostWithUserId: (NSNumber*) userId
+    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+
+/// pseudo signup user
+/// Add user if it dosent exist. set user_is_real = false
+///
+/// @param firstName 
+/// @param lastName 
+/// @param email 
+/// @param gender 
+///  code:200 message:"Pseudo User",
+///  code:302 message:"Real Player Already exists"
+/// @return SWGUser*
+-(NSNumber*) invitePlayerPostWithFirstName: (NSString*) firstName
+    lastName: (NSString*) lastName
+    email: (NSString*) email
+    gender: (NSString*) gender
     completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
 
 /// Challenge someone for a game
@@ -211,9 +243,18 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// @param userId 
 /// @param message 
 ///  code:200 message:"Notification Sent"
+/// @return NSObject*
 -(NSNumber*) notifyNewMessagePostWithUserId: (NSNumber*) userId
     message: (NSString*) message
-    completionHandler: (void (^)(NSError* error)) handler;
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
+/// Reject Challenge
+///
+/// @param challengeId 
+///  code:200 message:"Challenge Rejected"
+/// @return NSObject*
+-(NSNumber*) rejectChallengePostWithChallengeId: (NSNumber*) challengeId
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
 /// Reject pending score
 /// Validate the score entered by an opponent.
@@ -238,19 +279,28 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// Update favourite player
 ///
 /// @param sport Sport Enum
-/// @param player New Status Message
+/// @param player 
 ///  code:200 message:"Favourite Player Updated"
+/// @return NSObject*
 -(NSNumber*) updateFavouritePlayerPostWithSport: (NSString*) sport
     player: (NSString*) player
-    completionHandler: (void (^)(NSError* error)) handler;
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
+/// Update FCM InstanceID
+///
+/// @param instanceId 
+///  code:200 message:"Status Updated"
+/// @return NSObject*
+-(NSNumber*) updateFcmInstanceIdPostWithInstanceId: (NSString*) instanceId
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
 /// Update profile picture
-/// Upload a picture and get a url to the picture
 ///
 /// @param file File to upload Accepted formats jpg,jpeg,png
 ///  code:200 message:"URL of the picture"
+/// @return SWGUrl*
 -(NSNumber*) updateProfilePicturePostWithFile: (NSURL*) file
-    completionHandler: (void (^)(NSError* error)) handler;
+    completionHandler: (void (^)(SWGUrl* output, NSError* error)) handler;
 
 /// Update Profile
 /// If the profilePic file is provided, we save it and update the profile pic link in the user profile. Also, all other provided fileds are updated.
@@ -260,24 +310,24 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// @param handedness 
 /// @param city 
 /// @param locality 
-/// @param clubIds 
-///  code:200 message:"Updated Profile"
-/// @return SWGUser*
+/// @param clubIds  (optional)
+///  code:200 message:"Status Updated"
+/// @return NSObject*
 -(NSNumber*) updateProfilePostWithMobileNumber: (NSString*) mobileNumber
     birthDate: (NSString*) birthDate
     handedness: (NSString*) handedness
     city: (NSString*) city
     locality: (NSString*) locality
-    clubIds: (NSArray<NSNumber*>*) clubIds
-    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+    clubIds: (NSString*) clubIds
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
-/// Update profile picture
-/// Upload a picture and get a url to the picture
+/// Update status message
 ///
 /// @param message New Status Message
 ///  code:200 message:"Status Updated"
+/// @return NSObject*
 -(NSNumber*) updateStatusMessagePostWithMessage: (NSString*) message
-    completionHandler: (void (^)(NSError* error)) handler;
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
 /// Verify pending score
 /// Validate the score entered by an opponent.
