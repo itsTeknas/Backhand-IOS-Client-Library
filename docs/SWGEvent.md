@@ -4,7 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **eventId** | **NSNumber*** |  | [optional] 
-**isCurrentUserJoined** | **NSNumber*** | Whether or not the current user has joined this event | [optional] 
 **eventName** | **NSString*** |  | [optional] 
 **eventDescription** | **NSString*** |  | [optional] 
 **eventCity** | **NSString*** |  | [optional] 

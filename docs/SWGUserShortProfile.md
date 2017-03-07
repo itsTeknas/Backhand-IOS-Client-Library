@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **userId** | **NSNumber*** |  | 
 **userFirstName** | **NSString*** |  | 
 **userLastName** | **NSString*** |  | [optional] 
-**email** | **NSString*** |  | 
+**email** | **NSString*** |  | [optional] 
 **userMobileNo** | **NSString*** |  | [optional] 
 **userProfilePicUrl** | **NSString*** |  | 
 **userGender** | **NSString*** |  | 

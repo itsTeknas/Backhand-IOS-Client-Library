@@ -24,9 +24,6 @@
 
 
 @property(nonatomic) NSNumber* eventId;
-/* Whether or not the current user has joined this event [optional]
- */
-@property(nonatomic) NSNumber* isCurrentUserJoined;
 
 @property(nonatomic) NSString* eventName;
 

@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import <AFNetworking/AFURLResponseSerialization.h>
+#import "SWGObject.h"
 
 /**
 * Backhand Api
@@ -14,6 +14,18 @@
 */
 
 
-@interface SWGJSONResponseSerializer : AFJSONResponseSerializer
+
+
+@protocol SWGAvailability
+@end
+
+@interface SWGAvailability : SWGObject
+
+/* DD/MM/YYYY [optional]
+ */
+@property(nonatomic) NSString* date;
+/* 24Hrs format eg. 22:20 [optional]
+ */
+@property(nonatomic) NSString* time;
 
 @end

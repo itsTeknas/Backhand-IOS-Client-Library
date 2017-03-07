@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "SWGAvailability.h"
 #import "SWGChallenge.h"
 #import "SWGClub.h"
 #import "SWGEvent.h"
@@ -29,62 +30,98 @@
 extern NSString* kSWGUserApiErrorDomain;
 extern NSInteger kSWGUserApiMissingParamErrorCode;
 
-+(instancetype) sharedAPI;
+-(instancetype) initWithApiClient:(SWGApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
 
 /// Accept Challenge
+/// 
 ///
 /// @param challengeId 
+/// 
 ///  code:200 message:"Challenge Accepted"
+///
 /// @return NSObject*
--(NSNumber*) acceptChallengePostWithChallengeId: (NSNumber*) challengeId
+-(NSURLSessionTask*) acceptChallengePostWithChallengeId: (NSNumber*) challengeId
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
+
 /// Add sport to user profile
+/// 
 ///
 /// @param sport Sport Enum
 /// @param skillLevel 
 /// @param favouritePlayer 
 /// @param playingSince 
+/// 
 ///  code:200 message:"Status Updated"
+///
 /// @return NSObject*
--(NSNumber*) addSportPostWithSport: (NSString*) sport
+-(NSURLSessionTask*) addSportPostWithSport: (NSString*) sport
     skillLevel: (NSNumber*) skillLevel
     favouritePlayer: (NSString*) favouritePlayer
     playingSince: (NSNumber*) playingSince
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
+
 /// Delete sport to user profile
+/// 
 ///
 /// @param sport Sport Enum
+/// 
 ///  code:200 message:"Status Updated"
+///
 /// @return NSObject*
--(NSNumber*) deleteSportPostWithSport: (NSString*) sport
+-(NSURLSessionTask*) deleteSportPostWithSport: (NSString*) sport
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
+
+/// Invite user by email
+/// 
+///
+/// @param email 
+/// 
+///  code:200 message:"Invite Sent"
+///
+/// @return NSObject*
+-(NSURLSessionTask*) emailInvitePostWithEmail: (NSString*) email
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
+
+/// Get featured players
+/// get the availability for the next 10 days for the selected user
+///
+/// @param userId 
+/// 
+///  code:200 message:"Availability"
+///
+/// @return NSArray<SWGAvailability>*
+-(NSURLSessionTask*) getAvailabilityGetWithUserId: (NSNumber*) userId
+    completionHandler: (void (^)(NSArray<SWGAvailability>* output, NSError* error)) handler;
+
+
 /// Get challenge recommendations
+/// 
 ///
 /// @param sport Sport Enum (optional)
 /// @param limit Limit the number of results (optional) (default to 50)
+/// 
 ///  code:200 message:"List of Users"
+///
 /// @return NSArray<SWGUser>*
--(NSNumber*) getChallengeRecommendationsGetWithSport: (NSString*) sport
+-(NSURLSessionTask*) getChallengeRecommendationsGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
 
-/// Get List of Challenges
-///
-///  code:200 message:"List of Challenges"
-/// @return NSArray<SWGChallenge>*
--(NSNumber*) getChallengesGetWithCompletionHandler: 
-    (void (^)(NSArray<SWGChallenge>* output, NSError* error)) handler;
 
 /// Get List of Cities
 /// Get list of clubs for user's city
 ///
+/// 
 ///  code:200 message:"List of Cities"
+///
 /// @return NSArray<NSString*>*
--(NSNumber*) getCitiesGetWithCompletionHandler: 
+-(NSURLSessionTask*) getCitiesGetWithCompletionHandler: 
     (void (^)(NSArray<NSString*>* output, NSError* error)) handler;
+
 
 /// Get List of Clubs
 /// Get list of clubs for user's city
@@ -94,122 +131,152 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// @param locality Locality Search (optional)
 /// @param sport Sport Enum (optional)
 /// @param limit Limit the number of results (optional) (default to 50)
+/// 
 ///  code:200 message:"List of Clubs"
+///
 /// @return NSArray<SWGClub>*
--(NSNumber*) getClubsGetWithSearchString: (NSString*) searchString
+-(NSURLSessionTask*) getClubsGetWithSearchString: (NSString*) searchString
     city: (NSString*) city
     locality: (NSString*) locality
     sport: (NSString*) sport
     limit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGClub>* output, NSError* error)) handler;
 
+
 /// Get List of Events
 /// Get list of events for a city
 ///
 /// @param sport Sport Enum
 /// @param city City
+/// 
 ///  code:200 message:"List of Events"
+///
 /// @return NSArray<SWGEvent>*
--(NSNumber*) getEventsGetWithSport: (NSString*) sport
+-(NSURLSessionTask*) getEventsGetWithSport: (NSString*) sport
     city: (NSString*) city
     completionHandler: (void (^)(NSArray<SWGEvent>* output, NSError* error)) handler;
 
+
 /// Get featured players
+/// 
 ///
 /// @param sport Sport Enum
+/// 
 ///  code:200 message:"Player List"
+///
 /// @return NSArray<SWGFeaturedPlayer>*
--(NSNumber*) getFeaturedPlayersGetWithSport: (NSString*) sport
+-(NSURLSessionTask*) getFeaturedPlayersGetWithSport: (NSString*) sport
     completionHandler: (void (^)(NSArray<SWGFeaturedPlayer>* output, NSError* error)) handler;
+
 
 /// Get challenges
 /// A list of challenges
 ///
 /// @param limit Limit the number of results (optional) (default to 50)
+/// 
 ///  code:200 message:"List of Challenges"
+///
 /// @return NSArray<SWGChallenge>*
--(NSNumber*) getMyChallengesGetWithLimit: (NSNumber*) limit
+-(NSURLSessionTask*) getMyChallengesGetWithLimit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGChallenge>* output, NSError* error)) handler;
 
+
 /// Get news
+/// 
 ///
 /// @param sport Sport Enum
+/// 
 ///  code:200 message:"Player List"
+///
 /// @return NSArray<SWGNews>*
--(NSNumber*) getNewsPostWithSport: (NSString*) sport
+-(NSURLSessionTask*) getNewsGetWithSport: (NSString*) sport
     completionHandler: (void (^)(NSArray<SWGNews>* output, NSError* error)) handler;
+
 
 /// Get all pending games
 /// A list of games that are validated by the opoonent.
 ///
 /// @param sport Sport Enum (optional)
 /// @param limit Limit the number of results (optional) (default to 50)
+/// 
 ///  code:200 message:"Scoreboard per sport"
+///
 /// @return NSArray<SWGGame>*
--(NSNumber*) getPendingGamesGetWithSport: (NSString*) sport
+-(NSURLSessionTask*) getPendingGamesGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGGame>* output, NSError* error)) handler;
+
 
 /// Get Scoreboard for a sport
 /// A list of games that are validated by the opoonent.
 ///
 /// @param sport Sport Enum
 /// @param limit Limit the number of results (optional) (default to 50)
+/// 
 ///  code:200 message:"Scoreboard per sport"
+///
 /// @return SWGScoreboard*
--(NSNumber*) getScoreboardGetWithSport: (NSString*) sport
+-(NSURLSessionTask*) getScoreboardGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
     completionHandler: (void (^)(SWGScoreboard* output, NSError* error)) handler;
 
+
 /// Get Authenticated user's profile
+/// 
 ///
+/// 
 ///  code:200 message:"User's own profile"
+///
 /// @return SWGUser*
--(NSNumber*) getSelfProfileGetWithCompletionHandler: 
+-(NSURLSessionTask*) getSelfProfileGetWithCompletionHandler: 
     (void (^)(SWGUser* output, NSError* error)) handler;
 
+
 /// Get user profile
+/// 
 ///
 /// @param userId 
+/// 
 ///  code:200 message:"User profile"
+///
 /// @return SWGUser*
--(NSNumber*) getUserPostWithUserId: (NSNumber*) userId
+-(NSURLSessionTask*) getUserPostWithUserId: (NSNumber*) userId
     completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
 
-/// pseudo signup user
-/// Add user if it dosent exist. set user_is_real = false
+
+/// Mark Availability
+/// 
 ///
-/// @param firstName 
-/// @param lastName 
-/// @param email 
-/// @param gender 
-///  code:200 message:"Pseudo User",
-///  code:302 message:"Real Player Already exists"
-/// @return SWGUser*
--(NSNumber*) invitePlayerPostWithFirstName: (NSString*) firstName
-    lastName: (NSString*) lastName
-    email: (NSString*) email
-    gender: (NSString*) gender
-    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+/// @param date DD/MM/YYYY
+/// @param time 24 Hrs format ex. 22:30
+/// 
+///  code:200 message:"Marked"
+///
+/// @return NSObject*
+-(NSURLSessionTask*) markAvailabilityPostWithDate: (NSString*) date
+    time: (NSString*) time
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
 
 /// Challenge someone for a game
 /// Create a new challenge and send a push notification to opponents.
 ///
 /// @param gameSport 
 /// @param gameType 
-/// @param gameChallengerPlayer1 
 /// @param gameOppositionPlayer1 
 /// @param gameChallengerPlayer2  (optional)
 /// @param gameOppositionPlayer2  (optional)
+/// 
 ///  code:200 message:"Challenge Created"
+///
 /// @return SWGChallenge*
--(NSNumber*) newChallengePostWithGameSport: (NSString*) gameSport
+-(NSURLSessionTask*) newChallengePostWithGameSport: (NSString*) gameSport
     gameType: (NSString*) gameType
-    gameChallengerPlayer1: (NSNumber*) gameChallengerPlayer1
     gameOppositionPlayer1: (NSNumber*) gameOppositionPlayer1
     gameChallengerPlayer2: (NSNumber*) gameChallengerPlayer2
     gameOppositionPlayer2: (NSNumber*) gameOppositionPlayer2
     completionHandler: (void (^)(SWGChallenge* output, NSError* error)) handler;
+
 
 /// Make a new game
 /// Create a new game and send a push notification to opponents to verify the same.
@@ -220,87 +287,174 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// @param gameClubId 
 /// @param gameChallengerScore 
 /// @param gameOppositionScore 
-/// @param gameChallengerPlayer1 
 /// @param gameOppositionPlayer1 
 /// @param gameChallengerPlayer2  (optional)
 /// @param gameOppositionPlayer2  (optional)
+/// 
 ///  code:200 message:"Game Created"
+///
 /// @return SWGGame*
--(NSNumber*) newGamePostWithGameSport: (NSString*) gameSport
+-(NSURLSessionTask*) newGamePostWithGameSport: (NSString*) gameSport
     gameType: (NSString*) gameType
     gameClub: (NSString*) gameClub
     gameClubId: (NSNumber*) gameClubId
     gameChallengerScore: (NSNumber*) gameChallengerScore
     gameOppositionScore: (NSNumber*) gameOppositionScore
-    gameChallengerPlayer1: (NSNumber*) gameChallengerPlayer1
     gameOppositionPlayer1: (NSNumber*) gameOppositionPlayer1
     gameChallengerPlayer2: (NSNumber*) gameChallengerPlayer2
     gameOppositionPlayer2: (NSNumber*) gameOppositionPlayer2
     completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
 
+
 /// Push Notify User
+/// 
 ///
 /// @param userId 
+/// @param chatUid 
 /// @param message 
+/// 
 ///  code:200 message:"Notification Sent"
+///
 /// @return NSObject*
--(NSNumber*) notifyNewMessagePostWithUserId: (NSNumber*) userId
+-(NSURLSessionTask*) notifyNewMessagePostWithUserId: (NSNumber*) userId
+    chatUid: (NSString*) chatUid
     message: (NSString*) message
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
+
+/// pseudo signup user
+/// Add user if it dosent exist. set user_is_real = false
+///
+/// @param firstName 
+/// @param lastName 
+/// @param gender 
+/// 
+///  code:200 message:"Pseudo User"
+///
+/// @return SWGUser*
+-(NSURLSessionTask*) pseudoSignupUserPostWithFirstName: (NSString*) firstName
+    lastName: (NSString*) lastName
+    gender: (NSString*) gender
+    completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+
+
 /// Reject Challenge
+/// 
 ///
 /// @param challengeId 
+/// 
 ///  code:200 message:"Challenge Rejected"
+///
 /// @return NSObject*
--(NSNumber*) rejectChallengePostWithChallengeId: (NSNumber*) challengeId
+-(NSURLSessionTask*) rejectChallengePostWithChallengeId: (NSNumber*) challengeId
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
 
 /// Reject pending score
 /// Validate the score entered by an opponent.
 ///
 /// @param gameId 
+/// 
 ///  code:200 message:"Game Rejected"
+///
 /// @return SWGGame*
--(NSNumber*) rejectGamePostWithGameId: (NSNumber*) gameId
+-(NSURLSessionTask*) rejectGamePostWithGameId: (NSNumber*) gameId
     completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
 
-/// Query Users
+
+/// Search Users
 /// search users based on name / phone number / email / name / club
 ///
 /// @param query Search based on name, email, phone number
+/// @param sport Sport Enum (optional)
 /// @param limit Limit the number of results (optional) (default to 50)
+/// 
 ///  code:200 message:"List of Users"
+///
 /// @return NSArray<SWGUser>*
--(NSNumber*) searchUsersPostWithQuery: (NSString*) query
+-(NSURLSessionTask*) searchUsersPostWithQuery: (NSString*) query
+    sport: (NSString*) sport
     limit: (NSNumber*) limit
     completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
 
+
+/// Share a game by email
+/// 
+///
+/// @param gameId 
+/// @param email  (optional)
+/// 
+///  code:200 message:"Game shared"
+///
+/// @return NSObject*
+-(NSURLSessionTask*) shareGameEmailPostWithGameId: (NSNumber*) gameId
+    email: (NSString*) email
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
+
+/// Share a game by sms
+/// 
+///
+/// @param gameId 
+/// @param cell  (optional)
+/// 
+///  code:200 message:"Game shared"
+///
+/// @return NSObject*
+-(NSURLSessionTask*) shareGameSmsPostWithGameId: (NSNumber*) gameId
+    cell: (NSString*) cell
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
+
+/// Invite user by sms
+/// 
+///
+/// @param cell 
+/// 
+///  code:200 message:"Invite Sent"
+///
+/// @return NSObject*
+-(NSURLSessionTask*) smsInvitePostWithCell: (NSString*) cell
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
+
 /// Update favourite player
+/// 
 ///
 /// @param sport Sport Enum
 /// @param player 
+/// 
 ///  code:200 message:"Favourite Player Updated"
+///
 /// @return NSObject*
--(NSNumber*) updateFavouritePlayerPostWithSport: (NSString*) sport
+-(NSURLSessionTask*) updateFavouritePlayerPostWithSport: (NSString*) sport
     player: (NSString*) player
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
+
 /// Update FCM InstanceID
+/// 
 ///
 /// @param instanceId 
+/// 
 ///  code:200 message:"Status Updated"
+///
 /// @return NSObject*
--(NSNumber*) updateFcmInstanceIdPostWithInstanceId: (NSString*) instanceId
+-(NSURLSessionTask*) updateFcmInstanceIdPostWithInstanceId: (NSString*) instanceId
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
+
 /// Update profile picture
+/// 
 ///
 /// @param file File to upload Accepted formats jpg,jpeg,png
+/// 
 ///  code:200 message:"URL of the picture"
+///
 /// @return SWGUrl*
--(NSNumber*) updateProfilePicturePostWithFile: (NSURL*) file
+-(NSURLSessionTask*) updateProfilePicturePostWithFile: (NSURL*) file
     completionHandler: (void (^)(SWGUrl* output, NSError* error)) handler;
+
 
 /// Update Profile
 /// If the profilePic file is provided, we save it and update the profile pic link in the user profile. Also, all other provided fileds are updated.
@@ -311,9 +465,11 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// @param city 
 /// @param locality 
 /// @param clubIds  (optional)
+/// 
 ///  code:200 message:"Status Updated"
+///
 /// @return NSObject*
--(NSNumber*) updateProfilePostWithMobileNumber: (NSString*) mobileNumber
+-(NSURLSessionTask*) updateProfilePostWithMobileNumber: (NSString*) mobileNumber
     birthDate: (NSString*) birthDate
     handedness: (NSString*) handedness
     city: (NSString*) city
@@ -321,22 +477,30 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     clubIds: (NSString*) clubIds
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
+
 /// Update status message
+/// 
 ///
 /// @param message New Status Message
+/// 
 ///  code:200 message:"Status Updated"
+///
 /// @return NSObject*
--(NSNumber*) updateStatusMessagePostWithMessage: (NSString*) message
+-(NSURLSessionTask*) updateStatusMessagePostWithMessage: (NSString*) message
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
 
 /// Verify pending score
 /// Validate the score entered by an opponent.
 ///
 /// @param gameId 
+/// 
 ///  code:200 message:"Game Verified"
+///
 /// @return SWGGame*
--(NSNumber*) verifyGamePostWithGameId: (NSNumber*) gameId
+-(NSURLSessionTask*) verifyGamePostWithGameId: (NSNumber*) gameId
     completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
+
 
 
 @end

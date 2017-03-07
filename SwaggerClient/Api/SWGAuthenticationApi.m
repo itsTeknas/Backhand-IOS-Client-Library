@@ -1,11 +1,12 @@
 #import "SWGAuthenticationApi.h"
 #import "SWGQueryParamCollection.h"
+#import "SWGApiClient.h"
 #import "SWGAuthSuccess.h"
 
 
 @interface SWGAuthenticationApi ()
 
-@property (nonatomic, strong) NSMutableDictionary *defaultHeaders;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
@@ -19,52 +20,31 @@ NSInteger kSWGAuthenticationApiMissingParamErrorCode = 234513;
 #pragma mark - Initialize methods
 
 - (instancetype) init {
-    self = [super init];
-    if (self) {
-        SWGConfiguration *config = [SWGConfiguration sharedConfig];
-        if (config.apiClient == nil) {
-            config.apiClient = [[SWGApiClient alloc] init];
-        }
-        _apiClient = config.apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
-    }
-    return self;
+    return [self initWithApiClient:[SWGApiClient sharedClient]];
 }
 
-- (id) initWithApiClient:(SWGApiClient *)apiClient {
+
+-(instancetype) initWithApiClient:(SWGApiClient *)apiClient {
     self = [super init];
     if (self) {
         _apiClient = apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
+        _mutableDefaultHeaders = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 #pragma mark -
 
-+ (instancetype)sharedAPI {
-    static SWGAuthenticationApi *sharedAPI;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        sharedAPI = [[self alloc] init];
-    });
-    return sharedAPI;
-}
-
 -(NSString*) defaultHeaderForKey:(NSString*)key {
-    return self.defaultHeaders[key];
-}
-
--(void) addHeader:(NSString*)value forKey:(NSString*)key {
-    [self setDefaultHeaderValue:value forKey:key];
+    return self.mutableDefaultHeaders[key];
 }
 
 -(void) setDefaultHeaderValue:(NSString*) value forKey:(NSString*)key {
-    [self.defaultHeaders setValue:value forKey:key];
+    [self.mutableDefaultHeaders setValue:value forKey:key];
 }
 
--(NSUInteger) requestQueueSize {
-    return [SWGApiClient requestQueueSize];
+-(NSDictionary *)defaultHeaders {
+    return self.mutableDefaultHeaders;
 }
 
 #pragma mark - Api Methods
@@ -72,11 +52,11 @@ NSInteger kSWGAuthenticationApiMissingParamErrorCode = 234513;
 ///
 /// FB Login
 /// Submit the facebook token, our backend will query the facebook servers with with it and save the responce to fill in your basic profile.
-/// @param fbToken Facebook's Token 
+///  @param fbToken Facebook's Token 
 ///
-///  code:200 message:"Login Success"
-/// @return SWGAuthSuccess*
--(NSNumber*) authenticateFacebookPostWithFbToken: (NSString*) fbToken
+///  @returns SWGAuthSuccess*
+///
+-(NSURLSessionTask*) authenticateFacebookPostWithFbToken: (NSString*) fbToken
     completionHandler: (void (^)(SWGAuthSuccess* output, NSError* error)) handler {
     // verify the required parameter 'fbToken' is set
     if (fbToken == nil) {
@@ -137,27 +117,25 @@ NSInteger kSWGAuthenticationApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((SWGAuthSuccess*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
 /// Sign up new user
 /// If the user exists, throw an error. Otherwise sign up.
-/// @param firstName First Name 
+///  @param firstName First Name 
 ///
-/// @param email Email ID 
+///  @param email Email ID 
 ///
-/// @param password Password 
+///  @param password Password 
 ///
-/// @param gender  
+///  @param gender  
 ///
-/// @param lastName Last Name (optional)
+///  @param lastName Last Name (optional)
 ///
-///  code:200 message:"Login Success",
-///  code:302 message:"Email Already Exists"
-/// @return SWGAuthSuccess*
--(NSNumber*) authenticateSignupPostWithFirstName: (NSString*) firstName
+///  @returns SWGAuthSuccess*
+///
+-(NSURLSessionTask*) authenticateSignupPostWithFirstName: (NSString*) firstName
     email: (NSString*) email
     password: (NSString*) password
     gender: (NSString*) gender
@@ -267,26 +245,25 @@ NSInteger kSWGAuthenticationApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((SWGAuthSuccess*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
 /// Password Login
 /// Pass Traditional Username and Password to get token. If the user is not registered, please signup first.
-/// @param grantType  
+///  @param grantType  
 ///
-/// @param username Email ID 
+///  @param username Email ID 
 ///
-/// @param password Password 
+///  @param password Password 
 ///
-/// @param clientId  
+///  @param clientId  
 ///
-/// @param clientSecret  
+///  @param clientSecret  
 ///
-///  code:200 message:"Login Success"
-/// @return SWGAuthSuccess*
--(NSNumber*) oauthTokenPostWithGrantType: (NSString*) grantType
+///  @returns SWGAuthSuccess*
+///
+-(NSURLSessionTask*) oauthTokenPostWithGrantType: (NSString*) grantType
     username: (NSString*) username
     password: (NSString*) password
     clientId: (NSString*) clientId
@@ -407,9 +384,9 @@ NSInteger kSWGAuthenticationApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((SWGAuthSuccess*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
+
 
 
 @end

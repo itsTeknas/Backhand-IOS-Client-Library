@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"eventId": @"event_id", @"isCurrentUserJoined": @"is_current_user_joined", @"eventName": @"event_name", @"eventDescription": @"event_description", @"eventCity": @"event_city", @"eventSport": @"event_sport", @"eventStartDate": @"event_start_date", @"eventEndDate": @"event_end_date", @"eventBackgroundPicture": @"event_background_picture", @"eventLat": @"event_lat", @"eventLon": @"event_lon", @"eventClub": @"event_club" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"eventId": @"event_id", @"eventName": @"event_name", @"eventDescription": @"event_description", @"eventCity": @"event_city", @"eventSport": @"event_sport", @"eventStartDate": @"event_start_date", @"eventEndDate": @"event_end_date", @"eventBackgroundPicture": @"event_background_picture", @"eventLat": @"event_lat", @"eventLon": @"event_lon", @"eventClub": @"event_club" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"eventId", @"isCurrentUserJoined", @"eventName", @"eventDescription", @"eventCity", @"eventSport", @"eventStartDate", @"eventEndDate", @"eventBackgroundPicture", @"eventLat", @"eventLon", @"eventClub"];
+  NSArray *optionalProperties = @[@"eventId", @"eventName", @"eventDescription", @"eventCity", @"eventSport", @"eventStartDate", @"eventEndDate", @"eventBackgroundPicture", @"eventLat", @"eventLon", @"eventClub"];
   return [optionalProperties containsObject:propertyName];
 }
 

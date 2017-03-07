@@ -21,16 +21,19 @@
 extern NSString* kSWGAuthenticationApiErrorDomain;
 extern NSInteger kSWGAuthenticationApiMissingParamErrorCode;
 
-+(instancetype) sharedAPI;
+-(instancetype) initWithApiClient:(SWGApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
 
 /// FB Login
 /// Submit the facebook token, our backend will query the facebook servers with with it and save the responce to fill in your basic profile.
 ///
-/// @param fbToken Facebook's Token
+/// @param fbToken Facebook&#39;s Token
+/// 
 ///  code:200 message:"Login Success"
+///
 /// @return SWGAuthSuccess*
--(NSNumber*) authenticateFacebookPostWithFbToken: (NSString*) fbToken
+-(NSURLSessionTask*) authenticateFacebookPostWithFbToken: (NSString*) fbToken
     completionHandler: (void (^)(SWGAuthSuccess* output, NSError* error)) handler;
+
 
 /// Sign up new user
 /// If the user exists, throw an error. Otherwise sign up.
@@ -40,15 +43,18 @@ extern NSInteger kSWGAuthenticationApiMissingParamErrorCode;
 /// @param password Password
 /// @param gender 
 /// @param lastName Last Name (optional)
+/// 
 ///  code:200 message:"Login Success",
 ///  code:302 message:"Email Already Exists"
+///
 /// @return SWGAuthSuccess*
--(NSNumber*) authenticateSignupPostWithFirstName: (NSString*) firstName
+-(NSURLSessionTask*) authenticateSignupPostWithFirstName: (NSString*) firstName
     email: (NSString*) email
     password: (NSString*) password
     gender: (NSString*) gender
     lastName: (NSString*) lastName
     completionHandler: (void (^)(SWGAuthSuccess* output, NSError* error)) handler;
+
 
 /// Password Login
 /// Pass Traditional Username and Password to get token. If the user is not registered, please signup first.
@@ -58,14 +64,17 @@ extern NSInteger kSWGAuthenticationApiMissingParamErrorCode;
 /// @param password Password
 /// @param clientId 
 /// @param clientSecret 
+/// 
 ///  code:200 message:"Login Success"
+///
 /// @return SWGAuthSuccess*
--(NSNumber*) oauthTokenPostWithGrantType: (NSString*) grantType
+-(NSURLSessionTask*) oauthTokenPostWithGrantType: (NSString*) grantType
     username: (NSString*) username
     password: (NSString*) password
     clientId: (NSString*) clientId
     clientSecret: (NSString*) clientSecret
     completionHandler: (void (^)(SWGAuthSuccess* output, NSError* error)) handler;
+
 
 
 @end

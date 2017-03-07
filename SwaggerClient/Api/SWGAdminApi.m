@@ -1,12 +1,13 @@
 #import "SWGAdminApi.h"
 #import "SWGQueryParamCollection.h"
+#import "SWGApiClient.h"
 #import "SWGEvent.h"
 #import "SWGUrl.h"
 
 
 @interface SWGAdminApi ()
 
-@property (nonatomic, strong) NSMutableDictionary *defaultHeaders;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mutableDefaultHeaders;
 
 @end
 
@@ -20,52 +21,31 @@ NSInteger kSWGAdminApiMissingParamErrorCode = 234513;
 #pragma mark - Initialize methods
 
 - (instancetype) init {
-    self = [super init];
-    if (self) {
-        SWGConfiguration *config = [SWGConfiguration sharedConfig];
-        if (config.apiClient == nil) {
-            config.apiClient = [[SWGApiClient alloc] init];
-        }
-        _apiClient = config.apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
-    }
-    return self;
+    return [self initWithApiClient:[SWGApiClient sharedClient]];
 }
 
-- (id) initWithApiClient:(SWGApiClient *)apiClient {
+
+-(instancetype) initWithApiClient:(SWGApiClient *)apiClient {
     self = [super init];
     if (self) {
         _apiClient = apiClient;
-        _defaultHeaders = [NSMutableDictionary dictionary];
+        _mutableDefaultHeaders = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 #pragma mark -
 
-+ (instancetype)sharedAPI {
-    static SWGAdminApi *sharedAPI;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        sharedAPI = [[self alloc] init];
-    });
-    return sharedAPI;
-}
-
 -(NSString*) defaultHeaderForKey:(NSString*)key {
-    return self.defaultHeaders[key];
-}
-
--(void) addHeader:(NSString*)value forKey:(NSString*)key {
-    [self setDefaultHeaderValue:value forKey:key];
+    return self.mutableDefaultHeaders[key];
 }
 
 -(void) setDefaultHeaderValue:(NSString*) value forKey:(NSString*)key {
-    [self.defaultHeaders setValue:value forKey:key];
+    [self.mutableDefaultHeaders setValue:value forKey:key];
 }
 
--(NSUInteger) requestQueueSize {
-    return [SWGApiClient requestQueueSize];
+-(NSDictionary *)defaultHeaders {
+    return self.mutableDefaultHeaders;
 }
 
 #pragma mark - Api Methods
@@ -73,27 +53,27 @@ NSInteger kSWGAdminApiMissingParamErrorCode = 234513;
 ///
 /// Create a new event
 /// Create a new sports event/meet
-/// @param eventName Event Name 
+///  @param eventName Event Name 
 ///
-/// @param eventDescription Description 
+///  @param eventDescription Description 
 ///
-/// @param eventCity City 
+///  @param eventCity City 
 ///
-/// @param eventGameSport Sport 
+///  @param eventGameSport Sport 
 ///
-/// @param eventStartDate Start Date Format DD/MM/YYYY 
+///  @param eventStartDate Start Date Format DD/MM/YYYY 
 ///
-/// @param eventEndDate End Date Format DD/MM/YYYY 
+///  @param eventEndDate End Date Format DD/MM/YYYY 
 ///
-/// @param eventBackgroundPicture Picture URL 
+///  @param eventBackgroundPicture Picture URL 
 ///
-/// @param eventLat Event ID 
+///  @param eventLat Event ID 
 ///
-/// @param eventLon Event ID 
+///  @param eventLon Event ID 
 ///
-///  code:200 message:"Event"
-/// @return SWGEvent*
--(NSNumber*) createEventPostWithEventName: (NSString*) eventName
+///  @returns SWGEvent*
+///
+-(NSURLSessionTask*) createEventPostWithEventName: (NSString*) eventName
     eventDescription: (NSString*) eventDescription
     eventCity: (NSString*) eventCity
     eventGameSport: (NSString*) eventGameSport
@@ -274,18 +254,17 @@ NSInteger kSWGAdminApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((SWGEvent*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
 
 ///
 /// Upload a picture
 /// 
-/// @param file File to upload Accepted formats jpg,jpeg,png 
+///  @param file File to upload Accepted formats jpg,jpeg,png 
 ///
-///  code:200 message:"URL of the picture"
-/// @return SWGUrl*
--(NSNumber*) uploadPicturePostWithFile: (NSURL*) file
+///  @returns SWGUrl*
+///
+-(NSURLSessionTask*) uploadPicturePostWithFile: (NSURL*) file
     completionHandler: (void (^)(SWGUrl* output, NSError* error)) handler {
     // verify the required parameter 'file' is set
     if (file == nil) {
@@ -344,9 +323,9 @@ NSInteger kSWGAdminApiMissingParamErrorCode = 234513;
                                 if(handler) {
                                     handler((SWGUrl*)data, error);
                                 }
-                           }
-          ];
+                            }];
 }
+
 
 
 @end

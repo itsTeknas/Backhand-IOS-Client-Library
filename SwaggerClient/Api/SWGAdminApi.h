@@ -22,7 +22,7 @@
 extern NSString* kSWGAdminApiErrorDomain;
 extern NSInteger kSWGAdminApiMissingParamErrorCode;
 
-+(instancetype) sharedAPI;
+-(instancetype) initWithApiClient:(SWGApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
 
 /// Create a new event
 /// Create a new sports event/meet
@@ -36,9 +36,11 @@ extern NSInteger kSWGAdminApiMissingParamErrorCode;
 /// @param eventBackgroundPicture Picture URL
 /// @param eventLat Event ID
 /// @param eventLon Event ID
+/// 
 ///  code:200 message:"Event"
+///
 /// @return SWGEvent*
--(NSNumber*) createEventPostWithEventName: (NSString*) eventName
+-(NSURLSessionTask*) createEventPostWithEventName: (NSString*) eventName
     eventDescription: (NSString*) eventDescription
     eventCity: (NSString*) eventCity
     eventGameSport: (NSString*) eventGameSport
@@ -49,13 +51,18 @@ extern NSInteger kSWGAdminApiMissingParamErrorCode;
     eventLon: (NSString*) eventLon
     completionHandler: (void (^)(SWGEvent* output, NSError* error)) handler;
 
+
 /// Upload a picture
+/// 
 ///
 /// @param file File to upload Accepted formats jpg,jpeg,png
+/// 
 ///  code:200 message:"URL of the picture"
+///
 /// @return SWGUrl*
--(NSNumber*) uploadPicturePostWithFile: (NSURL*) file
+-(NSURLSessionTask*) uploadPicturePostWithFile: (NSURL*) file
     completionHandler: (void (^)(SWGUrl* output, NSError* error)) handler;
+
 
 
 @end

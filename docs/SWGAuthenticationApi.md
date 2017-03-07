@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 # **authenticateFacebookPost**
 ```objc
--(NSNumber*) authenticateFacebookPostWithFbToken: (NSString*) fbToken
+-(NSURLSessionTask*) authenticateFacebookPostWithFbToken: (NSString*) fbToken
         completionHandler: (void (^)(SWGAuthSuccess* output, NSError* error)) handler;
 ```
 
@@ -61,7 +61,7 @@ No authorization required
 
 # **authenticateSignupPost**
 ```objc
--(NSNumber*) authenticateSignupPostWithFirstName: (NSString*) firstName
+-(NSURLSessionTask*) authenticateSignupPostWithFirstName: (NSString*) firstName
     email: (NSString*) email
     password: (NSString*) password
     gender: (NSString*) gender
@@ -127,7 +127,7 @@ No authorization required
 
 # **oauthTokenPost**
 ```objc
--(NSNumber*) oauthTokenPostWithGrantType: (NSString*) grantType
+-(NSURLSessionTask*) oauthTokenPostWithGrantType: (NSString*) grantType
     username: (NSString*) username
     password: (NSString*) password
     clientId: (NSString*) clientId

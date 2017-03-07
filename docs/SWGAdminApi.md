@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 # **createEventPost**
 ```objc
--(NSNumber*) createEventPostWithEventName: (NSString*) eventName
+-(NSURLSessionTask*) createEventPostWithEventName: (NSString*) eventName
     eventDescription: (NSString*) eventDescription
     eventCity: (NSString*) eventCity
     eventGameSport: (NSString*) eventGameSport
@@ -28,7 +28,7 @@ Create a new sports event/meet
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 # **uploadPicturePost**
 ```objc
--(NSNumber*) uploadPicturePostWithFile: (NSURL*) file
+-(NSURLSessionTask*) uploadPicturePostWithFile: (NSURL*) file
         completionHandler: (void (^)(SWGUrl* output, NSError* error)) handler;
 ```
 
@@ -107,7 +107,7 @@ Upload a picture
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];

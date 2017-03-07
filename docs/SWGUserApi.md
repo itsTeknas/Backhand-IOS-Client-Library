@@ -7,25 +7,30 @@ Method | HTTP request | Description
 [**acceptChallengePost**](SWGUserApi.md#acceptchallengepost) | **POST** /accept_challenge | Accept Challenge
 [**addSportPost**](SWGUserApi.md#addsportpost) | **POST** /add_sport | Add sport to user profile
 [**deleteSportPost**](SWGUserApi.md#deletesportpost) | **POST** /delete_sport | Delete sport to user profile
+[**emailInvitePost**](SWGUserApi.md#emailinvitepost) | **POST** /email_invite | Invite user by email
+[**getAvailabilityGet**](SWGUserApi.md#getavailabilityget) | **GET** /get_availability | Get featured players
 [**getChallengeRecommendationsGet**](SWGUserApi.md#getchallengerecommendationsget) | **GET** /get_challenge_recommendations | Get challenge recommendations
-[**getChallengesGet**](SWGUserApi.md#getchallengesget) | **GET** /get_challenges | Get List of Challenges
 [**getCitiesGet**](SWGUserApi.md#getcitiesget) | **GET** /get_cities | Get List of Cities
 [**getClubsGet**](SWGUserApi.md#getclubsget) | **GET** /get_clubs | Get List of Clubs
 [**getEventsGet**](SWGUserApi.md#geteventsget) | **GET** /get_events | Get List of Events
 [**getFeaturedPlayersGet**](SWGUserApi.md#getfeaturedplayersget) | **GET** /get_featured_players | Get featured players
 [**getMyChallengesGet**](SWGUserApi.md#getmychallengesget) | **GET** /get_my_challenges | Get challenges
-[**getNewsPost**](SWGUserApi.md#getnewspost) | **POST** /get_news | Get news
+[**getNewsGet**](SWGUserApi.md#getnewsget) | **GET** /get_news | Get news
 [**getPendingGamesGet**](SWGUserApi.md#getpendinggamesget) | **GET** /get_pending_games | Get all pending games
 [**getScoreboardGet**](SWGUserApi.md#getscoreboardget) | **GET** /get_scoreboard | Get Scoreboard for a sport
 [**getSelfProfileGet**](SWGUserApi.md#getselfprofileget) | **GET** /get_self_profile | Get Authenticated user&#39;s profile
 [**getUserPost**](SWGUserApi.md#getuserpost) | **POST** /get_user | Get user profile
-[**invitePlayerPost**](SWGUserApi.md#inviteplayerpost) | **POST** /invite_player | pseudo signup user
+[**markAvailabilityPost**](SWGUserApi.md#markavailabilitypost) | **POST** /mark_availability | Mark Availability
 [**newChallengePost**](SWGUserApi.md#newchallengepost) | **POST** /new_challenge | Challenge someone for a game
 [**newGamePost**](SWGUserApi.md#newgamepost) | **POST** /new_game | Make a new game
 [**notifyNewMessagePost**](SWGUserApi.md#notifynewmessagepost) | **POST** /notify_new_message | Push Notify User
+[**pseudoSignupUserPost**](SWGUserApi.md#pseudosignupuserpost) | **POST** /pseudo_signup_user | pseudo signup user
 [**rejectChallengePost**](SWGUserApi.md#rejectchallengepost) | **POST** /reject_challenge | Reject Challenge
 [**rejectGamePost**](SWGUserApi.md#rejectgamepost) | **POST** /reject_game | Reject pending score
-[**searchUsersPost**](SWGUserApi.md#searchuserspost) | **POST** /search_users | Query Users
+[**searchUsersPost**](SWGUserApi.md#searchuserspost) | **POST** /search_users | Search Users
+[**shareGameEmailPost**](SWGUserApi.md#sharegameemailpost) | **POST** /share_game_email | Share a game by email
+[**shareGameSmsPost**](SWGUserApi.md#sharegamesmspost) | **POST** /share_game_sms | Share a game by sms
+[**smsInvitePost**](SWGUserApi.md#smsinvitepost) | **POST** /sms_invite | Invite user by sms
 [**updateFavouritePlayerPost**](SWGUserApi.md#updatefavouriteplayerpost) | **POST** /update_favourite_player | Update favourite player
 [**updateFcmInstanceIdPost**](SWGUserApi.md#updatefcminstanceidpost) | **POST** /update_fcm_instance_id | Update FCM InstanceID
 [**updateProfilePicturePost**](SWGUserApi.md#updateprofilepicturepost) | **POST** /update_profile_picture | Update profile picture
@@ -36,7 +41,7 @@ Method | HTTP request | Description
 
 # **acceptChallengePost**
 ```objc
--(NSNumber*) acceptChallengePostWithChallengeId: (NSNumber*) challengeId
+-(NSURLSessionTask*) acceptChallengePostWithChallengeId: (NSNumber*) challengeId
         completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
@@ -44,7 +49,7 @@ Accept Challenge
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -91,7 +96,7 @@ Name | Type | Description  | Notes
 
 # **addSportPost**
 ```objc
--(NSNumber*) addSportPostWithSport: (NSString*) sport
+-(NSURLSessionTask*) addSportPostWithSport: (NSString*) sport
     skillLevel: (NSNumber*) skillLevel
     favouritePlayer: (NSString*) favouritePlayer
     playingSince: (NSNumber*) playingSince
@@ -102,7 +107,7 @@ Add sport to user profile
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -158,7 +163,7 @@ Name | Type | Description  | Notes
 
 # **deleteSportPost**
 ```objc
--(NSNumber*) deleteSportPostWithSport: (NSString*) sport
+-(NSURLSessionTask*) deleteSportPostWithSport: (NSString*) sport
         completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
@@ -166,7 +171,7 @@ Delete sport to user profile
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -211,9 +216,121 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **emailInvitePost**
+```objc
+-(NSURLSessionTask*) emailInvitePostWithEmail: (NSString*) email
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+```
+
+Invite user by email
+
+### Example 
+```objc
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* email = @"email_example"; // 
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Invite user by email
+[apiInstance emailInvitePostWithEmail:email
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->emailInvitePost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **email** | **NSString***|  | 
+
+### Return type
+
+**NSObject***
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAvailabilityGet**
+```objc
+-(NSURLSessionTask*) getAvailabilityGetWithUserId: (NSNumber*) userId
+        completionHandler: (void (^)(NSArray<SWGAvailability>* output, NSError* error)) handler;
+```
+
+Get featured players
+
+get the availability for the next 10 days for the selected user
+
+### Example 
+```objc
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSNumber* userId = @789; // 
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Get featured players
+[apiInstance getAvailabilityGetWithUserId:userId
+          completionHandler: ^(NSArray<SWGAvailability>* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->getAvailabilityGet: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **NSNumber***|  | 
+
+### Return type
+
+[**NSArray<SWGAvailability>***](SWGAvailability.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getChallengeRecommendationsGet**
 ```objc
--(NSNumber*) getChallengeRecommendationsGetWithSport: (NSString*) sport
+-(NSURLSessionTask*) getChallengeRecommendationsGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
         completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
 ```
@@ -222,7 +339,7 @@ Get challenge recommendations
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -270,60 +387,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getChallengesGet**
-```objc
--(NSNumber*) getChallengesGetWithCompletionHandler: 
-        (void (^)(NSArray<SWGChallenge>* output, NSError* error)) handler;
-```
-
-Get List of Challenges
-
-### Example 
-```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
-
-// Configure API key authorization: (authentication scheme: TokenAuth)
-[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
-
-
-
-SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
-
-// Get List of Challenges
-[apiInstance getChallengesGetWithCompletionHandler: 
-          ^(NSArray<SWGChallenge>* output, NSError* error) {
-                        if (output) {
-                            NSLog(@"%@", output);
-                        }
-                        if (error) {
-                            NSLog(@"Error calling SWGUserApi->getChallengesGet: %@", error);
-                        }
-                    }];
-```
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-[**NSArray<SWGChallenge>***](SWGChallenge.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **getCitiesGet**
 ```objc
--(NSNumber*) getCitiesGetWithCompletionHandler: 
+-(NSURLSessionTask*) getCitiesGetWithCompletionHandler: 
         (void (^)(NSArray<NSString*>* output, NSError* error)) handler;
 ```
 
@@ -333,7 +399,7 @@ Get list of clubs for user's city
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -376,7 +442,7 @@ This endpoint does not need any parameter.
 
 # **getClubsGet**
 ```objc
--(NSNumber*) getClubsGetWithSearchString: (NSString*) searchString
+-(NSURLSessionTask*) getClubsGetWithSearchString: (NSString*) searchString
     city: (NSString*) city
     locality: (NSString*) locality
     sport: (NSString*) sport
@@ -390,7 +456,7 @@ Get list of clubs for user's city
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -449,7 +515,7 @@ Name | Type | Description  | Notes
 
 # **getEventsGet**
 ```objc
--(NSNumber*) getEventsGetWithSport: (NSString*) sport
+-(NSURLSessionTask*) getEventsGetWithSport: (NSString*) sport
     city: (NSString*) city
         completionHandler: (void (^)(NSArray<SWGEvent>* output, NSError* error)) handler;
 ```
@@ -460,7 +526,7 @@ Get list of events for a city
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -510,7 +576,7 @@ Name | Type | Description  | Notes
 
 # **getFeaturedPlayersGet**
 ```objc
--(NSNumber*) getFeaturedPlayersGetWithSport: (NSString*) sport
+-(NSURLSessionTask*) getFeaturedPlayersGetWithSport: (NSString*) sport
         completionHandler: (void (^)(NSArray<SWGFeaturedPlayer>* output, NSError* error)) handler;
 ```
 
@@ -518,7 +584,7 @@ Get featured players
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -565,7 +631,7 @@ Name | Type | Description  | Notes
 
 # **getMyChallengesGet**
 ```objc
--(NSNumber*) getMyChallengesGetWithLimit: (NSNumber*) limit
+-(NSURLSessionTask*) getMyChallengesGetWithLimit: (NSNumber*) limit
         completionHandler: (void (^)(NSArray<SWGChallenge>* output, NSError* error)) handler;
 ```
 
@@ -575,7 +641,7 @@ A list of challenges
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -620,9 +686,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getNewsPost**
+# **getNewsGet**
 ```objc
--(NSNumber*) getNewsPostWithSport: (NSString*) sport
+-(NSURLSessionTask*) getNewsGetWithSport: (NSString*) sport
         completionHandler: (void (^)(NSArray<SWGNews>* output, NSError* error)) handler;
 ```
 
@@ -630,7 +696,7 @@ Get news
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -643,13 +709,13 @@ NSString* sport = @"sport_example"; // Sport Enum
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 // Get news
-[apiInstance getNewsPostWithSport:sport
+[apiInstance getNewsGetWithSport:sport
           completionHandler: ^(NSArray<SWGNews>* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling SWGUserApi->getNewsPost: %@", error);
+                            NSLog(@"Error calling SWGUserApi->getNewsGet: %@", error);
                         }
                     }];
 ```
@@ -677,7 +743,7 @@ Name | Type | Description  | Notes
 
 # **getPendingGamesGet**
 ```objc
--(NSNumber*) getPendingGamesGetWithSport: (NSString*) sport
+-(NSURLSessionTask*) getPendingGamesGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
         completionHandler: (void (^)(NSArray<SWGGame>* output, NSError* error)) handler;
 ```
@@ -688,7 +754,7 @@ A list of games that are validated by the opoonent.
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -738,7 +804,7 @@ Name | Type | Description  | Notes
 
 # **getScoreboardGet**
 ```objc
--(NSNumber*) getScoreboardGetWithSport: (NSString*) sport
+-(NSURLSessionTask*) getScoreboardGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
         completionHandler: (void (^)(SWGScoreboard* output, NSError* error)) handler;
 ```
@@ -749,7 +815,7 @@ A list of games that are validated by the opoonent.
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -799,7 +865,7 @@ Name | Type | Description  | Notes
 
 # **getSelfProfileGet**
 ```objc
--(NSNumber*) getSelfProfileGetWithCompletionHandler: 
+-(NSURLSessionTask*) getSelfProfileGetWithCompletionHandler: 
         (void (^)(SWGUser* output, NSError* error)) handler;
 ```
 
@@ -807,7 +873,7 @@ Get Authenticated user's profile
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -850,7 +916,7 @@ This endpoint does not need any parameter.
 
 # **getUserPost**
 ```objc
--(NSNumber*) getUserPostWithUserId: (NSNumber*) userId
+-(NSURLSessionTask*) getUserPostWithUserId: (NSNumber*) userId
         completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
 ```
 
@@ -858,7 +924,7 @@ Get user profile
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -903,22 +969,18 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **invitePlayerPost**
+# **markAvailabilityPost**
 ```objc
--(NSNumber*) invitePlayerPostWithFirstName: (NSString*) firstName
-    lastName: (NSString*) lastName
-    email: (NSString*) email
-    gender: (NSString*) gender
-        completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+-(NSURLSessionTask*) markAvailabilityPostWithDate: (NSString*) date
+    time: (NSString*) time
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
-pseudo signup user
-
-Add user if it dosent exist. set user_is_real = false
+Mark Availability
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -926,24 +988,20 @@ SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
 
 
-NSString* firstName = @"firstName_example"; // 
-NSString* lastName = @"lastName_example"; // 
-NSString* email = @"email_example"; // 
-NSString* gender = @"gender_example"; // 
+NSString* date = @"date_example"; // DD/MM/YYYY
+NSString* time = @"time_example"; // 24 Hrs format ex. 22:30
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
-// pseudo signup user
-[apiInstance invitePlayerPostWithFirstName:firstName
-              lastName:lastName
-              email:email
-              gender:gender
-          completionHandler: ^(SWGUser* output, NSError* error) {
+// Mark Availability
+[apiInstance markAvailabilityPostWithDate:date
+              time:time
+          completionHandler: ^(NSObject* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling SWGUserApi->invitePlayerPost: %@", error);
+                            NSLog(@"Error calling SWGUserApi->markAvailabilityPost: %@", error);
                         }
                     }];
 ```
@@ -952,14 +1010,12 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **firstName** | **NSString***|  | 
- **lastName** | **NSString***|  | 
- **email** | **NSString***|  | 
- **gender** | **NSString***|  | 
+ **date** | **NSString***| DD/MM/YYYY | 
+ **time** | **NSString***| 24 Hrs format ex. 22:30 | 
 
 ### Return type
 
-[**SWGUser***](SWGUser.md)
+**NSObject***
 
 ### Authorization
 
@@ -974,9 +1030,8 @@ Name | Type | Description  | Notes
 
 # **newChallengePost**
 ```objc
--(NSNumber*) newChallengePostWithGameSport: (NSString*) gameSport
+-(NSURLSessionTask*) newChallengePostWithGameSport: (NSString*) gameSport
     gameType: (NSString*) gameType
-    gameChallengerPlayer1: (NSNumber*) gameChallengerPlayer1
     gameOppositionPlayer1: (NSNumber*) gameOppositionPlayer1
     gameChallengerPlayer2: (NSNumber*) gameChallengerPlayer2
     gameOppositionPlayer2: (NSNumber*) gameOppositionPlayer2
@@ -989,7 +1044,7 @@ Create a new challenge and send a push notification to opponents.
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -999,7 +1054,6 @@ SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
 
 NSString* gameSport = @"gameSport_example"; // 
 NSString* gameType = @"gameType_example"; // 
-NSNumber* gameChallengerPlayer1 = @789; // 
 NSNumber* gameOppositionPlayer1 = @789; // 
 NSNumber* gameChallengerPlayer2 = @789; //  (optional)
 NSNumber* gameOppositionPlayer2 = @789; //  (optional)
@@ -1009,7 +1063,6 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 // Challenge someone for a game
 [apiInstance newChallengePostWithGameSport:gameSport
               gameType:gameType
-              gameChallengerPlayer1:gameChallengerPlayer1
               gameOppositionPlayer1:gameOppositionPlayer1
               gameChallengerPlayer2:gameChallengerPlayer2
               gameOppositionPlayer2:gameOppositionPlayer2
@@ -1029,7 +1082,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **gameSport** | **NSString***|  | 
  **gameType** | **NSString***|  | 
- **gameChallengerPlayer1** | **NSNumber***|  | 
  **gameOppositionPlayer1** | **NSNumber***|  | 
  **gameChallengerPlayer2** | **NSNumber***|  | [optional] 
  **gameOppositionPlayer2** | **NSNumber***|  | [optional] 
@@ -1051,13 +1103,12 @@ Name | Type | Description  | Notes
 
 # **newGamePost**
 ```objc
--(NSNumber*) newGamePostWithGameSport: (NSString*) gameSport
+-(NSURLSessionTask*) newGamePostWithGameSport: (NSString*) gameSport
     gameType: (NSString*) gameType
     gameClub: (NSString*) gameClub
     gameClubId: (NSNumber*) gameClubId
     gameChallengerScore: (NSNumber*) gameChallengerScore
     gameOppositionScore: (NSNumber*) gameOppositionScore
-    gameChallengerPlayer1: (NSNumber*) gameChallengerPlayer1
     gameOppositionPlayer1: (NSNumber*) gameOppositionPlayer1
     gameChallengerPlayer2: (NSNumber*) gameChallengerPlayer2
     gameOppositionPlayer2: (NSNumber*) gameOppositionPlayer2
@@ -1070,7 +1121,7 @@ Create a new game and send a push notification to opponents to verify the same.
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -1084,7 +1135,6 @@ NSString* gameClub = @"gameClub_example"; //
 NSNumber* gameClubId = @789; // 
 NSNumber* gameChallengerScore = @56; // 
 NSNumber* gameOppositionScore = @56; // 
-NSNumber* gameChallengerPlayer1 = @789; // 
 NSNumber* gameOppositionPlayer1 = @789; // 
 NSNumber* gameChallengerPlayer2 = @789; //  (optional)
 NSNumber* gameOppositionPlayer2 = @789; //  (optional)
@@ -1098,7 +1148,6 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
               gameClubId:gameClubId
               gameChallengerScore:gameChallengerScore
               gameOppositionScore:gameOppositionScore
-              gameChallengerPlayer1:gameChallengerPlayer1
               gameOppositionPlayer1:gameOppositionPlayer1
               gameChallengerPlayer2:gameChallengerPlayer2
               gameOppositionPlayer2:gameOppositionPlayer2
@@ -1122,7 +1171,6 @@ Name | Type | Description  | Notes
  **gameClubId** | **NSNumber***|  | 
  **gameChallengerScore** | **NSNumber***|  | 
  **gameOppositionScore** | **NSNumber***|  | 
- **gameChallengerPlayer1** | **NSNumber***|  | 
  **gameOppositionPlayer1** | **NSNumber***|  | 
  **gameChallengerPlayer2** | **NSNumber***|  | [optional] 
  **gameOppositionPlayer2** | **NSNumber***|  | [optional] 
@@ -1144,7 +1192,8 @@ Name | Type | Description  | Notes
 
 # **notifyNewMessagePost**
 ```objc
--(NSNumber*) notifyNewMessagePostWithUserId: (NSNumber*) userId
+-(NSURLSessionTask*) notifyNewMessagePostWithUserId: (NSNumber*) userId
+    chatUid: (NSString*) chatUid
     message: (NSString*) message
         completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
@@ -1153,7 +1202,7 @@ Push Notify User
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -1162,12 +1211,14 @@ SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
 
 
 NSNumber* userId = @789; // 
+NSString* chatUid = @"chatUid_example"; // 
 NSString* message = @"message_example"; // 
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 // Push Notify User
 [apiInstance notifyNewMessagePostWithUserId:userId
+              chatUid:chatUid
               message:message
           completionHandler: ^(NSObject* output, NSError* error) {
                         if (output) {
@@ -1184,6 +1235,7 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | **NSNumber***|  | 
+ **chatUid** | **NSString***|  | 
  **message** | **NSString***|  | 
 
 ### Return type
@@ -1201,9 +1253,74 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **pseudoSignupUserPost**
+```objc
+-(NSURLSessionTask*) pseudoSignupUserPostWithFirstName: (NSString*) firstName
+    lastName: (NSString*) lastName
+    gender: (NSString*) gender
+        completionHandler: (void (^)(SWGUser* output, NSError* error)) handler;
+```
+
+pseudo signup user
+
+Add user if it dosent exist. set user_is_real = false
+
+### Example 
+```objc
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* firstName = @"firstName_example"; // 
+NSString* lastName = @"lastName_example"; // 
+NSString* gender = @"gender_example"; // 
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// pseudo signup user
+[apiInstance pseudoSignupUserPostWithFirstName:firstName
+              lastName:lastName
+              gender:gender
+          completionHandler: ^(SWGUser* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->pseudoSignupUserPost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **firstName** | **NSString***|  | 
+ **lastName** | **NSString***|  | 
+ **gender** | **NSString***|  | 
+
+### Return type
+
+[**SWGUser***](SWGUser.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **rejectChallengePost**
 ```objc
--(NSNumber*) rejectChallengePostWithChallengeId: (NSNumber*) challengeId
+-(NSURLSessionTask*) rejectChallengePostWithChallengeId: (NSNumber*) challengeId
         completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
@@ -1211,7 +1328,7 @@ Reject Challenge
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -1258,7 +1375,7 @@ Name | Type | Description  | Notes
 
 # **rejectGamePost**
 ```objc
--(NSNumber*) rejectGamePostWithGameId: (NSNumber*) gameId
+-(NSURLSessionTask*) rejectGamePostWithGameId: (NSNumber*) gameId
         completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
 ```
 
@@ -1268,7 +1385,7 @@ Validate the score entered by an opponent.
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -1315,18 +1432,19 @@ Name | Type | Description  | Notes
 
 # **searchUsersPost**
 ```objc
--(NSNumber*) searchUsersPostWithQuery: (NSString*) query
+-(NSURLSessionTask*) searchUsersPostWithQuery: (NSString*) query
+    sport: (NSString*) sport
     limit: (NSNumber*) limit
         completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
 ```
 
-Query Users
+Search Users
 
 search users based on name / phone number / email / name / club
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -1335,12 +1453,14 @@ SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
 
 
 NSString* query = @"query_example"; // Search based on name, email, phone number
+NSString* sport = @"sport_example"; // Sport Enum (optional)
 NSNumber* limit = @50; // Limit the number of results (optional) (default to 50)
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
-// Query Users
+// Search Users
 [apiInstance searchUsersPostWithQuery:query
+              sport:sport
               limit:limit
           completionHandler: ^(NSArray<SWGUser>* output, NSError* error) {
                         if (output) {
@@ -1357,6 +1477,7 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **NSString***| Search based on name, email, phone number | 
+ **sport** | **NSString***| Sport Enum | [optional] 
  **limit** | **NSNumber***| Limit the number of results | [optional] [default to 50]
 
 ### Return type
@@ -1374,9 +1495,182 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **shareGameEmailPost**
+```objc
+-(NSURLSessionTask*) shareGameEmailPostWithGameId: (NSNumber*) gameId
+    email: (NSString*) email
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+```
+
+Share a game by email
+
+### Example 
+```objc
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSNumber* gameId = @789; // 
+NSString* email = @"email_example"; //  (optional)
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Share a game by email
+[apiInstance shareGameEmailPostWithGameId:gameId
+              email:email
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->shareGameEmailPost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **gameId** | **NSNumber***|  | 
+ **email** | **NSString***|  | [optional] 
+
+### Return type
+
+**NSObject***
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **shareGameSmsPost**
+```objc
+-(NSURLSessionTask*) shareGameSmsPostWithGameId: (NSNumber*) gameId
+    cell: (NSString*) cell
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+```
+
+Share a game by sms
+
+### Example 
+```objc
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSNumber* gameId = @789; // 
+NSString* cell = @"cell_example"; //  (optional)
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Share a game by sms
+[apiInstance shareGameSmsPostWithGameId:gameId
+              cell:cell
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->shareGameSmsPost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **gameId** | **NSNumber***|  | 
+ **cell** | **NSString***|  | [optional] 
+
+### Return type
+
+**NSObject***
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **smsInvitePost**
+```objc
+-(NSURLSessionTask*) smsInvitePostWithCell: (NSString*) cell
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+```
+
+Invite user by sms
+
+### Example 
+```objc
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* cell = @"cell_example"; // 
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Invite user by sms
+[apiInstance smsInvitePostWithCell:cell
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->smsInvitePost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cell** | **NSString***|  | 
+
+### Return type
+
+**NSObject***
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **updateFavouritePlayerPost**
 ```objc
--(NSNumber*) updateFavouritePlayerPostWithSport: (NSString*) sport
+-(NSURLSessionTask*) updateFavouritePlayerPostWithSport: (NSString*) sport
     player: (NSString*) player
         completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
@@ -1385,7 +1679,7 @@ Update favourite player
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -1435,7 +1729,7 @@ Name | Type | Description  | Notes
 
 # **updateFcmInstanceIdPost**
 ```objc
--(NSNumber*) updateFcmInstanceIdPostWithInstanceId: (NSString*) instanceId
+-(NSURLSessionTask*) updateFcmInstanceIdPostWithInstanceId: (NSString*) instanceId
         completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
@@ -1443,7 +1737,7 @@ Update FCM InstanceID
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -1490,7 +1784,7 @@ Name | Type | Description  | Notes
 
 # **updateProfilePicturePost**
 ```objc
--(NSNumber*) updateProfilePicturePostWithFile: (NSURL*) file
+-(NSURLSessionTask*) updateProfilePicturePostWithFile: (NSURL*) file
         completionHandler: (void (^)(SWGUrl* output, NSError* error)) handler;
 ```
 
@@ -1498,7 +1792,7 @@ Update profile picture
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -1545,7 +1839,7 @@ Name | Type | Description  | Notes
 
 # **updateProfilePost**
 ```objc
--(NSNumber*) updateProfilePostWithMobileNumber: (NSString*) mobileNumber
+-(NSURLSessionTask*) updateProfilePostWithMobileNumber: (NSString*) mobileNumber
     birthDate: (NSString*) birthDate
     handedness: (NSString*) handedness
     city: (NSString*) city
@@ -1560,7 +1854,7 @@ If the profilePic file is provided, we save it and update the profile pic link i
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -1622,7 +1916,7 @@ Name | Type | Description  | Notes
 
 # **updateStatusMessagePost**
 ```objc
--(NSNumber*) updateStatusMessagePostWithMessage: (NSString*) message
+-(NSURLSessionTask*) updateStatusMessagePostWithMessage: (NSString*) message
         completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
@@ -1630,7 +1924,7 @@ Update status message
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -1677,7 +1971,7 @@ Name | Type | Description  | Notes
 
 # **verifyGamePost**
 ```objc
--(NSNumber*) verifyGamePostWithGameId: (NSNumber*) gameId
+-(NSURLSessionTask*) verifyGamePostWithGameId: (NSNumber*) gameId
         completionHandler: (void (^)(SWGGame* output, NSError* error)) handler;
 ```
 
@@ -1687,7 +1981,7 @@ Validate the score entered by an opponent.
 
 ### Example 
 ```objc
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];

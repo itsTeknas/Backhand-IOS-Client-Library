@@ -35,8 +35,6 @@
 
 @property(nonatomic) NSString* userProfilePicUrl;
 
-@property(nonatomic) NSString* userSocialId;
-
 @property(nonatomic) NSString* userHandedness;
 
 @property(nonatomic) NSString* userGender;
@@ -91,6 +89,10 @@
 @property(nonatomic) NSNumber* userTotalMatchesSquash;
 
 @property(nonatomic) NSNumber* userWinRateSquash;
+
+@property(nonatomic) NSNumber* userTotalMatches;
+
+@property(nonatomic) NSNumber* userTotalMatchesWon;
 
 @property(nonatomic) NSArray<SWGUserUserClubs>* userClubs;
 

@@ -33,8 +33,6 @@
 
 @property(nonatomic) NSNumber* verifiedMatchesWon;
 
-@property(nonatomic) NSNumber* winRate;
-
 @property(nonatomic) NSArray<SWGGame>* games;
 
 @end

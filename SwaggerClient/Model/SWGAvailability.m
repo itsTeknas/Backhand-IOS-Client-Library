@@ -1,6 +1,6 @@
-#import "SWGScoreboard.h"
+#import "SWGAvailability.h"
 
-@implementation SWGScoreboard
+@implementation SWGAvailability
 
 - (instancetype)init {
   self = [super init];
@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"pendingScores": @"pending_scores", @"totalMatches": @"total_matches", @"totalVerifiedMatches": @"total_verified_matches", @"totalMatchesWon": @"total_matches_won", @"verifiedMatchesWon": @"verified_matches_won", @"games": @"games" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"date": @"date", @"time": @"time" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[];
+  NSArray *optionalProperties = @[@"date", @"time"];
   return [optionalProperties containsObject:propertyName];
 }
 

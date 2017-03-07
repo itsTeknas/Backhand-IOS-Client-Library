@@ -40,9 +40,10 @@ Import the following:
 
 ```objc
 #import <SwaggerClient/SWGApiClient.h>
-#import <SwaggerClient/SWGConfiguration.h>
+#import <SwaggerClient/SWGDefaultConfiguration.h>
 // load models
 #import <SwaggerClient/SWGAuthSuccess.h>
+#import <SwaggerClient/SWGAvailability.h>
 #import <SwaggerClient/SWGChallenge.h>
 #import <SwaggerClient/SWGClub.h>
 #import <SwaggerClient/SWGEvent.h>
@@ -71,7 +72,7 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 ```objc
 
-SWGConfiguration *apiConfig = [SWGConfiguration sharedConfig];
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 // Configure API key authorization: (authentication scheme: TokenAuth)
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
@@ -126,25 +127,30 @@ Class | Method | HTTP request | Description
 *SWGUserApi* | [**acceptChallengePost**](docs/SWGUserApi.md#acceptchallengepost) | **POST** /accept_challenge | Accept Challenge
 *SWGUserApi* | [**addSportPost**](docs/SWGUserApi.md#addsportpost) | **POST** /add_sport | Add sport to user profile
 *SWGUserApi* | [**deleteSportPost**](docs/SWGUserApi.md#deletesportpost) | **POST** /delete_sport | Delete sport to user profile
+*SWGUserApi* | [**emailInvitePost**](docs/SWGUserApi.md#emailinvitepost) | **POST** /email_invite | Invite user by email
+*SWGUserApi* | [**getAvailabilityGet**](docs/SWGUserApi.md#getavailabilityget) | **GET** /get_availability | Get featured players
 *SWGUserApi* | [**getChallengeRecommendationsGet**](docs/SWGUserApi.md#getchallengerecommendationsget) | **GET** /get_challenge_recommendations | Get challenge recommendations
-*SWGUserApi* | [**getChallengesGet**](docs/SWGUserApi.md#getchallengesget) | **GET** /get_challenges | Get List of Challenges
 *SWGUserApi* | [**getCitiesGet**](docs/SWGUserApi.md#getcitiesget) | **GET** /get_cities | Get List of Cities
 *SWGUserApi* | [**getClubsGet**](docs/SWGUserApi.md#getclubsget) | **GET** /get_clubs | Get List of Clubs
 *SWGUserApi* | [**getEventsGet**](docs/SWGUserApi.md#geteventsget) | **GET** /get_events | Get List of Events
 *SWGUserApi* | [**getFeaturedPlayersGet**](docs/SWGUserApi.md#getfeaturedplayersget) | **GET** /get_featured_players | Get featured players
 *SWGUserApi* | [**getMyChallengesGet**](docs/SWGUserApi.md#getmychallengesget) | **GET** /get_my_challenges | Get challenges
-*SWGUserApi* | [**getNewsPost**](docs/SWGUserApi.md#getnewspost) | **POST** /get_news | Get news
+*SWGUserApi* | [**getNewsGet**](docs/SWGUserApi.md#getnewsget) | **GET** /get_news | Get news
 *SWGUserApi* | [**getPendingGamesGet**](docs/SWGUserApi.md#getpendinggamesget) | **GET** /get_pending_games | Get all pending games
 *SWGUserApi* | [**getScoreboardGet**](docs/SWGUserApi.md#getscoreboardget) | **GET** /get_scoreboard | Get Scoreboard for a sport
 *SWGUserApi* | [**getSelfProfileGet**](docs/SWGUserApi.md#getselfprofileget) | **GET** /get_self_profile | Get Authenticated user&#39;s profile
 *SWGUserApi* | [**getUserPost**](docs/SWGUserApi.md#getuserpost) | **POST** /get_user | Get user profile
-*SWGUserApi* | [**invitePlayerPost**](docs/SWGUserApi.md#inviteplayerpost) | **POST** /invite_player | pseudo signup user
+*SWGUserApi* | [**markAvailabilityPost**](docs/SWGUserApi.md#markavailabilitypost) | **POST** /mark_availability | Mark Availability
 *SWGUserApi* | [**newChallengePost**](docs/SWGUserApi.md#newchallengepost) | **POST** /new_challenge | Challenge someone for a game
 *SWGUserApi* | [**newGamePost**](docs/SWGUserApi.md#newgamepost) | **POST** /new_game | Make a new game
 *SWGUserApi* | [**notifyNewMessagePost**](docs/SWGUserApi.md#notifynewmessagepost) | **POST** /notify_new_message | Push Notify User
+*SWGUserApi* | [**pseudoSignupUserPost**](docs/SWGUserApi.md#pseudosignupuserpost) | **POST** /pseudo_signup_user | pseudo signup user
 *SWGUserApi* | [**rejectChallengePost**](docs/SWGUserApi.md#rejectchallengepost) | **POST** /reject_challenge | Reject Challenge
 *SWGUserApi* | [**rejectGamePost**](docs/SWGUserApi.md#rejectgamepost) | **POST** /reject_game | Reject pending score
-*SWGUserApi* | [**searchUsersPost**](docs/SWGUserApi.md#searchuserspost) | **POST** /search_users | Query Users
+*SWGUserApi* | [**searchUsersPost**](docs/SWGUserApi.md#searchuserspost) | **POST** /search_users | Search Users
+*SWGUserApi* | [**shareGameEmailPost**](docs/SWGUserApi.md#sharegameemailpost) | **POST** /share_game_email | Share a game by email
+*SWGUserApi* | [**shareGameSmsPost**](docs/SWGUserApi.md#sharegamesmspost) | **POST** /share_game_sms | Share a game by sms
+*SWGUserApi* | [**smsInvitePost**](docs/SWGUserApi.md#smsinvitepost) | **POST** /sms_invite | Invite user by sms
 *SWGUserApi* | [**updateFavouritePlayerPost**](docs/SWGUserApi.md#updatefavouriteplayerpost) | **POST** /update_favourite_player | Update favourite player
 *SWGUserApi* | [**updateFcmInstanceIdPost**](docs/SWGUserApi.md#updatefcminstanceidpost) | **POST** /update_fcm_instance_id | Update FCM InstanceID
 *SWGUserApi* | [**updateProfilePicturePost**](docs/SWGUserApi.md#updateprofilepicturepost) | **POST** /update_profile_picture | Update profile picture
@@ -156,6 +162,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [SWGAuthSuccess](docs/SWGAuthSuccess.md)
+ - [SWGAvailability](docs/SWGAvailability.md)
  - [SWGChallenge](docs/SWGChallenge.md)
  - [SWGClub](docs/SWGClub.md)
  - [SWGEvent](docs/SWGEvent.md)
@@ -182,6 +189,5 @@ Class | Method | HTTP request | Description
 ## Author
 
 sanket@blackcurrantapps.com
-
 
 
