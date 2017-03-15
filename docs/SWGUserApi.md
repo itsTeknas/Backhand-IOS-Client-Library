@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**deleteSportPost**](SWGUserApi.md#deletesportpost) | **POST** /delete_sport | Delete sport to user profile
 [**emailInvitePost**](SWGUserApi.md#emailinvitepost) | **POST** /email_invite | Invite user by email
 [**getAvailabilityGet**](SWGUserApi.md#getavailabilityget) | **GET** /get_availability | Get featured players
+[**getAvailableUsersGet**](SWGUserApi.md#getavailableusersget) | **GET** /get_available_users | Get available users on a date
 [**getChallengeRecommendationsGet**](SWGUserApi.md#getchallengerecommendationsget) | **GET** /get_challenge_recommendations | Get challenge recommendations
 [**getCitiesGet**](SWGUserApi.md#getcitiesget) | **GET** /get_cities | Get List of Cities
 [**getClubsGet**](SWGUserApi.md#getclubsget) | **GET** /get_clubs | Get List of Clubs
@@ -316,6 +317,73 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**NSArray<SWGAvailability>***](SWGAvailability.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAvailableUsersGet**
+```objc
+-(NSURLSessionTask*) getAvailableUsersGetWithDate: (NSString*) date
+    sport: (NSString*) sport
+    city: (NSString*) city
+    limit: (NSNumber*) limit
+        completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
+```
+
+Get available users on a date
+
+### Example 
+```objc
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* date = @"date_example"; // DD/MM/YYYY
+NSString* sport = @"sport_example"; // Sport Enum
+NSString* city = @"city_example"; // city filter (optional)
+NSNumber* limit = @50; // Limit the number of results (optional) (default to 50)
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// Get available users on a date
+[apiInstance getAvailableUsersGetWithDate:date
+              sport:sport
+              city:city
+              limit:limit
+          completionHandler: ^(NSArray<SWGUser>* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->getAvailableUsersGet: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **date** | **NSString***| DD/MM/YYYY | 
+ **sport** | **NSString***| Sport Enum | 
+ **city** | **NSString***| city filter | [optional] 
+ **limit** | **NSNumber***| Limit the number of results | [optional] [default to 50]
+
+### Return type
+
+[**NSArray<SWGUser>***](SWGUser.md)
 
 ### Authorization
 
@@ -806,6 +874,7 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) getScoreboardGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
+    timeFilter: (NSString*) timeFilter
         completionHandler: (void (^)(SWGScoreboard* output, NSError* error)) handler;
 ```
 
@@ -825,12 +894,14 @@ SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 
 NSString* sport = @"sport_example"; // Sport Enum
 NSNumber* limit = @50; // Limit the number of results (optional) (default to 50)
+NSString* timeFilter = @"timeFilter_example"; // time filter (optional)
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 // Get Scoreboard for a sport
 [apiInstance getScoreboardGetWithSport:sport
               limit:limit
+              timeFilter:timeFilter
           completionHandler: ^(SWGScoreboard* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
@@ -847,6 +918,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sport** | **NSString***| Sport Enum | 
  **limit** | **NSNumber***| Limit the number of results | [optional] [default to 50]
+ **timeFilter** | **NSString***| time filter | [optional] 
 
 ### Return type
 

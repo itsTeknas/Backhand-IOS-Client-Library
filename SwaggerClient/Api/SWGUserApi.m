@@ -465,6 +465,106 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 }
 
 ///
+/// Get available users on a date
+/// 
+///  @param date DD/MM/YYYY 
+///
+///  @param sport Sport Enum 
+///
+///  @param city city filter (optional)
+///
+///  @param limit Limit the number of results (optional, default to 50)
+///
+///  @returns NSArray<SWGUser>*
+///
+-(NSURLSessionTask*) getAvailableUsersGetWithDate: (NSString*) date
+    sport: (NSString*) sport
+    city: (NSString*) city
+    limit: (NSNumber*) limit
+    completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler {
+    // verify the required parameter 'date' is set
+    if (date == nil) {
+        NSParameterAssert(date);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"date"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'sport' is set
+    if (sport == nil) {
+        NSParameterAssert(sport);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"sport"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/get_available_users"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (date != nil) {
+        queryParams[@"date"] = date;
+    }
+    if (sport != nil) {
+        queryParams[@"sport"] = sport;
+    }
+    if (city != nil) {
+        queryParams[@"city"] = city;
+    }
+    if (limit != nil) {
+        queryParams[@"limit"] = limit;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"TokenAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"NSArray<SWGUser>*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((NSArray<SWGUser>*)data, error);
+                                }
+                            }];
+}
+
+///
 /// Get challenge recommendations
 /// 
 ///  @param sport Sport Enum (optional)
@@ -1032,10 +1132,13 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 ///
 ///  @param limit Limit the number of results (optional, default to 50)
 ///
+///  @param timeFilter time filter (optional)
+///
 ///  @returns SWGScoreboard*
 ///
 -(NSURLSessionTask*) getScoreboardGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
+    timeFilter: (NSString*) timeFilter
     completionHandler: (void (^)(SWGScoreboard* output, NSError* error)) handler {
     // verify the required parameter 'sport' is set
     if (sport == nil) {
@@ -1061,6 +1164,9 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
     }
     if (limit != nil) {
         queryParams[@"limit"] = limit;
+    }
+    if (timeFilter != nil) {
+        queryParams[@"time_filter"] = timeFilter;
     }
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];

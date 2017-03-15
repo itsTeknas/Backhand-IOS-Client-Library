@@ -77,9 +77,6 @@ NSInteger kSWGAuthenticationApiMissingParamErrorCode = 234513;
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
     NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    if (fbToken != nil) {
-        queryParams[@"fb_token"] = fbToken;
-    }
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
     // HTTP header `Accept`
@@ -100,6 +97,9 @@ NSInteger kSWGAuthenticationApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    if (fbToken) {
+        formParams[@"fb_token"] = fbToken;
+    }
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"

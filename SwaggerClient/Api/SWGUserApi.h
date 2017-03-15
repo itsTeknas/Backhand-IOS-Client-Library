@@ -98,6 +98,24 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     completionHandler: (void (^)(NSArray<SWGAvailability>* output, NSError* error)) handler;
 
 
+/// Get available users on a date
+/// 
+///
+/// @param date DD/MM/YYYY
+/// @param sport Sport Enum
+/// @param city city filter (optional)
+/// @param limit Limit the number of results (optional) (default to 50)
+/// 
+///  code:200 message:"List of Users"
+///
+/// @return NSArray<SWGUser>*
+-(NSURLSessionTask*) getAvailableUsersGetWithDate: (NSString*) date
+    sport: (NSString*) sport
+    city: (NSString*) city
+    limit: (NSNumber*) limit
+    completionHandler: (void (^)(NSArray<SWGUser>* output, NSError* error)) handler;
+
+
 /// Get challenge recommendations
 /// 
 ///
@@ -212,12 +230,14 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 ///
 /// @param sport Sport Enum
 /// @param limit Limit the number of results (optional) (default to 50)
+/// @param timeFilter time filter (optional)
 /// 
 ///  code:200 message:"Scoreboard per sport"
 ///
 /// @return SWGScoreboard*
 -(NSURLSessionTask*) getScoreboardGetWithSport: (NSString*) sport
     limit: (NSNumber*) limit
+    timeFilter: (NSString*) timeFilter
     completionHandler: (void (^)(SWGScoreboard* output, NSError* error)) handler;
 
 

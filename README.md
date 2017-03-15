@@ -129,6 +129,7 @@ Class | Method | HTTP request | Description
 *SWGUserApi* | [**deleteSportPost**](docs/SWGUserApi.md#deletesportpost) | **POST** /delete_sport | Delete sport to user profile
 *SWGUserApi* | [**emailInvitePost**](docs/SWGUserApi.md#emailinvitepost) | **POST** /email_invite | Invite user by email
 *SWGUserApi* | [**getAvailabilityGet**](docs/SWGUserApi.md#getavailabilityget) | **GET** /get_availability | Get featured players
+*SWGUserApi* | [**getAvailableUsersGet**](docs/SWGUserApi.md#getavailableusersget) | **GET** /get_available_users | Get available users on a date
 *SWGUserApi* | [**getChallengeRecommendationsGet**](docs/SWGUserApi.md#getchallengerecommendationsget) | **GET** /get_challenge_recommendations | Get challenge recommendations
 *SWGUserApi* | [**getCitiesGet**](docs/SWGUserApi.md#getcitiesget) | **GET** /get_cities | Get List of Cities
 *SWGUserApi* | [**getClubsGet**](docs/SWGUserApi.md#getclubsget) | **GET** /get_clubs | Get List of Clubs
@@ -189,5 +190,6 @@ Class | Method | HTTP request | Description
 ## Author
 
 sanket@blackcurrantapps.com
+
 
 
