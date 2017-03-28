@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **playerName** | **NSString*** |  | [optional] 
 **playerWikipediaUrl** | **NSString*** |  | [optional] 
 **playerSport** | **NSString*** |  | [optional] 
+**playerProfilePicUrl** | **NSString*** |  | [optional] 
 **playerHomeCountry** | **NSString*** |  | [optional] 
 **playerHandedness** | **NSString*** |  | [optional] 
 **playerTitlesWon** | **NSNumber*** |  | [optional] 

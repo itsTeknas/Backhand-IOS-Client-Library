@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"varNewsId": @"news_id", @"varNewsTitle": @"news_title", @"varNewsContent": @"news_content", @"varNewsAuthor": @"news_author", @"varNewsSport": @"news_sport", @"varNewsPublishTs": @"news_publish_ts", @"varNewsImageUrl": @"news_image_url" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"varNewsId": @"news_id", @"varNewsTitle": @"news_title", @"varNewsContent": @"news_content", @"varNewsAuthor": @"news_author", @"varNewsSport": @"news_sport", @"varNewsSourceUrl": @"news_source_url", @"varNewsPublishTs": @"news_publish_ts", @"varNewsImageUrl": @"news_image_url" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"varNewsId", @"varNewsTitle", @"varNewsContent", @"varNewsAuthor", @"varNewsSport", @"varNewsPublishTs", @"varNewsImageUrl"];
+  NSArray *optionalProperties = @[@"varNewsId", @"varNewsTitle", @"varNewsContent", @"varNewsAuthor", @"varNewsSport", @"varNewsSourceUrl", @"varNewsPublishTs", @"varNewsImageUrl"];
   return [optionalProperties containsObject:propertyName];
 }
 

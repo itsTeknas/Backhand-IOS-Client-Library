@@ -95,5 +95,8 @@
 @property(nonatomic) NSNumber* userTotalMatchesWon;
 
 @property(nonatomic) NSArray<SWGUserUserClubs>* userClubs;
+/* for use in getSelfProfile Only [optional]
+ */
+@property(nonatomic) NSNumber* userPendingMatches;
 
 @end

@@ -30,6 +30,8 @@
 
 @property(nonatomic) NSString* playerSport;
 
+@property(nonatomic) NSString* playerProfilePicUrl;
+
 @property(nonatomic) NSString* playerHomeCountry;
 
 @property(nonatomic) NSString* playerHandedness;

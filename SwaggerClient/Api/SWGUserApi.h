@@ -438,6 +438,20 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
 
+/// suggest addition of a club
+/// 
+///
+/// @param clubName 
+/// @param clubAddress 
+/// 
+///  code:200 message:"Game shared"
+///
+/// @return NSObject*
+-(NSURLSessionTask*) suggestClubAdditionPostWithClubName: (NSString*) clubName
+    clubAddress: (NSString*) clubAddress
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
+
 /// Update favourite player
 /// 
 ///

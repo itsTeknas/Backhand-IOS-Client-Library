@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **varNewsContent** | **NSString*** |  | [optional] 
 **varNewsAuthor** | **NSString*** |  | [optional] 
 **varNewsSport** | **NSString*** |  | [optional] 
+**varNewsSourceUrl** | **NSString*** |  | [optional] 
 **varNewsPublishTs** | **NSString*** |  | [optional] 
 **varNewsImageUrl** | **NSString*** |  | [optional] 
 

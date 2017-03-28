@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **userTotalMatches** | **NSNumber*** |  | [optional] 
 **userTotalMatchesWon** | **NSNumber*** |  | [optional] 
 **userClubs** | [**NSArray&lt;SWGUserUserClubs&gt;***](SWGUserUserClubs.md) |  | 
+**userPendingMatches** | **NSNumber*** | for use in getSelfProfile Only | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

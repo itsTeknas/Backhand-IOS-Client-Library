@@ -32,6 +32,8 @@
 
 @property(nonatomic) NSString* varNewsSport;
 
+@property(nonatomic) NSString* varNewsSourceUrl;
+
 @property(nonatomic) NSString* varNewsPublishTs;
 
 @property(nonatomic) NSString* varNewsImageUrl;

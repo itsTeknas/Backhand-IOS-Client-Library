@@ -152,6 +152,7 @@ Class | Method | HTTP request | Description
 *SWGUserApi* | [**shareGameEmailPost**](docs/SWGUserApi.md#sharegameemailpost) | **POST** /share_game_email | Share a game by email
 *SWGUserApi* | [**shareGameSmsPost**](docs/SWGUserApi.md#sharegamesmspost) | **POST** /share_game_sms | Share a game by sms
 *SWGUserApi* | [**smsInvitePost**](docs/SWGUserApi.md#smsinvitepost) | **POST** /sms_invite | Invite user by sms
+*SWGUserApi* | [**suggestClubAdditionPost**](docs/SWGUserApi.md#suggestclubadditionpost) | **POST** /suggest_club_addition | suggest addition of a club
 *SWGUserApi* | [**updateFavouritePlayerPost**](docs/SWGUserApi.md#updatefavouriteplayerpost) | **POST** /update_favourite_player | Update favourite player
 *SWGUserApi* | [**updateFcmInstanceIdPost**](docs/SWGUserApi.md#updatefcminstanceidpost) | **POST** /update_fcm_instance_id | Update FCM InstanceID
 *SWGUserApi* | [**updateProfilePicturePost**](docs/SWGUserApi.md#updateprofilepicturepost) | **POST** /update_profile_picture | Update profile picture

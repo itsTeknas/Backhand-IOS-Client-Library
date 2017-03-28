@@ -32,6 +32,7 @@ Method | HTTP request | Description
 [**shareGameEmailPost**](SWGUserApi.md#sharegameemailpost) | **POST** /share_game_email | Share a game by email
 [**shareGameSmsPost**](SWGUserApi.md#sharegamesmspost) | **POST** /share_game_sms | Share a game by sms
 [**smsInvitePost**](SWGUserApi.md#smsinvitepost) | **POST** /sms_invite | Invite user by sms
+[**suggestClubAdditionPost**](SWGUserApi.md#suggestclubadditionpost) | **POST** /suggest_club_addition | suggest addition of a club
 [**updateFavouritePlayerPost**](SWGUserApi.md#updatefavouriteplayerpost) | **POST** /update_favourite_player | Update favourite player
 [**updateFcmInstanceIdPost**](SWGUserApi.md#updatefcminstanceidpost) | **POST** /update_fcm_instance_id | Update FCM InstanceID
 [**updateProfilePicturePost**](SWGUserApi.md#updateprofilepicturepost) | **POST** /update_profile_picture | Update profile picture
@@ -1724,6 +1725,65 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cell** | **NSString***|  | 
+
+### Return type
+
+**NSObject***
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **suggestClubAdditionPost**
+```objc
+-(NSURLSessionTask*) suggestClubAdditionPostWithClubName: (NSString*) clubName
+    clubAddress: (NSString*) clubAddress
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+```
+
+suggest addition of a club
+
+### Example 
+```objc
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: TokenAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* clubName = @"clubName_example"; // 
+NSString* clubAddress = @"clubAddress_example"; // 
+
+SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
+
+// suggest addition of a club
+[apiInstance suggestClubAdditionPostWithClubName:clubName
+              clubAddress:clubAddress
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGUserApi->suggestClubAdditionPost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **clubName** | **NSString***|  | 
+ **clubAddress** | **NSString***|  | 
 
 ### Return type
 
