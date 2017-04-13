@@ -287,7 +287,8 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// @param gameChallengerPlayer2  (optional)
 /// @param gameOppositionPlayer2  (optional)
 /// 
-///  code:200 message:"Challenge Created"
+///  code:200 message:"Challenge Created",
+///  code:302 message:"Challenge Already exists"
 ///
 /// @return SWGChallenge*
 -(NSURLSessionTask*) newChallengePostWithGameSport: (NSString*) gameSport
@@ -469,12 +470,14 @@ extern NSInteger kSWGUserApiMissingParamErrorCode;
 /// Update FCM InstanceID
 /// 
 ///
+/// @param deviceType 
 /// @param instanceId 
 /// 
 ///  code:200 message:"Status Updated"
 ///
 /// @return NSObject*
--(NSURLSessionTask*) updateFcmInstanceIdPostWithInstanceId: (NSString*) instanceId
+-(NSURLSessionTask*) updateFcmInstanceIdPostWithDeviceType: (NSString*) deviceType
+    instanceId: (NSString*) instanceId
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 
 

@@ -1861,7 +1861,8 @@ Name | Type | Description  | Notes
 
 # **updateFcmInstanceIdPost**
 ```objc
--(NSURLSessionTask*) updateFcmInstanceIdPostWithInstanceId: (NSString*) instanceId
+-(NSURLSessionTask*) updateFcmInstanceIdPostWithDeviceType: (NSString*) deviceType
+    instanceId: (NSString*) instanceId
         completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
 ```
 
@@ -1877,12 +1878,14 @@ SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
 
 
+NSString* deviceType = @"deviceType_example"; // 
 NSString* instanceId = @"instanceId_example"; // 
 
 SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 // Update FCM InstanceID
-[apiInstance updateFcmInstanceIdPostWithInstanceId:instanceId
+[apiInstance updateFcmInstanceIdPostWithDeviceType:deviceType
+              instanceId:instanceId
           completionHandler: ^(NSObject* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
@@ -1897,6 +1900,7 @@ SWGUserApi*apiInstance = [[SWGUserApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **deviceType** | **NSString***|  | 
  **instanceId** | **NSString***|  | 
 
 ### Return type

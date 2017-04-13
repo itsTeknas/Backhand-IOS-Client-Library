@@ -5,6 +5,7 @@ All URIs are relative to *http://www.back-hand.com/api/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**authenticateFacebookPost**](SWGAuthenticationApi.md#authenticatefacebookpost) | **POST** /authenticate/facebook | FB Login
+[**authenticateRequestEmailVerificationPost**](SWGAuthenticationApi.md#authenticaterequestemailverificationpost) | **POST** /authenticate/request_email_verification | Sign up new user
 [**authenticateSignupPost**](SWGAuthenticationApi.md#authenticatesignuppost) | **POST** /authenticate/signup | Sign up new user
 [**oauthTokenPost**](SWGAuthenticationApi.md#oauthtokenpost) | **POST** /oauth/token | Password Login
 
@@ -47,6 +48,56 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SWGAuthSuccess***](SWGAuthSuccess.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **authenticateRequestEmailVerificationPost**
+```objc
+-(NSURLSessionTask*) authenticateRequestEmailVerificationPostWithEmail: (NSString*) email
+        completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+```
+
+Sign up new user
+
+If the user exists, throw an error. Otherwise sign up.
+
+### Example 
+```objc
+
+NSString* email = @"email_example"; // Email ID
+
+SWGAuthenticationApi*apiInstance = [[SWGAuthenticationApi alloc] init];
+
+// Sign up new user
+[apiInstance authenticateRequestEmailVerificationPostWithEmail:email
+          completionHandler: ^(NSObject* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGAuthenticationApi->authenticateRequestEmailVerificationPost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **email** | **NSString***| Email ID | 
+
+### Return type
+
+**NSObject***
 
 ### Authorization
 

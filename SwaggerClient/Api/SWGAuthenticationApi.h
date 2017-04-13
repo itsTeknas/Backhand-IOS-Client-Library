@@ -38,13 +38,25 @@ extern NSInteger kSWGAuthenticationApiMissingParamErrorCode;
 /// Sign up new user
 /// If the user exists, throw an error. Otherwise sign up.
 ///
+/// @param email Email ID
+/// 
+///  code:200 message:"Email Verification Requested"
+///
+/// @return NSObject*
+-(NSURLSessionTask*) authenticateRequestEmailVerificationPostWithEmail: (NSString*) email
+    completionHandler: (void (^)(NSObject* output, NSError* error)) handler;
+
+
+/// Sign up new user
+/// If the user exists, throw an error. Otherwise sign up.
+///
 /// @param firstName First Name
 /// @param email Email ID
 /// @param password Password
 /// @param gender 
 /// @param lastName Last Name (optional)
 /// 
-///  code:200 message:"Login Success",
+///  code:200 message:"Signup Success",
 ///  code:302 message:"Email Already Exists"
 ///
 /// @return SWGAuthSuccess*
@@ -65,7 +77,9 @@ extern NSInteger kSWGAuthenticationApiMissingParamErrorCode;
 /// @param clientId 
 /// @param clientSecret 
 /// 
-///  code:200 message:"Login Success"
+///  code:200 message:"Login Success",
+///  code:302 message:"Login Failure",
+///  code:303 message:"Email Unverified"
 ///
 /// @return SWGAuthSuccess*
 -(NSURLSessionTask*) oauthTokenPostWithGrantType: (NSString*) grantType

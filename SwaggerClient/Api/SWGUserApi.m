@@ -2563,12 +2563,26 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
 ///
 /// Update FCM InstanceID
 /// 
+///  @param deviceType  
+///
 ///  @param instanceId  
 ///
 ///  @returns NSObject*
 ///
--(NSURLSessionTask*) updateFcmInstanceIdPostWithInstanceId: (NSString*) instanceId
+-(NSURLSessionTask*) updateFcmInstanceIdPostWithDeviceType: (NSString*) deviceType
+    instanceId: (NSString*) instanceId
     completionHandler: (void (^)(NSObject* output, NSError* error)) handler {
+    // verify the required parameter 'deviceType' is set
+    if (deviceType == nil) {
+        NSParameterAssert(deviceType);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"deviceType"] };
+            NSError* error = [NSError errorWithDomain:kSWGUserApiErrorDomain code:kSWGUserApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
     // verify the required parameter 'instanceId' is set
     if (instanceId == nil) {
         NSParameterAssert(instanceId);
@@ -2588,6 +2602,9 @@ NSInteger kSWGUserApiMissingParamErrorCode = 234513;
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
     NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (deviceType != nil) {
+        queryParams[@"device_type"] = deviceType;
+    }
     if (instanceId != nil) {
         queryParams[@"instance_id"] = instanceId;
     }

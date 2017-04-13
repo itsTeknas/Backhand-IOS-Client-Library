@@ -19,7 +19,7 @@ The SDK requires [**ARC (Automatic Reference Counting)**](http://stackoverflow.c
 Add the following to the Podfile:
 
 ```ruby
-pod 'SwaggerClient', :git => 'https://github.com/sanket0007/Backhand-IOS-Client-Library.git'
+pod 'SwaggerClient', :git => 'https://github.com//.git'
 ```
 
 To specify a particular branch, append `, :branch => 'branch-name-here'`
@@ -122,6 +122,7 @@ Class | Method | HTTP request | Description
 *SWGAdminApi* | [**createEventPost**](docs/SWGAdminApi.md#createeventpost) | **POST** /create_event | Create a new event
 *SWGAdminApi* | [**uploadPicturePost**](docs/SWGAdminApi.md#uploadpicturepost) | **POST** /upload_picture | Upload a picture
 *SWGAuthenticationApi* | [**authenticateFacebookPost**](docs/SWGAuthenticationApi.md#authenticatefacebookpost) | **POST** /authenticate/facebook | FB Login
+*SWGAuthenticationApi* | [**authenticateRequestEmailVerificationPost**](docs/SWGAuthenticationApi.md#authenticaterequestemailverificationpost) | **POST** /authenticate/request_email_verification | Sign up new user
 *SWGAuthenticationApi* | [**authenticateSignupPost**](docs/SWGAuthenticationApi.md#authenticatesignuppost) | **POST** /authenticate/signup | Sign up new user
 *SWGAuthenticationApi* | [**oauthTokenPost**](docs/SWGAuthenticationApi.md#oauthtokenpost) | **POST** /oauth/token | Password Login
 *SWGUserApi* | [**acceptChallengePost**](docs/SWGUserApi.md#acceptchallengepost) | **POST** /accept_challenge | Accept Challenge
@@ -191,6 +192,5 @@ Class | Method | HTTP request | Description
 ## Author
 
 sanket@blackcurrantapps.com
-
 
 
